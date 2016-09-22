@@ -1,6 +1,6 @@
 package simulation;
 
-enum SimulationType {
+public enum SimulationType {
 
 	GAME_OF_LIFE,
 	SPREADING_FIRE,

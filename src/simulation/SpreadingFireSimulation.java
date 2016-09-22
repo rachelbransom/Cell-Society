@@ -14,11 +14,11 @@ import cellUtil.CellState.SpreadingFire;
 
 class SpreadingFireSimulation extends AbstractSimulation {
 
-	private double myProbCatch;
+	private float myProbCatch;
 	private Random myRandom;
 	private Map<CellState.SpreadingFire, Color> myColorMap;
 	
-	SpreadingFireSimulation( Grid inputGrid , int probCatch){
+	SpreadingFireSimulation( Grid inputGrid , float probCatch){
 		super( inputGrid );
 		
 		myProbCatch = probCatch;

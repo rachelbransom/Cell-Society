@@ -1,0 +1,33 @@
+<xmlfile>
+	<situation>life</situation>
+	<title>Game of Life</title>
+	<author>John Conway</author>
+	<global_config>0</global_config>
+	<grid_dimensions>5</grid_dimensions>
+	<states>2</states>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>0</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+</xmlfile>

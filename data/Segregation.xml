@@ -1,0 +1,33 @@
+<xmlfile>
+	<situation>segregation</situation>
+	<title>Schelling's Model of Segregation</title>
+	<author>Frank McCown</author>
+	<global_config>0.3</global_config>
+	<grid_dimensions>5</grid_dimensions>
+	<states>3</states>
+	<cell>1</cell>
+	<cell>2</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>2</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>0</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>1</cell>
+	<cell>2</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>0</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+</xmlfile>
