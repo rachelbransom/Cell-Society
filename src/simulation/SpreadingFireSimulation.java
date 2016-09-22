@@ -2,13 +2,11 @@ package simulation;
 
 import java.awt.Point;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
 
 import cellUtil.Cell;
-import cellUtil.CellState;
 import cellUtil.Grid;
 import cellUtil.CellState.SpreadingFire;
 
@@ -16,7 +14,6 @@ class SpreadingFireSimulation extends AbstractSimulation {
 
 	private float myProbCatch;
 	private Random myRandom;
-	private Map<CellState.SpreadingFire, Color> myColorMap;
 	
 	SpreadingFireSimulation( Grid inputGrid , float probCatch){
 		super( inputGrid );
@@ -32,10 +29,7 @@ class SpreadingFireSimulation extends AbstractSimulation {
 		SpreadingFire currState = (SpreadingFire) currCell.getActor().getState();
 		
 		Point location = currCell.getLocation();
-		int x = location.x;
-		int y = location.y;
-
-		Cell newCell = myNextGrid.getCell(x, y);
+		Cell newCell = myNextGrid.getCell(location.x, location.y);
 		
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){
@@ -51,17 +45,14 @@ class SpreadingFireSimulation extends AbstractSimulation {
 
 	}
 
-	
 	@Override
 	protected void initColorMap() {
-		// TODO Auto-generated method stub
+		myColorMap = new HashMap<Enum, Color>();		
 		
-	}
-
-	@Override
-	Map<Enum, Color> getColorMap() {
-		// TODO Auto-generated method stub
-		return null;
+		myColorMap.put(SpreadingFire.EMPTY, Color.YELLOW);
+		myColorMap.put(SpreadingFire.TREE, Color.GREEN);
+		myColorMap.put(SpreadingFire.BURNING, Color.RED);
+		
 	}
 
 	
