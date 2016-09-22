@@ -1,8 +1,11 @@
-package simulation;
+package cellUtil;
 
-class Actor {
+import javafx.scene.paint.Color;
+
+public class Actor {
 	
 	private Enum myState;
+	private Color myColor;
 	
 	private int myEnergy;
 	private int myAge;
@@ -32,36 +35,44 @@ class Actor {
 		
 	}
 	
-	void incrementEnergy(){
+	public void incrementEnergy(){
 		myEnergy++;
 	}
 	
-	void decrementEnergy(){
+	public void decrementEnergy(){
 		myEnergy--;
 	}
 	
-	void incrementAge(){
+	public void incrementAge(){
 		myAge++;
 	}
 	
-	void decrementAge(){
+	public void decrementAge(){
 		myAge--;
 	}
 	
-	int getAge(){
+	public int getAge(){
 		return myAge;
 	}
 	
-	int getEnergy(){
+	public int getEnergy(){
 		return myEnergy;
 	}
 	
-	Enum getState(){
+	public Enum getState(){
 		return myState;
 	}
 	
-	void changeState(Enum state){
+	public void changeState(Enum state){
 		myState = state;
+	}
+
+	public Color getColor() {
+		return myColor;
+	}
+
+	public void setColor(Color myColor) {
+		this.myColor = myColor;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package simulation;
+package cellUtil;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -12,19 +12,19 @@ public class Cell {
 	
 	private Actor myActor;
 	
-	Cell(){
+	public Cell(){
 		this.myActor = new Actor();
 		this.myLocation = new Point();
 		this.myNeighbors = new ArrayList<Cell>();
 	}
 	
-	Cell(int x, int y){
+	public Cell(int x, int y){
 		this.myActor = new Actor();
 		this.myLocation = new Point(x, y);
 		this.myNeighbors = new ArrayList<Cell>();
 	}
 	
-	Cell(Cell that){
+	public Cell(Cell that){
 		this.myActor = new Actor(that.myActor);
 		this.myLocation = new Point(that.myLocation);
 		this.myNeighbors = new ArrayList<Cell>(that.myNeighbors);

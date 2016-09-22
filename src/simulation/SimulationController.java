@@ -3,8 +3,8 @@ package simulation;
 
 public class SimulationController {
 
-	private Simulation mySimulation;
-	
+	private AbstractSimulation mySimulation;
+	private SimulationVisualizer myVisualizer;
 	
 	public void initializeSimulation(String filename){
 		

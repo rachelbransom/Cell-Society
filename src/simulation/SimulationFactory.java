@@ -6,11 +6,12 @@ class SimulationFactory {
 	
 	//TODO: Add Logic for building specific simulation types (i.e. game of life over 
 	
+	
 	public void giveFilename(){
 		
 	}
 	
-	public Simulation makeSimulation( String file){
+	public AbstractSimulation makeSimulation( String file){
 		
 		return null;
 	}

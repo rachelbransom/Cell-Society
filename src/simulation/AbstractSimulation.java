@@ -1,5 +1,11 @@
 package simulation;
 
+import java.util.Map;
+
+import cellUtil.Cell;
+import cellUtil.Grid;
+import javafx.scene.paint.Color;
+
 /**
  * 
  *
@@ -14,12 +20,20 @@ package simulation;
 public abstract class AbstractSimulation {
 
 	protected Grid myCurrGrid;
-	protected Grid myNewGrid;
+	protected Grid myNextGrid;
+	protected int mySize;
+	protected Map<Enum, Color> myColorMap;
 	
+	AbstractSimulation( Grid inputGrid ){
+		myCurrGrid = new Grid( inputGrid );
+	}
+	
+	Grid showGrid(){
+		return new Grid( myCurrGrid );
+	}
 	
 	/**
-	 * Returns the next holistic state of the Grid. I.e. returns a Grid 
-	 * of the next logical state after the input Grid. 
+	 * Updates the grid to the next logical state.
 	 * 
 	 * In Implementation should make copies of grid and use the below 
 	 * updateCell method on every Cell in the grid.
@@ -27,7 +41,22 @@ public abstract class AbstractSimulation {
 	 * @param 	grid  Reference to current Grid
 	 * @return		  Reference to the next Grid
 	 */
-	abstract void updateGrid();
+	
+	void updateGrid(){
+
+		// Make copies of input Grid
+		myCurrGrid = new Grid(mySize);
+		myNextGrid  = new Grid(mySize);
+		
+		// Update each cell
+		for (int i = 0; i < myCurrGrid.getSize(); i++) {
+			for (int j = 0; j < myCurrGrid.getSize(); j++) {
+				updateCell(myCurrGrid.getCell(i, j));
+			}
+		}
+		
+		myCurrGrid = myNextGrid;
+	};
 	
 	/**
 	 * Updates cell according to whichever rules the simulation is 
@@ -39,4 +68,8 @@ public abstract class AbstractSimulation {
 	 */
 	protected abstract void updateCell(Cell curr);
 	
+	protected abstract void initColorMap();
+	
+	abstract Map<Enum, Color> getColorMap();
+
 }

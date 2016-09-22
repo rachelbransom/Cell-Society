@@ -1,20 +1,31 @@
 package simulation;
 
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
-import simulation.CellState.SpreadingFire;
+import javafx.scene.paint.Color;
 
-class SpreadingFireSimulation extends Simulation {
+import cellUtil.Cell;
+import cellUtil.CellState;
+import cellUtil.Grid;
+import cellUtil.CellState.SpreadingFire;
+
+class SpreadingFireSimulation extends AbstractSimulation {
 
 	private double myProbCatch;
 	private Random myRandom;
-
-	SpreadingFireSimulation(){
-		myProbCatch = 0.5;
+	private Map<CellState.SpreadingFire, Color> myColorMap;
+	
+	SpreadingFireSimulation( Grid inputGrid , int probCatch){
+		super( inputGrid );
+		
+		myProbCatch = probCatch;
 		myRandom = new Random(1234);
 	}
 
+	@Override
 	protected void updateCell(Cell currCell) {
 		
 		// Set intermediate Variables
@@ -24,7 +35,7 @@ class SpreadingFireSimulation extends Simulation {
 		int x = location.x;
 		int y = location.y;
 
-		Cell newCell = myNewGrid.getCell(x, y);
+		Cell newCell = myNextGrid.getCell(x, y);
 		
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){
@@ -40,4 +51,19 @@ class SpreadingFireSimulation extends Simulation {
 
 	}
 
+	
+	@Override
+	protected void initColorMap() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	Map<Enum, Color> getColorMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
 }

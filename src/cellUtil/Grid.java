@@ -1,11 +1,11 @@
-package simulation;
+package cellUtil;
 
-class Grid {
+public class Grid {
 
 	private Cell[][] myCellGrid;
 	private int mySize;
 
-	Grid(int n){
+	public Grid(int n){
 		
 		mySize = n;
 		myCellGrid = new Cell[mySize][mySize];
@@ -17,7 +17,7 @@ class Grid {
 		}
 	}
 	
-	Grid( Grid that ){
+	public Grid( Grid that ){
 		
 		this.mySize = that.mySize;
 		myCellGrid = new Cell[mySize][mySize];
