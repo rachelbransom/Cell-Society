@@ -2,7 +2,6 @@ package cellUtil;
 
 public final class CellState {
 	
-	Enum<WaTorWorld> WaTorStates;
 	public enum WaTorWorld{
 		PREDATOR,
 		PREY,
