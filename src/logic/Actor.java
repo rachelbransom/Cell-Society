@@ -7,6 +7,12 @@ class Actor {
 	private int myEnergy;
 	private int myAge;
 	
+	Actor(){
+		myState = null;
+		myEnergy = 0;
+		myAge = 0;
+	}
+	
 	Actor(Enum state){
 		myState = state;
 		myEnergy = 0;
@@ -17,6 +23,13 @@ class Actor {
 		myState = state;
 		myEnergy = energy;
 		myAge = age;
+	}
+	
+	Actor(Actor that){
+		this.myState = that.myState;
+		this.myEnergy = that.myEnergy;
+		this.myAge = that.myAge;
+		
 	}
 	
 	void incrementEnergy(){

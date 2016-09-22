@@ -1,7 +1,7 @@
 package logic;
 
 final class CellState {
-
+	
 	enum WaTorWorld{
 		PREDATOR,
 		PREY,
@@ -14,7 +14,7 @@ final class CellState {
 	}
 
 
-	enum Fire{
+	enum SpreadingFire{
 		EMPTY,
 		TREE,
 		BURNING;
