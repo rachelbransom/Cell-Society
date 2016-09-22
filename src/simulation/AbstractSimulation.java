@@ -25,7 +25,11 @@ public abstract class AbstractSimulation {
 	protected Map<Enum, Color> myColorMap;
 	
 	AbstractSimulation( Grid inputGrid ){
+		
+		mySize = inputGrid.getSize();
 		myCurrGrid = new Grid( inputGrid );
+		
+		initColorMap();
 	}
 	
 	Grid showGrid(){
@@ -70,6 +74,8 @@ public abstract class AbstractSimulation {
 	
 	protected abstract void initColorMap();
 	
-	abstract Map<Enum, Color> getColorMap();
+	Map<Enum, Color> getColorMap(){
+		return myColorMap;
+	};
 
 }
