@@ -5,12 +5,12 @@ import java.util.Random;
 
 import logic.CellState.SpreadingFire;
 
-class SpreadingFireManager extends GridManager {
+class SpreadingFireSimulation extends Simulation {
 
 	private double myProbCatch;
 	private Random myRandom;
 
-	SpreadingFireManager(){
+	SpreadingFireSimulation(){
 		myProbCatch = 0.5;
 		myRandom = new Random(1234);
 	}

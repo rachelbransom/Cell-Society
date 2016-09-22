@@ -1,7 +1,7 @@
 package logic;
 
 /**
- * @author George Bernard
+ * 
  * 
  *	This class extends AbstractGridManager, but does nothing
  *	
@@ -9,25 +9,28 @@ package logic;
  *	for getNextGridState method to be extended by managers following
  *	specific rules
  *
+ *	@author George Bernard
  */
 
-class GridManager extends AbstractGridManager {
+class Simulation extends AbstractSimulation {
+	
+	int size;
 	
 	@Override
-	Grid getNextGridState(Grid grid) {
+	void updateGrid() {
 		
 		// Make copies of input Grid
-		myCurrGrid = new Grid( grid );
-		myNewGrid  = new Grid( grid );
+		myCurrGrid = new Grid(size);
+		myNewGrid  = new Grid(size);
 		
 		// Update each cell
-		for (int i = 0; i < grid.getSize(); i++) {
-			for (int j = 0; j < grid.getSize(); j++) {
+		for (int i = 0; i < myCurrGrid.getSize(); i++) {
+			for (int j = 0; j < myCurrGrid.getSize(); j++) {
 				updateCell(myCurrGrid.getCell(i, j));
 			}
 		}
 		
-		return myNewGrid;
+		myCurrGrid = myNewGrid;
 	}
 
 	@Override

@@ -1,16 +1,17 @@
 package logic;
 
 /**
- * @author George Bernard
+ * 
  *
  *	This class manages the current state of the grid. 
  *	Responsibility for returning 
  *
  *	Provides two relevant methods: getNextGridState
  *	
+ *	@author George Bernard
  *
  */
-public abstract class AbstractGridManager {
+public abstract class AbstractSimulation {
 
 	protected Grid myCurrGrid;
 	protected Grid myNewGrid;
@@ -26,7 +27,7 @@ public abstract class AbstractGridManager {
 	 * @param 	grid  Reference to current Grid
 	 * @return		  Reference to the next Grid
 	 */
-	abstract Grid getNextGridState(Grid grid);
+	abstract void updateGrid();
 	
 	/**
 	 * Updates cell according to whichever rules the simulation is 
