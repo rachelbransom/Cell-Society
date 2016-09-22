@@ -1,5 +1,7 @@
 package simulation;
 
+import simulation.types.AbstractSimulation;
+
 class SimulationFactory {
 
 	//TODO: Add instance of XML parser as a field in this factory 

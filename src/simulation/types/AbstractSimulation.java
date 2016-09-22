@@ -1,4 +1,4 @@
-package simulation;
+package simulation.types;
 
 import java.util.Map;
 

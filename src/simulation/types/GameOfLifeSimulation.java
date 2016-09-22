@@ -1,4 +1,4 @@
-package simulation;
+package simulation.types;
 
 import java.awt.Point;
 import java.util.HashMap;

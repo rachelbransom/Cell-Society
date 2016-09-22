@@ -6,6 +6,7 @@ import javafx.scene.shape.Rectangle;
 
 class SimulationVisualizer {
 
+	private int mySize;
 	private Grid myCellGrid;
 	private Rectangle[][] myRectGrid;
 	
@@ -17,6 +18,15 @@ class SimulationVisualizer {
 		myCellGrid = new Grid( grid );
 	}
 	
-	void initRectGrid(){}
+	void initRectGrid(){
+		myRectGrid = new Rectangle[mySize][mySize];
+		
+		for (int i = 0; i < myRectGrid.length; i++) {
+			for (int j = 0; j < myRectGrid.length; j++) {
+				myRectGrid[i][j] = new Rectangle();
+			}
+		}
+		
+	}
 	
 }

@@ -1,4 +1,4 @@
-package simulation;
+package simulation.types;
 
 public enum SimulationType {
 

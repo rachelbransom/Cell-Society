@@ -1,11 +1,10 @@
-package simulation;
+package simulation.types;
 
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
-
 import cellUtil.Cell;
 import cellUtil.Grid;
 import cellUtil.CellState.SpreadingFire;
