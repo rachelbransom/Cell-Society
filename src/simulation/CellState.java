@@ -1,4 +1,4 @@
-package logic;
+package simulation;
 
 final class CellState {
 	

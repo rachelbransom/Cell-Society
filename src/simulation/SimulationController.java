@@ -1,4 +1,4 @@
-package logic;
+package simulation;
 
 
 public class SimulationController {

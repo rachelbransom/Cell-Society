@@ -1,9 +1,9 @@
-package logic;
+package simulation;
 
 import java.awt.Point;
 import java.util.Random;
 
-import logic.CellState.SpreadingFire;
+import simulation.CellState.SpreadingFire;
 
 class SpreadingFireSimulation extends Simulation {
 

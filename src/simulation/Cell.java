@@ -1,4 +1,4 @@
-package logic;
+package simulation;
 
 import java.awt.Point;
 import java.util.ArrayList;
