@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
+import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.Grid;
 import cellUtil.CellState.SpreadingFire;
@@ -25,8 +26,17 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	
 	@Override
 	public Color[][] showColorGrid() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		Color[][] colorGrid = new Color[mySize][mySize];
+		
+		for (int i = 0; i < mySize; i++) {
+			for (int j = 0; j < mySize; j++) {
+				Actor currActor = myCurrGrid.getCell(i, j).getActor();
+				colorGrid[i][j] = myColorMap.get(currActor.getState());
+			}
+		}
+		
+		return colorGrid;
 	}
 	
 	@Override

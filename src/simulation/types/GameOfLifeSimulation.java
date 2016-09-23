@@ -24,7 +24,6 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	
 	@Override
 	protected void updateCell(Cell currCell) {
-		// TODO Auto-generated method stub
 
 		GameOfLife currState = (GameOfLife) currCell.getActor().getState();
 		
@@ -70,6 +69,40 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
 		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
 
+	}
+	
+	public static void main(String[] args){
+		int size = 3;
+		
+		Grid g = new Grid(size);
+		Cell[] arr = new Cell[size];
+		
+		// set middle column to alive, rest to dead
+		for(int i = 0; i < size; i++){
+			for(int j = 0; j < size; j++){
+				g.setCell(i, j, new Cell(i, j));
+				if(i == 1) g.getCell(i, j).getActor().changeState(GameOfLife.DEAD);
+				else g.getCell(i, j).getActor().changeState(GameOfLife.ALIVE);
+			}
+		}
+		
+		GameOfLifeSimulation sim = new GameOfLifeSimulation(g); 
+		
+		for(int run = 0; run < 5; run++){
+			
+			sim.updateGrid();
+			
+			Grid printGrid = sim.myCurrGrid;
+			
+			for (int i = 0; i < arr.length; i++) {
+				for (int j = 0; j < arr.length; j++) {
+					
+					
+					
+				}
+			}
+		}
+		
 	}
 	
 	
