@@ -1,11 +1,11 @@
 package simulation;
-
 import cellUtil.Grid;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-class SimulationVisualizer extends UX {
+class SimulationVisualizer {
 	private int myGridSize;
 	private int myPixelSize;
 	private Grid myCellGrid;
@@ -17,7 +17,7 @@ class SimulationVisualizer extends UX {
 		myPixelSize = gridPixelSize;
 	}
 	
-	Group showSimulation(){
+	private Group showSimulation(){
 		return root;
 	}
 	
@@ -38,6 +38,40 @@ class SimulationVisualizer extends UX {
 				root.getChildren().add(myRectGrid[i][j]);
 			}
 		}
+	}
+	SimulationVisualizer(int size){
+		initRectGrid(size);
+	}
+
+	Node returnVisualGrid(){
+		return null;
+	}
+
+	void updateVisuals(Color[][] colorGrid){
+
+		updateGridColor(colorGrid);
+
+
+	}
+
+	private void updateGridColor(Color[][] colorGrid){
+
+		for (int i = 0; i < myRectGrid.length; i++) {
+			for (int j = 0; j < myRectGrid.length; j++) {
+				myRectGrid[i][j].setFill( colorGrid[i][j] );
+			}
+		}
+
+	}
+
+	private void initRectGrid(int size){
+		myRectGrid = new Rectangle[size][size];
+		
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				myRectGrid[i][j] = new Rectangle();
+			}
+		}	
 	}
 	
 }
