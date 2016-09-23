@@ -1,10 +1,21 @@
 package simulation;
 
-import simulation.types.AbstractSimulation;
+import simulation.types.*;
+import simulation.types.SimulationType;
+import cellsociety_team23.XMLParser;
 
 class SimulationFactory {
-
-	//TODO: Add instance of XML parser as a field in this factory 
+	String file;
+	private SimulationType situation;
+	private XMLParser parser;
+	private AbstractSimulation out;
+	
+	public SimulationFactory(String chosenFile){
+		file = chosenFile;
+		parser = new XMLParser(file);
+		situation = parser.getSimulationType();
+		makeSimulation();
+	}
 	
 	//TODO: Add Logic for building specific simulation types (i.e. game of life over 
 	
@@ -13,8 +24,17 @@ class SimulationFactory {
 		
 	}
 	
-	public AbstractSimulation makeSimulation( String file){
-		
-		return null;
+	public AbstractSimulation makeSimulation(){
+		switch (situation){
+		case GAME_OF_LIFE:
+			return out = new GameOfLifeSimulation(parser.getGrid(), parser.getGlobalConfiguration());
+		case SPREADING_FIRE:
+			return out = new SpreadingFireSimulation(parser.getGrid(), parser.getGlobalConfiguration());
+		case SEGREGATION:
+			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
+		case WA_TOR_WORLD:
+			return out = new WaTorWorldSimulation(parser.getGrid(), parser.getGlobalConfiguration());
+		}
+		return out;
 	}
 }

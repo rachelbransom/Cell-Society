@@ -10,7 +10,7 @@ public class Actor {
 	private int myEnergy;
 	private int myAge;
 	
-	Actor(){
+	public Actor(){
 		myState = null;
 		myEnergy = 0;
 		myAge = 0;
