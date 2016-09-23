@@ -32,9 +32,7 @@ public abstract class AbstractSimulation {
 		initColorMap();
 	}
 	
-	Grid showGrid(){
-		return new Grid( myCurrGrid );
-	}
+	abstract Color[][] showColorGrid();
 	
 	/**
 	 * Updates the grid to the next logical state.
