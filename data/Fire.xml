@@ -1,0 +1,33 @@
+<xmlfile>
+	<situation>fire</situation>
+	<title>Spreading of Fire</title>
+	<author>Angela B. Shiflet</author>
+	<global_config>0.4</global_config>
+	<grid_dimensions>5</grid_dimensions>
+	<states>3</states>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>2</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>0</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>2</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+	<cell>1</cell>
+	<cell>0</cell>
+	<cell>2</cell>
+	<cell>0</cell>
+	<cell>1</cell>
+</xmlfile>
