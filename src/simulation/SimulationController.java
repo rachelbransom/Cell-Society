@@ -1,5 +1,6 @@
 package simulation;
 
+import simulation.types.AbstractSimulation;
 
 public class SimulationController {
 
