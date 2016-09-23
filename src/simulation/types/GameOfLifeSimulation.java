@@ -8,10 +8,18 @@ import cellUtil.CellState.GameOfLife;
 import cellUtil.Grid;
 import javafx.scene.paint.Color;
 
-class GameOfLifeSimulation extends AbstractSimulation {
+public class GameOfLifeSimulation extends AbstractSimulation {
 
-	GameOfLifeSimulation(Grid grid){
+	public GameOfLifeSimulation(Grid grid){
 		super(grid);
+	}
+	
+	/*----------------- Overriden Methods -----------------------------*/
+	
+	@Override
+	public Color[][] showColorGrid() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override
@@ -63,5 +71,6 @@ class GameOfLifeSimulation extends AbstractSimulation {
 		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
 
 	}
-
+	
+	
 }

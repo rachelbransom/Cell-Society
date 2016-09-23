@@ -9,18 +9,26 @@ import cellUtil.Cell;
 import cellUtil.Grid;
 import cellUtil.CellState.SpreadingFire;
 
-class SpreadingFireSimulation extends AbstractSimulation {
+public class SpreadingFireSimulation extends AbstractSimulation {
 
 	private float myProbCatch;
 	private Random myRandom;
 	
-	SpreadingFireSimulation( Grid inputGrid , float probCatch){
+	public SpreadingFireSimulation( Grid inputGrid , float probCatch){
 		super( inputGrid );
 		
 		myProbCatch = probCatch;
 		myRandom = new Random(1234);
 	}
 
+	/*----------------- Overridden Methods -----------------------------*/
+	
+	@Override
+	public Color[][] showColorGrid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	protected void updateCell(Cell currCell) {
 		
@@ -54,6 +62,4 @@ class SpreadingFireSimulation extends AbstractSimulation {
 		
 	}
 
-	
-	
 }

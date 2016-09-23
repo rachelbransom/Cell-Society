@@ -24,7 +24,7 @@ public abstract class AbstractSimulation {
 	protected int mySize;
 	protected Map<Enum, Color> myColorMap;
 	
-	AbstractSimulation( Grid inputGrid ){
+	public AbstractSimulation( Grid inputGrid ){
 		
 		mySize = inputGrid.getSize();
 		myCurrGrid = new Grid( inputGrid );
@@ -32,7 +32,23 @@ public abstract class AbstractSimulation {
 		initColorMap();
 	}
 	
-	abstract Color[][] showColorGrid();
+	/*----------------- Abstract Methods -----------------------------*/	
+	
+	public abstract Color[][] showColorGrid();
+	
+	/**
+	 * Updates cell according to whichever rules the simulation is 
+	 * currently using
+	 * 
+	 * Preserves all state of cell other than the Actor subclass
+	 * 
+	 * @param curr Cell to be updated to next state.
+	 */
+	protected abstract void updateCell(Cell curr);
+	
+	protected abstract void initColorMap();
+	
+	/*----------------- Implemented methods -----------------------------*/
 	
 	/**
 	 * Updates the grid to the next logical state.
@@ -43,7 +59,6 @@ public abstract class AbstractSimulation {
 	 * @param 	grid  Reference to current Grid
 	 * @return		  Reference to the next Grid
 	 */
-	
 	void updateGrid(){
 
 		// Make copies of input Grid
@@ -59,18 +74,6 @@ public abstract class AbstractSimulation {
 		
 		myCurrGrid = myNextGrid;
 	};
-	
-	/**
-	 * Updates cell according to whichever rules the simulation is 
-	 * currently using
-	 * 
-	 * Preserves all state of cell other than the Actor subclass
-	 * 
-	 * @param curr Cell to be updated to next state.
-	 */
-	protected abstract void updateCell(Cell curr);
-	
-	protected abstract void initColorMap();
 	
 	Map<Enum, Color> getColorMap(){
 		return myColorMap;
