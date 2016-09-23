@@ -16,11 +16,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import simulation.SimulationController;
 
 public class UX {
 	private final String TITLE = "Cell Society";
-	private final int titleSize = 88;
+	private final int titleSize = 88, instructionsSize = 60, instructionsX = 50, instructionsY = 300;
 	private Scene scene;
 	private Group root = new Group();
 	private Button start, stop, step, reset;
@@ -28,7 +29,7 @@ public class UX {
 	private TextField speedTextField;
 	private ComboBox<String> comboBox;
 	private Rectangle gridBorder;
-	private Text cellSocietyText;
+	private Text cellSocietyText, instructionsText;
 	private String output;
 	private SimulationController simulationControl;
 	
@@ -42,6 +43,7 @@ public class UX {
 		textFieldInit();
 		comboBoxInit();
 		gridBorderInit();
+		displayInstructions();
 		displayTitle();
 		return scene;
 	}
@@ -62,8 +64,7 @@ public class UX {
 		reset = new Button("RESET");
 		
 		start.setOnAction((event) -> {
-			simulationControl = new SimulationController();
-			simulationControl.initializeSimulation(getComboBoxValue());
+			//play
 		});
 		stop.setOnAction((event) -> {
 			//stop
@@ -72,7 +73,8 @@ public class UX {
 			//step
 		});
 		reset.setOnAction((event) -> {
-			//reset
+			simulationControl = new SimulationController();
+			simulationControl.initializeSimulation(getComboBoxValue());
 		});
 		
 		root.getChildren().addAll(setControlLayout(start,0,1), setControlLayout(stop,buttonDimensions,1),
@@ -113,6 +115,14 @@ public class UX {
 		cellSocietyText.setFont(Font.font("Segoe UI Semibold", FontWeight.BOLD, titleSize));
 		cellSocietyText.setFill(Color.WHITE);
 		root.getChildren().add(cellSocietyText);
+	}
+	
+	private void displayInstructions(){
+		instructionsText = new Text(instructionsX, instructionsY, "Please select \n an XML file \n and press 'RESET'");
+		instructionsText.setFont(Font.font("Segoe UI Semibold", instructionsSize));
+		instructionsText.setTextAlignment(TextAlignment.CENTER);
+		instructionsText.setFill(Color.WHITE);
+		root.getChildren().add(instructionsText);
 	}
 	
 }
