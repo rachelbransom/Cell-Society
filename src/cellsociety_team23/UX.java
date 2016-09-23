@@ -1,5 +1,8 @@
 package cellsociety_team23;
 
+import javax.swing.JComboBox;
+
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -13,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import simulation.SimulationController;
 
 public class UX {
 	private final String TITLE = "Cell Society";
@@ -25,6 +29,8 @@ public class UX {
 	private ComboBox<String> comboBox;
 	private Rectangle gridBorder;
 	private Text cellSocietyText;
+	private String output;
+	private SimulationController simulationControl;
 	
 	public String getTitle(){
 		return TITLE;
@@ -37,7 +43,6 @@ public class UX {
 		comboBoxInit();
 		gridBorderInit();
 		displayTitle();
-		// call grid visual
 		return scene;
 	}
 	
@@ -57,7 +62,8 @@ public class UX {
 		reset = new Button("RESET");
 		
 		start.setOnAction((event) -> {
-			//start
+			simulationControl = new SimulationController();
+			simulationControl.initializeSimulation(getComboBoxValue());
 		});
 		stop.setOnAction((event) -> {
 			//stop
@@ -89,6 +95,11 @@ public class UX {
 		comboBox = new ComboBox<String>(xmlOptions);
 		comboBox.setValue("CHOOSE XML FILE");
 		root.getChildren().add(setControlLayout(comboBox, buttonDimensions*6,4));
+
+	}
+	
+	private String getComboBoxValue(){
+		return comboBox.getSelectionModel().getSelectedItem();
 	}
 	
 	private void gridBorderInit() {
