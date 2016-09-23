@@ -1,47 +1,54 @@
 package simulation;
 
-import javafx.scene.Node;
+
+
+
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 class SimulationVisualizer {
-
-	private Rectangle[][] myRectGrid;
+	
+	
+	private Shape[][] myShapeGrid;
 	
 	SimulationVisualizer(int size){
 
-
-		initRectGrid(size);
+		initShapeGrid(size);
 	}
 
 
-	Node returnVisualGrid(){
-		return null;
+	Group returnVisualGrid(){
+		Group gridRoot = new Group();
+		
+		
+		return gridRoot;
 	}
 
-	void updateVisuals(Color[][] colorGrid){
-
-		updateGridColor(colorGrid);
-
-
-	}
+//	void updateVisuals(Color[][] colorGrid){
+//
+//		updateGridColor(colorGrid);
+//
+//
+//	}
 
 	private void updateGridColor(Color[][] colorGrid){
 
-		for (int i = 0; i < myRectGrid.length; i++) {
-			for (int j = 0; j < myRectGrid.length; j++) {
-				myRectGrid[i][j].setFill( colorGrid[i][j] );
+		for (int i = 0; i < myShapeGrid.length; i++) {
+			for (int j = 0; j < myShapeGrid.length; j++) {
+				myShapeGrid[i][j].setFill(colorGrid[i][j]);
 			}
 		}
 
 	}
 
-	private void initRectGrid(int size){
-		myRectGrid = new Rectangle[size][size];
+	private void initShapeGrid(int size){
+		myShapeGrid = new Shape[size][size];
 		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				myRectGrid[i][j] = new Rectangle();
+				myShapeGrid[i][j] = new Rectangle();
 			}
 		}
 		
