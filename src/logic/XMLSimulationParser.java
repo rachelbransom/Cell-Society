@@ -1,6 +1,10 @@
 package logic;
 
 
+
+import cellUtil.Grid;
+
+
 public class XMLSimulationParser {
 	private String situation;
 	private String title;

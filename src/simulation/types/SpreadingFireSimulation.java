@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
-import cellUtil.Actor;
+
 import cellUtil.Cell;
 import cellUtil.Grid;
 import cellUtil.CellState.SpreadingFire;
@@ -24,20 +24,8 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	/*----------------- Overridden Methods -----------------------------*/
 	
-	@Override
-	public Color[][] showColorGrid() {
 	
-		Color[][] colorGrid = new Color[mySize][mySize];
-		
-		for (int i = 0; i < mySize; i++) {
-			for (int j = 0; j < mySize; j++) {
-				Actor currActor = myCurrGrid.getCellCopy(i, j).getActor();
-				colorGrid[i][j] = myColorMap.get(currActor.getState());
-			}
-		}
-		
-		return colorGrid;
-	}
+
 	
 	@Override
 	protected void updateCell(Cell currCell) {
@@ -46,7 +34,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		SpreadingFire currState = (SpreadingFire) currCell.getActor().getState();
 		
 		Point location = currCell.getLocation();
-		Cell newCell = myNextGrid.getCellCopy(location.x, location.y);
+		Cell newCell = myNextGrid.getCell(location.x, location.y);
 		
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){
@@ -72,4 +60,6 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		
 	}
 
+	
+	
 }

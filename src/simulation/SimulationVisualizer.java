@@ -1,77 +1,58 @@
 package simulation;
-import cellUtil.Grid;
+
+
+import cellsociety_team23.Main;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 class SimulationVisualizer {
-	private int myGridSize;
-	private int myPixelSize;
-	private Grid myCellGrid;
-	private Rectangle[][] myRectGrid;
-	private Group root;
 	
-	public SimulationVisualizer (int gridPixelSize, Group rootToSet){
-		rootToSet = root;
-		myPixelSize = gridPixelSize;
-	}
 	
-	private Group showSimulation(){
-		return root;
-	}
+	private Shape[][] myShapeGrid;
+	private Group myGridRoot;
 	
-	void update(){
-		
-	}
-
-	void setCurrentGrid(Grid grid){
-		myCellGrid = new Grid( grid );
-		myGridSize = grid.getSize();
-		
-	}
-	
-	void initRectGrid(){
-		for (int i=0; i<myGridSize; i++){
-			for (int j=0; i<myGridSize; j++){
-				myRectGrid[i][j] = new Rectangle(myPixelSize/myGridSize,myPixelSize/myGridSize);
-				root.getChildren().add(myRectGrid[i][j]);
-			}
-		}
-	}
 	SimulationVisualizer(int size){
-		initRectGrid(size);
+		initShapeGrid(size);		
 	}
 
-	Node returnVisualGrid(){
-		return null;
-	}
-
-	void updateVisuals(Color[][] colorGrid){
-
+	Group returnVisualGrid(Color[][] colorGrid){
 		updateGridColor(colorGrid);
-
-
+		return myGridRoot;
 	}
+	
 
 	private void updateGridColor(Color[][] colorGrid){
-
-		for (int i = 0; i < myRectGrid.length; i++) {
-			for (int j = 0; j < myRectGrid.length; j++) {
-				myRectGrid[i][j].setFill( colorGrid[i][j] );
+		myGridRoot = new Group();
+		for (int i = 0; i < myShapeGrid.length; i++) {
+			for (int j = 0; j < myShapeGrid.length; j++) {
+				myShapeGrid[i][j].setFill(colorGrid[i][j]);
+				myGridRoot.getChildren().add(myShapeGrid[i][j]);
 			}
 		}
-
 	}
 
-	private void initRectGrid(int size){
-		myRectGrid = new Rectangle[size][size];
-		
+	private void initShapeGrid(int size){
+		myShapeGrid = new Shape[size][size];		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				myRectGrid[i][j] = new Rectangle();
+				Rectangle shapeInGrid = new Rectangle();			
+				formatRectangle(i, j, shapeInGrid);				
+				myShapeGrid[i][j] = shapeInGrid;				
 			}
-		}	
+
+		}		
+	}
+
+	private void formatRectangle(int i, int j, Rectangle shapeInGrid) {
+		shapeInGrid.setWidth(Main.XSIZE/myShapeGrid.length);
+		shapeInGrid.setHeight(Main.YSIZE/myShapeGrid[0].length);
+		shapeInGrid.setX(Main.XSIZE/myShapeGrid.length*i);
+		shapeInGrid.setY(Main.YSIZE/myShapeGrid[0].length*j);
+
+			
+
 	}
 	
 }

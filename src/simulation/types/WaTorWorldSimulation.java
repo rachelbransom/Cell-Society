@@ -2,7 +2,7 @@ package simulation.types;
 
 import cellUtil.Cell;
 import cellUtil.Grid;
-import javafx.scene.paint.Color;
+
 
 public class WaTorWorldSimulation extends AbstractSimulation {
 
@@ -13,11 +13,7 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 
 	/*----------------- Overriden Methods -----------------------------*/
 	
-	@Override
-	public Color[][] showColorGrid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	protected void updateCell(Cell curr) {
