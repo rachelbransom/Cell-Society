@@ -20,6 +20,7 @@ public class SimulationController {
 	}
 	
 	public Group returnVisualGrid(){
+		
 		Color[][] colorGrid = mySimulation.showColorGrid();
 		myVisualizer = new SimulationVisualizer(colorGrid.length);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);

@@ -37,7 +37,7 @@ public class UX {
 	private String output;
 	private SimulationController simulationControl;
 	
-	
+
 	private static int BUTTON_DIMENSIONS = Main.XSIZE/10;
 	public static int GRID_START = Main.YSIZE-Main.XSIZE-BUTTON_DIMENSIONS;
 	
@@ -53,7 +53,8 @@ public class UX {
 		gridBorderInit();
 		displayInstructions();
 		displayTitle();
-
+		
+		
 		return scene;
 	}
 	
@@ -87,6 +88,9 @@ public class UX {
 			if (!file.equals("NONE CHOSEN")){
 			simulationControl = new SimulationController();
 			simulationControl.initializeSimulation(file);
+			Group gridRoot = simulationControl.returnVisualGrid();
+			root.getChildren().add(gridRoot);
+			
 			}
 		});
 		

@@ -36,19 +36,6 @@ public abstract class AbstractSimulation {
 	/*----------------- Abstract Methods -----------------------------*/	
 	
 	
-	public Color[][] showColorGrid() {
-	
-		Color[][] colorGrid = new Color[mySize][mySize];
-		
-		for (int i = 0; i < mySize; i++) {
-			for (int j = 0; j < mySize; j++) {
-				Actor currActor = myCurrGrid.getCell(i, j).getActor();
-				colorGrid[i][j] = myColorMap.get(currActor.getState());
-			}
-		}
-		
-		return colorGrid;
-	}
 	
 	/**
 	 * Updates cell according to whichever rules the simulation is 
@@ -93,13 +80,15 @@ public abstract class AbstractSimulation {
 	};
 
 	public Color[][] showColorGrid() {
-		
+		updateGrid();
 		Color[][] colorGrid = new Color[mySize][mySize];
 		
 		for (int i = 0; i < mySize; i++) {
 			for (int j = 0; j < mySize; j++) {
+				
 				Actor currActor = myCurrGrid.getCell(i, j).getActor();
 				colorGrid[i][j] = myColorMap.get(currActor.getState());
+				System.out.println(colorGrid[i][j]);
 			}
 		}
 		

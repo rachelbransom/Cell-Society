@@ -42,13 +42,13 @@ public class XMLParser {
 			situation = (SimulationType) returnSimulationType(getTextByTag("situation"));
 			title = getTextByTag("title");
 			author = getTextByTag("author");
-			System.out.print(author);
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
 
-			for (int i = 1; i < gridDimensions + 1; i++) {
-				for (int j = 1; j < gridDimensions + 1; j++) {
+			for (int i = 0; i < gridDimensions ; i++) {
+				for (int j = 0; j < gridDimensions ; j++) {
+					grid = new Grid(gridDimensions);
 					Cell cell = new Cell(i, j);
 					cell.getActor().changeState(
 							returnCellState(situation, Integer.parseInt(getTextByTag("cell" + i + "." + j ))));
