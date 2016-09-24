@@ -13,8 +13,7 @@ public class Grid {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				myCellGrid[i][j] = new Cell(i,j);
-			}
-		}
+			}		}
 	}
 	
 	public Grid( Grid that ){
