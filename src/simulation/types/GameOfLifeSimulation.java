@@ -33,8 +33,8 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 
 		if( currState == GameOfLife.ALIVE ) {;
 			// Cell dies
-			if( numberAliveNeighbors(currCell) < 2 || 
-					numberAliveNeighbors(currCell) > 3){
+			if( numberNeighborsWithState(GameOfLife.ALIVE, currCell) < 2 || 
+					numberNeighborsWithState(GameOfLife.ALIVE, currCell) > 3){
 				newCell.getActor().changeState(GameOfLife.DEAD);
 			}
 			// Cell Stays Alive
@@ -44,7 +44,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		}
 		if(currState == GameOfLife.DEAD){
 			// Cell repopulates
-			if(numberAliveNeighbors(currCell) == 3)
+			if(numberNeighborsWithState(GameOfLife.ALIVE, currCell) == 3)
 				newCell.getActor().changeState(GameOfLife.ALIVE);
 			else{
 				newCell.getActor().changeState(GameOfLife.DEAD);
@@ -52,15 +52,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		}
 	}
 
-	private int numberAliveNeighbors(Cell cell){
-		int count = 0;
-
-		for (Cell neighbor : cell.getNeighbors())
-			if(neighbor.getActor().getState() == GameOfLife.ALIVE)
-				count++;
-
-		return count;
-	}
+	
 	
 	@Override
 	protected void initColorMap() {

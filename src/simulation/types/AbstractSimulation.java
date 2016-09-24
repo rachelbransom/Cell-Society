@@ -4,6 +4,7 @@ import java.util.Map;
 
 import cellUtil.Cell;
 import cellUtil.Grid;
+import cellUtil.CellState.GameOfLife;
 import javafx.scene.paint.Color;
 
 /**
@@ -77,6 +78,15 @@ public abstract class AbstractSimulation {
 	Map<Enum, Color> getColorMap(){
 		return myColorMap;
 	};
+	
+	protected int numberNeighborsWithState(Enum state, Cell cell){
+		int count = 0;
+		for (Cell neighbor : cell.getNeighbors())
+			if(neighbor.getActor().getState() == state)
+				count++;
+
+		return count;
+	}
 
 	
 	

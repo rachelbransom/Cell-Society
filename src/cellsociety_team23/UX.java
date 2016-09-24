@@ -55,6 +55,7 @@ public class UX {
 		control.setLayoutY(Main.YSIZE-buttonDimensions);
 		control.setPrefSize(buttonDimensions*widthMultiplier, buttonDimensions);
 		control.setFocusTraversable(false);
+		//control.setFont(Font.font("Segoe UI Semibold", 11));
 		control.setStyle("-fx-font: 11 Segoe UI Semibold; -fx-base: #1d1d1d");
 		return control;
 	}
