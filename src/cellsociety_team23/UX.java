@@ -25,7 +25,7 @@ import simulation.SimulationController;
 
 public class UX {
 	private final String TITLE = "Cell Society";
-	private final int titleSize = 78, instructionsSize = 60, instructionsX = 50, instructionsY = 300;
+	private final int titleSize = 80, instructionsSize = 60, instructionsX = 50, instructionsY = 300;
 	private Scene scene;
 	private Group root = new Group();
 	private Button start, stop, step, reset;
@@ -63,7 +63,7 @@ public class UX {
 		control.setLayoutY(Main.YSIZE-BUTTON_DIMENSIONS);
 		control.setPrefSize(BUTTON_DIMENSIONS*widthMultiplier, BUTTON_DIMENSIONS);
 		control.setFocusTraversable(false);
-		control.setStyle("-fx-font: 11 Segoe UI Semibold; -fx-base: #1d1d1d");
+		control.setStyle("-fx-font-size: 12; -fx-base: #1d1d1d");
 		return control;
 	}
 	
@@ -90,6 +90,7 @@ public class UX {
 			simulationControl.initializeSimulation(file);
 			Group gridRoot = simulationControl.returnVisualGrid();
 			root.getChildren().add(gridRoot);
+			//TODO: This currently sends current grid, not initial grid
 			
 			}
 		});
@@ -114,8 +115,6 @@ public class UX {
 			);
 		comboBox = new ComboBox<String>(xmlOptions);
 		comboBox.setValue("CHOOSE XML FILE");
-		
-
 		root.getChildren().add(setControlLayout(comboBox, BUTTON_DIMENSIONS*6,4));
 		
 
@@ -127,7 +126,7 @@ public class UX {
 	}
 	
 	private void gridBorderInit() {
-		gridBorder = new Rectangle(0,Main.YSIZE-Main.XSIZE-BUTTON_DIMENSIONS, Main.XSIZE,Main.XSIZE);
+		gridBorder = new Rectangle(0,GRID_START, Main.XSIZE,Main.XSIZE);
 		gridBorder.setFill(Color.LIGHTGRAY);
 		root.getChildren().add(gridBorder);
 	}
