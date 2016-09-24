@@ -1,5 +1,6 @@
 package logic;
 
+
 public class XMLSimulationParser {
 	private String situation;
 	private String title;
