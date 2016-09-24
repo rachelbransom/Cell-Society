@@ -45,16 +45,18 @@ public class XMLParser {
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
-
+			grid = new Grid(gridDimensions);
+			
 			for (int i = 0; i < gridDimensions ; i++) {
 				for (int j = 0; j < gridDimensions ; j++) {
-					grid = new Grid(gridDimensions);
-					Cell cell = new Cell(i, j);
-					cell.getActor().changeState(
-							returnCellState(situation, Integer.parseInt(getTextByTag("cell" + i + "." + j ))));
-					grid.setCell(i, j, cell);
+					Cell currCell = new Cell(i, j);
+					int currCellState = Integer.parseInt( getTextByTag("cell" + i + "." + j ) );
+					Actor currAct = new Actor( returnCellState( situation, currCellState ) );
+					currCell.setActor( currAct );
+					grid.setCell(i, j, currCell);
 				}
 			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,11 +102,12 @@ public class XMLParser {
 		switch (simType) {
 		case GAME_OF_LIFE:
 			switch (state) {
-			case 1:
+			case 0:
 				return CellState.GameOfLife.DEAD;
-			case 2:
+			case 1:
 				return CellState.GameOfLife.ALIVE;
 			}
+			break;
 		case SPREADING_FIRE:
 			switch (state) {
 			case 0:
@@ -114,6 +117,7 @@ public class XMLParser {
 			case 2:
 				return CellState.SpreadingFire.TREE;
 			}
+			break;
 		case SEGREGATION:
 			switch (state) {
 			case 0:
@@ -123,6 +127,7 @@ public class XMLParser {
 			case 2:
 				return CellState.Segregation.POP_TWO;
 			}
+			break;
 		case WA_TOR_WORLD:
 			switch (state) {
 			case 0:
@@ -132,6 +137,7 @@ public class XMLParser {
 			case 2:
 				return CellState.WaTorWorld.PREY;
 			}
+			break;
 		}
 		return null;
 	}

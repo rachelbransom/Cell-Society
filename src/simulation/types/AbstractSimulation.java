@@ -28,7 +28,7 @@ public abstract class AbstractSimulation {
 	public AbstractSimulation( Grid inputGrid ){
 		
 		mySize = inputGrid.getSize();
-		myCurrGrid = new Grid( inputGrid );
+		myCurrGrid = inputGrid;
 		
 		initColorMap();
 	}
@@ -81,6 +81,7 @@ public abstract class AbstractSimulation {
 
 	public Color[][] showColorGrid() {
 		updateGrid();
+		
 		Color[][] colorGrid = new Color[mySize][mySize];
 		
 		for (int i = 0; i < mySize; i++) {
