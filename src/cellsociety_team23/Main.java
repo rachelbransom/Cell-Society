@@ -5,8 +5,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private UX userEx;
-	public static int XSIZE = 650;
-	public static int YSIZE = 800;
+	public static int XSIZE = 585;
+	public static int YSIZE = 720;
 	
 	public void start(Stage stage) {
 		userEx = new UX();
@@ -20,3 +20,5 @@ public class Main extends Application {
 		launch(args);
 	}
 }
+
+//0.8125

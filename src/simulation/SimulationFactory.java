@@ -1,7 +1,7 @@
 package simulation;
 
-import simulation.types.*;
 import cellsociety_team23.XMLParser;
+import simulation.types.*;
 
 class SimulationFactory {
 	String file;
@@ -12,7 +12,6 @@ class SimulationFactory {
 	public SimulationFactory(String chosenFile){
 		file = chosenFile;
 		parser = new XMLParser(file);
-		situation = parser.getSimulationType();
 		makeSimulation();
 	}
 	
