@@ -16,11 +16,6 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	
 	/*----------------- Overriden Methods -----------------------------*/
 	
-	@Override
-	public Color[][] showColorGrid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	protected void updateCell(Cell currCell) {

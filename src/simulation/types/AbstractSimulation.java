@@ -2,6 +2,7 @@ package simulation.types;
 
 import java.util.Map;
 
+import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.Grid;
 import javafx.scene.paint.Color;
@@ -34,7 +35,20 @@ public abstract class AbstractSimulation {
 	
 	/*----------------- Abstract Methods -----------------------------*/	
 	
-	public abstract Color[][] showColorGrid();
+	
+	public Color[][] showColorGrid() {
+	
+		Color[][] colorGrid = new Color[mySize][mySize];
+		
+		for (int i = 0; i < mySize; i++) {
+			for (int j = 0; j < mySize; j++) {
+				Actor currActor = myCurrGrid.getCell(i, j).getActor();
+				colorGrid[i][j] = myColorMap.get(currActor.getState());
+			}
+		}
+		
+		return colorGrid;
+	}
 	
 	/**
 	 * Updates cell according to whichever rules the simulation is 
