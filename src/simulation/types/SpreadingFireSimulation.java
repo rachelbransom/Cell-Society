@@ -31,7 +31,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		
 		for (int i = 0; i < mySize; i++) {
 			for (int j = 0; j < mySize; j++) {
-				Actor currActor = myCurrGrid.getCell(i, j).getActor();
+				Actor currActor = myCurrGrid.getCellCopy(i, j).getActor();
 				colorGrid[i][j] = myColorMap.get(currActor.getState());
 			}
 		}
@@ -46,7 +46,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		SpreadingFire currState = (SpreadingFire) currCell.getActor().getState();
 		
 		Point location = currCell.getLocation();
-		Cell newCell = myNextGrid.getCell(location.x, location.y);
+		Cell newCell = myNextGrid.getCellCopy(location.x, location.y);
 		
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){

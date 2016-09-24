@@ -49,7 +49,7 @@ public class XMLParser {
 		for (int i=1; i< gridDimensions+1; i++){
 			for (int j=1; j<gridDimensions+1; j++){
 					Cell cell = new Cell(i,j);
-					cell.getActor().changeState(returnCellState(situation, Integer.parseInt(getTextByTag("cell("+i+","+j+")"))));
+					cell.getActorCopy().changeState(returnCellState(situation, Integer.parseInt(getTextByTag("cell("+i+","+j+")"))));
 					grid.setCell(i, j, cell);
 			}
 		}

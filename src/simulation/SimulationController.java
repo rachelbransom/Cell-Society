@@ -9,9 +9,9 @@ public class SimulationController {
 	
 	public void initializeSimulation(String filename){
 		
-		SimulationFactory sf = new SimulationFactory();
+		SimulationFactory sf = new SimulationFactory(filename);
 		
-		mySimulation = sf.makeSimulation( filename );
+		mySimulation = sf.makeSimulation( );
 		
 		
 	}
