@@ -37,7 +37,6 @@ public class UX {
 	private String output;
 	private SimulationController simulationControl;
 	
-	private SimulationController mySimulation;
 	
 	private static int BUTTON_DIMENSIONS = Main.XSIZE/10;
 	public static int GRID_START = Main.YSIZE-Main.XSIZE-BUTTON_DIMENSIONS;
