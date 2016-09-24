@@ -25,8 +25,8 @@ public class Cell {
 	}
 	
 	public Cell(Cell that){
-		newActorWithState( that.myActor.getState() );
 		
+		newActorWithState( that.myActor.getState() );
 		this.myLocation = new Point(that.myLocation);
 		
 		this.myNeighbors = new ArrayList<Cell>();

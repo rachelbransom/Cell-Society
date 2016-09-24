@@ -13,7 +13,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 
 	public GameOfLifeSimulation(Grid grid){
 		super(grid);
-		setSquareNeighbors();
+		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE);
 	}
 
 	/*----------------- Overriden Methods -----------------------------*/
@@ -21,7 +21,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	@Override
 	public void updateGrid(){
 		super.updateGrid();
-		this.setSquareNeighbors();
+		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE);
 	}
 
 	@Override
@@ -68,35 +68,6 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	}
 	
 	/*----------------- Helper / Private Methods -----------------------------*/
-	
-	private void setSquareNeighbors(){
-
-		for (int i = 0; i < myCurrGrid.getSize(); i++) {
-			for (int j = 0; j < myCurrGrid.getSize(); j++) {
-				Cell currCell = myCurrGrid.getCell(i, j);
-
-				currCell.getNeighbors().clear();
-
-				// Top Left
-				if(myCurrGrid.inBounds(i - 1 , j - 1)) currCell.getNeighbors().add(myCurrGrid.getCell(i - 1, j - 1));
-				// Top Middle
-				if(myCurrGrid.inBounds(i     , j - 1)) currCell.getNeighbors().add(myCurrGrid.getCell(i    , j - 1 ));
-				// Top Right
-				if(myCurrGrid.inBounds(i + 1 , j - 1)) currCell.getNeighbors().add(myCurrGrid.getCell(i + 1, j - 1));
-				// Right Side
-				if(myCurrGrid.inBounds(i + 1 , j    )) currCell.getNeighbors().add(myCurrGrid.getCell(i + 1, j    ));
-				// Bottom Right
-				if(myCurrGrid.inBounds(i + 1 , j + 1)) currCell.getNeighbors().add(myCurrGrid.getCell(i + 1, j + 1));
-				// Bottom Middle
-				if(myCurrGrid.inBounds(i     , j + 1)) currCell.getNeighbors().add(myCurrGrid.getCell(i    , j + 1));
-				// Bottom Left
-				if(myCurrGrid.inBounds(i - 1 , j + 1)) currCell.getNeighbors().add(myCurrGrid.getCell(i - 1, j + 1));
-				// Left Side
-				if(myCurrGrid.inBounds(i - 1 , j    )) currCell.getNeighbors().add(myCurrGrid.getCell(i - 1, j    ));
-
-			}
-		}
-	}
 
 	private int numberAliveNeighbors(Cell cell){
 		int count = 0;
@@ -108,9 +79,8 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		}		
 		return count;
 	}
-
+ 
 	/*
-	 * 
 	public static void main(String[] args){
 		int size = 3;
 
