@@ -24,6 +24,13 @@ class SimulationVisualizer {
 	}
 	
 
+	//TODO: update grid vs. initialize grid
+	//TODO: clear root between steps
+	
+//	private void initGridColor(Color[][] colorGrid){
+//		
+//	}
+	
 	private void updateGridColor(Color[][] colorGrid){
 		myGridRoot = new Group();
 		for (int i = 0; i < myShapeGrid.length; i++) {
@@ -37,13 +44,11 @@ class SimulationVisualizer {
 	private void initShapeGrid(int size){
 		myShapeGrid = new Shape[size][size];		
 		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {
-				
+			for (int j = 0; j < size; j++) {				
 				Rectangle shapeInGrid = new Rectangle();			
 				formatRectangle(i, j, shapeInGrid);				
 				myShapeGrid[i][j] = shapeInGrid;				
 			}
-
 		}		
 	}
 

@@ -1,14 +1,14 @@
 package cellsociety_team23;
 
-import javax.swing.JComboBox;
-
-import javafx.beans.value.ChangeListener;
+//import javax.swing.JComboBox;
+//
+//import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+//import javafx.scene.control.Alert;
+//import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
@@ -34,7 +34,6 @@ public class UX {
 	private ComboBox<String> comboBox;
 	private Rectangle gridBorder;
 	private Text cellSocietyText, instructionsText;
-	private String output;
 	private SimulationController simulationControl;
 	
 
@@ -53,8 +52,6 @@ public class UX {
 		gridBorderInit();
 		displayInstructions();
 		displayTitle();
-		
-		
 		return scene;
 	}
 	
