@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
@@ -58,7 +60,7 @@ public class UX {
 	}
 	
 	private void buttonInit() {
-		start = new Button("START");
+		start = new Button("PLAY");
 		stop = new Button("STOP");
 		step = new Button("STEP");
 		reset = new Button("RESET");
@@ -73,8 +75,12 @@ public class UX {
 			//step
 		});
 		reset.setOnAction((event) -> {
+			String file = getFile(getComboBoxValue());
+			if (!file.equals("NONE CHOSEN")){
 			simulationControl = new SimulationController();
-			simulationControl.initializeSimulation(getComboBoxValue());
+			simulationControl.initializeSimulation(file);
+			}
+	
 		});
 		
 		root.getChildren().addAll(setControlLayout(start,0,1), setControlLayout(stop,buttonDimensions,1),
@@ -123,6 +129,22 @@ public class UX {
 		instructionsText.setTextAlignment(TextAlignment.CENTER);
 		instructionsText.setFill(Color.WHITE);
 		root.getChildren().add(instructionsText);
+	}
+	
+	private String getFile(String chosenFileName){
+		switch (chosenFileName){
+			case ("SEGREGATION"):
+				return "Segregation.xml";
+			case ("PREDATOR-PREY"):
+				return "Wator.xml";
+			case ("FIRE"):
+				return "Fire.xml";
+			case("GAME OF LIFE"):
+				return "Life.xml";
+			case("CHOOSE XML FILE"):
+				return "NONE CHOSEN";
+		}
+		return null;
 	}
 	
 }

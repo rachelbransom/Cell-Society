@@ -2,6 +2,8 @@ package simulation;
 
 import simulation.types.AbstractSimulation;
 
+//@authour: Rachel Bransom
+
 public class SimulationController {
 
 	private AbstractSimulation mySimulation;
@@ -9,9 +11,10 @@ public class SimulationController {
 	
 	public void initializeSimulation(String filename){
 		
-		SimulationFactory sf = new SimulationFactory();
+		SimulationFactory sf = new SimulationFactory(filename);
+		mySimulation = sf.makeSimulation();
 		
-		mySimulation = sf.makeSimulation( filename );
+		//SimulationVisualizer sv = new SimulationVisualizer();
 		
 		
 	}

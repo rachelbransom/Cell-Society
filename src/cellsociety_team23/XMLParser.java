@@ -12,7 +12,7 @@ import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.CellState;
 import cellUtil.Grid;
-import simulation.SimulationType;
+import simulation.types.SimulationType;
 
 public class XMLParser {
 	Document document;
@@ -20,7 +20,7 @@ public class XMLParser {
 	private SimulationType situation;
 	private String title;
 	private String author;
-	private float globalConfig;
+	private double globalConfig;
 	private int gridDimensions;
 	private int states;
 	private Grid grid;
@@ -42,7 +42,8 @@ public class XMLParser {
 			situation = (SimulationType) returnSimulationType(getTextByTag("situation"));
 			title = getTextByTag("title");
 			author = getTextByTag("author");
-			globalConfig = Integer.parseInt(getTextByTag("global_config"));
+			System.out.print(author);
+			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
 
@@ -50,7 +51,7 @@ public class XMLParser {
 				for (int j = 1; j < gridDimensions + 1; j++) {
 					Cell cell = new Cell(i, j);
 					cell.getActor().changeState(
-							returnCellState(situation, Integer.parseInt(getTextByTag("cell(" + i + "," + j + ")"))));
+							returnCellState(situation, Integer.parseInt(getTextByTag("cell" + i + "." + j ))));
 					grid.setCell(i, j, cell);
 				}
 			}
@@ -64,7 +65,7 @@ public class XMLParser {
 		return situation;
 	}
 
-	public float getGlobalConfiguration() {
+	public double getGlobalConfiguration() {
 		return globalConfig;
 	}
 
@@ -78,6 +79,7 @@ public class XMLParser {
 
 	public String getTextByTag(String tag) {
 		return document.getElementsByTagName(tag).item(0).getTextContent();
+		//System.out.println(document.getElementsByTagName(tag).item(0).getTextContent());
 	}
 
 	public Enum<SimulationType> returnSimulationType(String situation) {
