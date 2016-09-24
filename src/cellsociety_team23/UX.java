@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 
 public class UX {
 	private final String TITLE = "Cell Society";
-	private final int titleSize = 88;
+	private final int titleSize = 80;
 	private Scene scene;
 	private Group root = new Group();
 	private Button start, stop, step, reset;
@@ -71,8 +71,9 @@ public class UX {
 		
 		root.getChildren().addAll(setControlLayout(start,0,1), setControlLayout(stop,buttonDimensions,1),
 				setControlLayout(step,buttonDimensions*2,1),setControlLayout(reset,buttonDimensions*3,1));
+		
 	}
-	
+		
 	private void textFieldInit(){
 		speedTextField = new TextField();
 		speedTextField.setPromptText("ENTER SPEED");
@@ -88,7 +89,9 @@ public class UX {
 			);
 		comboBox = new ComboBox<String>(xmlOptions);
 		comboBox.setValue("CHOOSE XML FILE");
+		
 		root.getChildren().add(setControlLayout(comboBox, buttonDimensions*6,4));
+		
 	}
 	
 	private void gridBorderInit() {
