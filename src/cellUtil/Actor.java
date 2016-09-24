@@ -29,9 +29,9 @@ public class Actor {
 	}
 	
 	Actor(Actor that){
-		this.myState = that.myState;
+		this.myState  = that.myState ;
 		this.myEnergy = that.myEnergy;
-		this.myAge = that.myAge;
+		this.myAge    = that.myAge;
 		
 	}
 	
@@ -65,14 +65,6 @@ public class Actor {
 	
 	public void changeState(Enum state){
 		myState = state;
-	}
-
-	public Color getColor() {
-		return myColor;
-	}
-
-	public void setColor(Color myColor) {
-		this.myColor = myColor;
 	}
 	
 }

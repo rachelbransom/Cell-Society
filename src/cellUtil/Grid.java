@@ -24,11 +24,11 @@ public class Grid {
 		
 		for (int i = 0; i < that.mySize; i++) {
 			for (int j = 0; j < that.mySize; j++) {
-				myCellGrid[i][j] = new Cell( that.myCellGrid[i][j] );
+				myCellGrid[i][j] = new Cell ( that.myCellGrid[i][j] );
 			}
 		}
 	}
-	
+
 	public int getSize(){
 		return mySize;
 	}
@@ -36,9 +36,15 @@ public class Grid {
 	public Cell getCell(int x, int y){
 		return myCellGrid[x][y];
 	}
-	
+		
 	public void setCell(int x, int y, Cell input){
 		myCellGrid[x][y] = new Cell(input);
 	}
 	
+	public boolean inBounds(int x, int y){
+		boolean inX = 0 <= x && x < mySize;
+		boolean inY = 0 <= y && y < mySize;
+				
+		return inX && inY;
+	}
 }
