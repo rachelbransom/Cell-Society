@@ -95,7 +95,8 @@ public class Grid {
 						simType.equals(SimulationType.SEGREGATION)) setFullSquareNeighbors(i, j, getCell(i, j));
 				
 				if( simType.equals(SimulationType.WA_TOR_WORLD) ||
-						simType.equals(SimulationType.SPREADING_FIRE)) cardinalNeighbors(i, j, getCell(i, j));
+						simType.equals(SimulationType.SPREADING_FIRE)) 
+						cardinalNeighbors(i, j, getCell(i, j));
 				
 			}
 		}
