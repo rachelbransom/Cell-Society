@@ -2,6 +2,7 @@ package simulation;
 
 
 import cellsociety_team23.Main;
+import cellsociety_team23.UX;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -47,13 +48,12 @@ class SimulationVisualizer {
 	}
 
 	private void formatRectangle(int i, int j, Rectangle shapeInGrid) {
-		shapeInGrid.setWidth(Main.XSIZE/myShapeGrid.length);
-		shapeInGrid.setHeight(Main.YSIZE/myShapeGrid[0].length);
-		shapeInGrid.setX(Main.XSIZE/myShapeGrid.length*i);
-		shapeInGrid.setY(Main.YSIZE/myShapeGrid[0].length*j);
-
-			
-
+		shapeInGrid.setWidth(Main.XSIZE/myShapeGrid[0].length);
+		shapeInGrid.setHeight(Main.XSIZE/myShapeGrid.length);
+		shapeInGrid.setX(Main.XSIZE/myShapeGrid[0].length*j);
+		shapeInGrid.setY(Main.XSIZE/myShapeGrid.length*i + UX.GRID_START);
+		
+		
 	}
 	
 }
