@@ -25,15 +25,18 @@ import simulation.SimulationController;
 
 public class UX {
 	private final String TITLE = "Cell Society";
-	private final int titleSize = 80, instructionsSize = 60, instructionsX = 50, instructionsY = 300;
+	private final int titleSize = 80, instructionsSize = 60, instructionsX = 35, instructionsY = 300;
 	private Scene scene;
 	private Group root = new Group();
+	private Group gridRoot = new Group();
 	private Button start, stop, step, reset;
 	
 	private TextField speedTextField;
 	private ComboBox<String> comboBox;
 	private Rectangle gridBorder;
 	private Text cellSocietyText, instructionsText;
+
+	
 	private SimulationController simulationControl;
 	
 
@@ -52,6 +55,7 @@ public class UX {
 		gridBorderInit();
 		displayInstructions();
 		displayTitle();
+		root.getChildren().add(gridRoot);
 		return scene;
 	}
 	
@@ -77,18 +81,18 @@ public class UX {
 			//stop
 		});
 		step.setOnAction((event) -> {
+			if (simulationControl != null){
+				resetGridRoot();
+			}
+			
 			//step
 		});
 		reset.setOnAction((event) -> {
-
 			String file = getFile(getComboBoxValue());
 			if (!file.equals("NONE CHOSEN")){
-			simulationControl = new SimulationController();
-			simulationControl.initializeSimulation(file);
-			Group gridRoot = simulationControl.returnVisualGrid();
-			root.getChildren().add(gridRoot);
-			//TODO: This currently sends current grid, not initial grid
-			
+				simulationControl = new SimulationController();
+				simulationControl.initializeSimulation(file);
+				resetGridRoot();
 			}
 		});
 		
@@ -96,12 +100,19 @@ public class UX {
 				setControlLayout(step,BUTTON_DIMENSIONS*2,1),setControlLayout(reset,BUTTON_DIMENSIONS*3,1));
 		
 	}
+
+	private void resetGridRoot() {
+		root.getChildren().remove(gridRoot);
+		gridRoot = simulationControl.returnVisualGrid();
+		root.getChildren().add(gridRoot);
+	}
 		
-	private void textFieldInit(){
+	private void textFieldInit(){		
 		speedTextField = new TextField();
 		speedTextField.setPromptText("ENTER SPEED");
 		root.getChildren().add(setControlLayout(speedTextField,BUTTON_DIMENSIONS*4,2));
 	}
+	
 	
 	private void comboBoxInit(){
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(
@@ -110,7 +121,7 @@ public class UX {
 				"FIRE",
 				"GAME OF LIFE"
 			);
-		comboBox = new ComboBox<String>(xmlOptions);
+		comboBox = new ComboBox<String>(xmlOptions);		
 		comboBox.setValue("CHOOSE XML FILE");
 		root.getChildren().add(setControlLayout(comboBox, BUTTON_DIMENSIONS*6,4));
 		
@@ -142,6 +153,7 @@ public class UX {
 		instructionsText.setFill(Color.WHITE);
 		root.getChildren().add(instructionsText);
 	}
+	
 	
 	private String getFile(String chosenFileName){
 		switch (chosenFileName){
