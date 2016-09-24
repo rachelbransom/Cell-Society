@@ -12,7 +12,7 @@ public class Main extends Application {
 		userEx = new UX();
 		stage.setTitle(userEx.getTitle());
 		stage.setScene(userEx.init(XSIZE, YSIZE));
-		stage.setResizable(false);
+		stage.setResizable(true);
 		stage.show();
 	}
 	

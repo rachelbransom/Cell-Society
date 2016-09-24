@@ -4,6 +4,8 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
 
+//@authour: Rachel Bransom
+
 public class SimulationController {
 
 	private AbstractSimulation mySimulation;
@@ -12,9 +14,8 @@ public class SimulationController {
 	public void initializeSimulation(String filename){
 		
 		SimulationFactory sf = new SimulationFactory(filename);
-		
 		mySimulation = sf.makeSimulation();
-			
+
 	}
 	
 	public Group returnVisualGrid(){

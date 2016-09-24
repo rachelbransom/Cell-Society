@@ -25,6 +25,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	/*----------------- Overridden Methods -----------------------------*/
 	
 	
+
 	
 	@Override
 	protected void updateCell(Cell currCell) {
@@ -33,7 +34,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		SpreadingFire currState = (SpreadingFire) currCell.getActor().getState();
 		
 		Point location = currCell.getLocation();
-		Cell newCell = myNextGrid.getCell(location.x, location.y);
+		Cell newCell = myNextGrid.getCellCopy(location.x, location.y);
 		
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){

@@ -25,22 +25,24 @@ public class Cell {
 	}
 	
 	public Cell(Cell that){
-		this.myActor = new Actor(that.myActor);
+		newActorWithState( that.myActor.getState() );
+		
 		this.myLocation = new Point(that.myLocation);
-		this.myNeighbors = new ArrayList<Cell>(that.myNeighbors);
+		
+		this.myNeighbors = new ArrayList<Cell>();
+		this.myNeighbors.addAll(that.myNeighbors);
 	}
 	
 	public Actor getActor(){
-		Actor out = new Actor(myActor);
-		return out;
+		return myActor;
+	}
+	
+	public void newActorWithState(Enum state){
+		this.myActor = new Actor(state);
 	}
 	
 	public Collection<Cell> getNeighbors(){
-		
-		Collection<Cell> out = new ArrayList<>();
-		out.addAll(myNeighbors);
-		
-		return out;
+		return myNeighbors;
 	}
 	
 	public Point getLocation(){

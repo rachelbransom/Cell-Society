@@ -1,8 +1,6 @@
 package simulation;
 
 
-
-
 import cellsociety_team23.Main;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
@@ -19,10 +17,11 @@ class SimulationVisualizer {
 		initShapeGrid(size);		
 	}
 
-	Group returnVisualGrid(Color[][] colorGrid){		
+	Group returnVisualGrid(Color[][] colorGrid){
 		updateGridColor(colorGrid);
 		return myGridRoot;
 	}
+	
 
 	private void updateGridColor(Color[][] colorGrid){
 		myGridRoot = new Group();
@@ -42,6 +41,7 @@ class SimulationVisualizer {
 				formatRectangle(i, j, shapeInGrid);				
 				myShapeGrid[i][j] = shapeInGrid;				
 			}
+
 		}		
 	}
 
@@ -50,6 +50,9 @@ class SimulationVisualizer {
 		shapeInGrid.setHeight(Main.YSIZE/myShapeGrid[0].length);
 		shapeInGrid.setX(Main.XSIZE/myShapeGrid.length*i);
 		shapeInGrid.setY(Main.YSIZE/myShapeGrid[0].length*j);
+
+			
+
 	}
 	
 }

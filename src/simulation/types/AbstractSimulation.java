@@ -76,8 +76,7 @@ public abstract class AbstractSimulation {
 	void updateGrid(){
 
 		// Make copies of input Grid
-		myCurrGrid = new Grid(mySize);
-		myNextGrid  = new Grid(mySize);
+		myNextGrid  = new Grid(myCurrGrid.getSize());
 		
 		// Update each cell
 		for (int i = 0; i < myCurrGrid.getSize(); i++) {
@@ -86,11 +85,13 @@ public abstract class AbstractSimulation {
 			}
 		}
 		
-		myCurrGrid = myNextGrid;
+		myCurrGrid = new Grid( myNextGrid );
 	};
 	
 	Map<Enum, Color> getColorMap(){
 		return myColorMap;
 	};
 
+	
+	
 }
