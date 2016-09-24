@@ -8,12 +8,7 @@ import cellUtil.Grid;
 import javafx.scene.paint.Color;
 
 /**
- * 
- *
  *	This class manages the current state of the grid. 
- *	Responsibility for returning 
- *
- *	Provides two relevant methods: getNextGridState
  *	
  *	@author George Bernard
  *
@@ -34,8 +29,6 @@ public abstract class AbstractSimulation {
 	}
 	
 	/*----------------- Abstract Methods -----------------------------*/	
-	
-	
 	
 	/**
 	 * Updates cell according to whichever rules the simulation is 
@@ -60,7 +53,7 @@ public abstract class AbstractSimulation {
 	 * @param 	grid  Reference to current Grid
 	 * @return		  Reference to the next Grid
 	 */
-	void updateGrid(){
+	protected void updateGrid(){
 
 		// Make copies of input Grid
 		myNextGrid  = new Grid(myCurrGrid.getSize());
@@ -73,10 +66,6 @@ public abstract class AbstractSimulation {
 		}
 		
 		myCurrGrid = new Grid( myNextGrid );
-	};
-	
-	Map<Enum, Color> getColorMap(){
-		return myColorMap;
 	};
 
 	public Color[][] showColorGrid() {

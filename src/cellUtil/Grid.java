@@ -91,8 +91,11 @@ public class Grid {
 		for (int i = 0; i < mySize; i++) {
 			for (int j = 0; j < mySize; j++) {
 				
-				if( simType.equals(SimulationType.GAME_OF_LIFE) ) setFullSquareNeighbors(i, j, getCell(i, j));
-				if( simType.equals(SimulationType.SPREADING_FIRE)) cardinalNeighbors(i, j, getCell(i, j));
+				if( simType.equals(SimulationType.GAME_OF_LIFE) ||
+						simType.equals(SimulationType.SEGREGATION)) setFullSquareNeighbors(i, j, getCell(i, j));
+				
+				if( simType.equals(SimulationType.WA_TOR_WORLD) ||
+						simType.equals(SimulationType.SPREADING_FIRE)) cardinalNeighbors(i, j, getCell(i, j));
 				
 			}
 		}

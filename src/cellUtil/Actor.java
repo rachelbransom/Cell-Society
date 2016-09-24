@@ -63,6 +63,10 @@ public class Actor {
 		return myState;
 	}
 	
+	public boolean isState(Enum state){
+		return myState.equals(state);
+	}
+	
 	public void changeState(Enum state){
 		myState = state;
 	}

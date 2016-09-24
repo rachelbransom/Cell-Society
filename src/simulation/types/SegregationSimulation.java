@@ -13,8 +13,6 @@ public class SegregationSimulation extends AbstractSimulation {
 
 	/*----------------- Overriden Methods -----------------------------*/
 	
-
-
 	@Override
 	protected void updateCell(Cell curr) {
 		// TODO Auto-generated method stub
