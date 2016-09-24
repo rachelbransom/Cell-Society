@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import simulation.SimulationController;
 
 public class UX {
 	private final String TITLE = "Cell Society";
@@ -20,11 +21,16 @@ public class UX {
 	private Scene scene;
 	private Group root = new Group();
 	private Button start, stop, step, reset;
-	private int buttonDimensions = Main.XSIZE/10;
+	
 	private TextField speedTextField;
 	private ComboBox<String> comboBox;
 	private Rectangle gridBorder;
 	private Text cellSocietyText;
+	
+	private SimulationController mySimulation;
+	
+	private static int BUTTON_DIMENSIONS = Main.XSIZE/10;
+	public static int GRID_START = Main.YSIZE-Main.XSIZE-BUTTON_DIMENSIONS;
 	
 	public String getTitle(){
 		return TITLE;
@@ -38,13 +44,14 @@ public class UX {
 		gridBorderInit();
 		displayTitle();
 		// call grid visual
+		
 		return scene;
 	}
 	
 	private Control setControlLayout(Control control, int layoutX, int widthMultiplier) {
 		control.setLayoutX(layoutX);
-		control.setLayoutY(Main.YSIZE-buttonDimensions);
-		control.setPrefSize(buttonDimensions*widthMultiplier, buttonDimensions);
+		control.setLayoutY(Main.YSIZE-BUTTON_DIMENSIONS);
+		control.setPrefSize(BUTTON_DIMENSIONS*widthMultiplier, BUTTON_DIMENSIONS);
 		control.setFocusTraversable(false);
 		control.setStyle("-fx-font: 11 Segoe UI Semibold; -fx-base: #1d1d1d");
 		return control;
@@ -66,18 +73,17 @@ public class UX {
 			//step
 		});
 		reset.setOnAction((event) -> {
-			//reset
 		});
 		
-		root.getChildren().addAll(setControlLayout(start,0,1), setControlLayout(stop,buttonDimensions,1),
-				setControlLayout(step,buttonDimensions*2,1),setControlLayout(reset,buttonDimensions*3,1));
+		root.getChildren().addAll(setControlLayout(start,0,1), setControlLayout(stop,BUTTON_DIMENSIONS,1),
+				setControlLayout(step,BUTTON_DIMENSIONS*2,1),setControlLayout(reset,BUTTON_DIMENSIONS*3,1));
 		
 	}
 		
 	private void textFieldInit(){
 		speedTextField = new TextField();
 		speedTextField.setPromptText("ENTER SPEED");
-		root.getChildren().add(setControlLayout(speedTextField,buttonDimensions*4,2));
+		root.getChildren().add(setControlLayout(speedTextField,BUTTON_DIMENSIONS*4,2));
 	}
 	
 	private void comboBoxInit(){
@@ -90,18 +96,18 @@ public class UX {
 		comboBox = new ComboBox<String>(xmlOptions);
 		comboBox.setValue("CHOOSE XML FILE");
 		
-		root.getChildren().add(setControlLayout(comboBox, buttonDimensions*6,4));
+		root.getChildren().add(setControlLayout(comboBox, BUTTON_DIMENSIONS*6,4));
 		
 	}
 	
 	private void gridBorderInit() {
-		gridBorder = new Rectangle(0,Main.YSIZE-Main.XSIZE-buttonDimensions, Main.XSIZE,Main.XSIZE);
+		gridBorder = new Rectangle(0,Main.YSIZE-Main.XSIZE-BUTTON_DIMENSIONS, Main.XSIZE,Main.XSIZE);
 		gridBorder.setFill(Color.LIGHTGRAY);
 		root.getChildren().add(gridBorder);
 	}
 	
 	private void displayTitle() {
-		cellSocietyText = new Text(0,buttonDimensions+10,"CELL SOCIETY");
+		cellSocietyText = new Text(0,BUTTON_DIMENSIONS + 10,"CELL SOCIETY");
 		cellSocietyText.setFont(Font.font("Segoe UI Semibold", FontWeight.BOLD, titleSize));
 		cellSocietyText.setFill(Color.WHITE);
 		root.getChildren().add(cellSocietyText);

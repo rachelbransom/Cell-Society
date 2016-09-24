@@ -3,6 +3,7 @@ package simulation;
 
 
 
+import cellsociety_team23.Main;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -12,46 +13,43 @@ class SimulationVisualizer {
 	
 	
 	private Shape[][] myShapeGrid;
+	private Group myGridRoot;
 	
 	SimulationVisualizer(int size){
-
-		initShapeGrid(size);
+		initShapeGrid(size);		
 	}
 
-
-	Group returnVisualGrid(){
-		Group gridRoot = new Group();
-		
-		
-		return gridRoot;
+	Group returnVisualGrid(Color[][] colorGrid){		
+		updateGridColor(colorGrid);
+		return myGridRoot;
 	}
-
-//	void updateVisuals(Color[][] colorGrid){
-//
-//		updateGridColor(colorGrid);
-//
-//
-//	}
 
 	private void updateGridColor(Color[][] colorGrid){
-
+		myGridRoot = new Group();
 		for (int i = 0; i < myShapeGrid.length; i++) {
 			for (int j = 0; j < myShapeGrid.length; j++) {
 				myShapeGrid[i][j].setFill(colorGrid[i][j]);
+				myGridRoot.getChildren().add(myShapeGrid[i][j]);
 			}
 		}
-
 	}
 
 	private void initShapeGrid(int size){
-		myShapeGrid = new Shape[size][size];
-		
+		myShapeGrid = new Shape[size][size];		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				myShapeGrid[i][j] = new Rectangle();
+				Rectangle shapeInGrid = new Rectangle();			
+				formatRectangle(i, j, shapeInGrid);				
+				myShapeGrid[i][j] = shapeInGrid;				
 			}
-		}
-		
+		}		
+	}
+
+	private void formatRectangle(int i, int j, Rectangle shapeInGrid) {
+		shapeInGrid.setWidth(Main.XSIZE/myShapeGrid.length);
+		shapeInGrid.setHeight(Main.YSIZE/myShapeGrid[0].length);
+		shapeInGrid.setX(Main.XSIZE/myShapeGrid.length*i);
+		shapeInGrid.setY(Main.YSIZE/myShapeGrid[0].length*j);
 	}
 	
 }
