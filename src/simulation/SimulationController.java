@@ -1,5 +1,7 @@
 package simulation;
 
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
 
 //@authour: Rachel Bransom
@@ -14,9 +16,14 @@ public class SimulationController {
 		SimulationFactory sf = new SimulationFactory(filename);
 		
 		mySimulation = sf.makeSimulation();
-		
-		//SimulationVisualizer sv = new SimulationVisualizer();
+
 	}
 	
+	public Group returnVisualGrid(){
+		Color[][] colorGrid = mySimulation.showColorGrid();
+		myVisualizer = new SimulationVisualizer(colorGrid.length);
+		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
+		return gridRoot;
+	}
 	
 }
