@@ -11,9 +11,12 @@ public class SimulationController {
 		
 		SimulationFactory sf = new SimulationFactory(filename);
 		
-		mySimulation = sf.makeSimulation( );
+<<<<<<< HEAD
+		mySimulation = sf.makeSimulation();
+>>>>>>> 35d3acb054cce2c9c163642064a600a8d2c8a364
 		
 		
 	}
+	
 	
 }
