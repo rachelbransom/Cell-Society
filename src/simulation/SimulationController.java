@@ -12,11 +12,10 @@ public class SimulationController {
 	public void initializeSimulation(String filename){
 		
 		SimulationFactory sf = new SimulationFactory(filename);
+		
 		mySimulation = sf.makeSimulation();
 		
 		//SimulationVisualizer sv = new SimulationVisualizer();
-		
-		
 	}
 	
 	
