@@ -16,19 +16,19 @@ public class Actor {
 		myAge = 0;
 	}
 	
-	Actor(Enum state){
+	public Actor(Enum state){
 		myState = state;
 		myEnergy = 0;
 		myAge = 0;
 	}
 	
-	Actor(Enum state, int energy, int age){
+	public Actor(Enum state, int energy, int age){
 		myState = state;
 		myEnergy = energy;
 		myAge = age;
 	}
 	
-	Actor(Actor that){
+	public Actor(Actor that){
 		this.myState  = that.myState ;
 		this.myEnergy = that.myEnergy;
 		this.myAge    = that.myAge;

@@ -37,6 +37,10 @@ public class Cell {
 		return myActor;
 	}
 	
+	public void setActor(Actor act){
+		myActor = act;
+	}
+	
 	public void newActorWithState(Enum state){
 		this.myActor = new Actor(state);
 	}

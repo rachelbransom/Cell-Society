@@ -19,7 +19,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	/*----------------- Overriden Methods -----------------------------*/
 
 	@Override
-	public void updateGrid(){
+	void updateGrid(){
 		super.updateGrid();
 		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE);
 	}
