@@ -19,12 +19,6 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	/*----------------- Overriden Methods -----------------------------*/
 
 	@Override
-	public Color[][] showColorGrid() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void updateGrid(){
 		super.updateGrid();
 		this.setSquareNeighbors();
@@ -64,6 +58,17 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 
 	}
 
+	@Override
+	protected void initColorMap() {
+		myColorMap = new HashMap<Enum, Color>();
+
+		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
+		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
+
+	}
+	
+	/*----------------- Helper / Private Methods -----------------------------*/
+	
 	private void setSquareNeighbors(){
 
 		for (int i = 0; i < myCurrGrid.getSize(); i++) {
@@ -104,16 +109,8 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		return count;
 	}
 
-	@Override
-	protected void initColorMap() {
-		myColorMap = new HashMap<Enum, Color>();
-
-		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
-		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
-
-	}
-
 	/*
+	 * 
 	public static void main(String[] args){
 		int size = 3;
 
@@ -155,6 +152,5 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 
 	}
 	*/
-
 
 }
