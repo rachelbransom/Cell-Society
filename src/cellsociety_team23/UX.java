@@ -25,7 +25,7 @@ import simulation.SimulationController;
 
 public class UX {
 	private final String TITLE = "Cell Society";
-	private final int titleSize = 88, instructionsSize = 60, instructionsX = 50, instructionsY = 300;
+	private final int titleSize = 78, instructionsSize = 60, instructionsX = 50, instructionsY = 300;
 	private Scene scene;
 	private Group root = new Group();
 	private Button start, stop, step, reset;
