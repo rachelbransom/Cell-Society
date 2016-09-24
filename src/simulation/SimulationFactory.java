@@ -27,10 +27,10 @@ class SimulationFactory {
 		switch (situation){
 		case GAME_OF_LIFE:
 			return out = new GameOfLifeSimulation(parser.getGrid());
-		case SPREADING_FIRE:
-			return out = new SpreadingFireSimulation(parser.getGrid(), parser.getGlobalConfiguration());
-		case SEGREGATION:
-			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
+//		case SPREADING_FIRE:
+//			return out = new SpreadingFireSimulation(parser.getGrid(), parser.getGlobalConfiguration());
+//		case SEGREGATION:
+//			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 		case WA_TOR_WORLD:
 			return out = new WaTorWorldSimulation(parser.getGrid());
 		}
