@@ -37,6 +37,7 @@ class SimulationVisualizer {
 		myShapeGrid = new Shape[size][size];		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
+				
 				Rectangle shapeInGrid = new Rectangle();			
 				formatRectangle(i, j, shapeInGrid);				
 				myShapeGrid[i][j] = shapeInGrid;				

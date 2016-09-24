@@ -42,7 +42,6 @@ public class XMLParser {
 			situation = (SimulationType) returnSimulationType(getTextByTag("situation"));
 			title = getTextByTag("title");
 			author = getTextByTag("author");
-			System.out.print(author);
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
