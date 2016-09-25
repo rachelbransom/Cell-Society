@@ -123,16 +123,22 @@ public class UX {
 
 	private void step() {
 		if (simulationControl != null){
-			resetGridRoot();
+			advanceGridRoot();
 		}
 		checkSpeed();
 	}
 	
 	private void resetGridRoot() {
 		root.getChildren().remove(gridRoot);
-		gridRoot = simulationControl.returnVisualGrid();
+		gridRoot = simulationControl.returnCurrVisualGrid();
 		root.getChildren().add(gridRoot);
 	}	
+	
+	private void advanceGridRoot() {
+		root.getChildren().remove(gridRoot);
+		gridRoot = simulationControl.returnNextVisualGrid();
+		root.getChildren().add(gridRoot);
+	}
 	
 	private void sliderInit(){
 		slider = new Slider(1, 10, 3);

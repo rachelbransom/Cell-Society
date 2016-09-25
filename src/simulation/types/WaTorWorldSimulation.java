@@ -43,8 +43,6 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 				updateCell( myCurrGrid.getCell(i, j));
 			}
 		}
-
-
 	}
 	
 	@Override
@@ -140,5 +138,14 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 		
 		int i = myRand.nextInt(from.size());
 		return (Cell) from.toArray()[i];
+	}
+
+	private void initSharkAge(){
+		
+		for (int x = 0; x < mySize; x++) {
+			for (int y = 0; y < mySize; y++) {
+				
+			}
+		}
 	}
 }

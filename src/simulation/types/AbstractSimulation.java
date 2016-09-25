@@ -83,8 +83,12 @@ public abstract class AbstractSimulation {
 	};
 
 
-	public Color[][] showColorGrid() {
-		updateGrid();
+	public Color[][] showNextColorGrid(){
+		updateGrid();	
+		return showCurrColorGrid();
+	}
+	
+	public Color[][] showCurrColorGrid() {
 		
 		Color[][] colorGrid = new Color[mySize][mySize];
 		

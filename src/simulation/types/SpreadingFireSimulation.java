@@ -67,46 +67,5 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	}
 	
-	public static void main(String[] args){
-		int size = 10;
-
-		Grid g = new Grid(size);
-		Cell[] arr = new Cell[size];
-
-		// set middle column to alive, rest to dead
-		for(int i = 0; i < size; i++){
-			for(int j = 0; j < size; j++){
-				g.setCell(i, j, new Cell(i, j));
-				if (i == 1 || i == 7) g.getCell(i, j).getActor().changeState(SpreadingFire.BURNING);
-				else g.getCell(i, j).getActor().changeState(SpreadingFire.TREE);
-			}
-		}
-
-		SpreadingFireSimulation sim = new SpreadingFireSimulation(g, 0.5); 
-
-		for(int run = 0; run < 10; run++){
-
-			Grid printGrid = sim.myCurrGrid;
-
-			for (int i = 0; i < arr.length; i++) {
-				for (int j = 0; j < arr.length; j++) {
-
-					Actor printActor = printGrid.getCell(i, j).getActor();
-
-					if(printActor.getState().equals(SpreadingFire.EMPTY)) System.out.print("   |");
-					if(printActor.getState().equals(SpreadingFire.BURNING)) System.out.print(" * |");
-					if(printActor.getState().equals(SpreadingFire.TREE)) System.out.print(" # |");
-
-				}
-
-
-				System.out.println("");
-			}
-
-			sim.updateGrid();
-
-			System.out.println("");
-		}
-	}
 }
 
