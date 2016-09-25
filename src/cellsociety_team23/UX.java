@@ -2,20 +2,15 @@ package cellsociety_team23;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-//import javax.swing.JComboBox;
-//
-//import javafx.beans.value.ChangeListener;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-//import javafx.scene.control.Alert;
-//import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Slider;
-//import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -37,6 +32,7 @@ public class UX {
 	private Group gridRoot = new Group();
 	private Timeline animation;
 	private Button start, stop, step, reset;
+	private Slider slider;
 	private ComboBox<String> comboBox;
 	private Rectangle gridBorder;
 	private Text cellSocietyText, instructionsText, sliderText;
@@ -54,9 +50,7 @@ public class UX {
 	public Scene init(int width, int height) {
 		scene = new Scene(root, width, height, Color.BLACK);
 		buttonInit();
-		//textFieldInit();
-		sliderInit();
-		
+		sliderInit();		
 		comboBoxInit();
 		gridBorderInit();
 		displayInstructions();
@@ -82,7 +76,8 @@ public class UX {
 		reset = new Button("RESET");
 		
 		start.setOnAction((event) -> {
-			KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY),
+			double speedMultiplier = slider.getValue();
+			KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY*speedMultiplier),
                     e -> step());
 			animation = new Timeline();
 			animation.setCycleCount(Timeline.INDEFINITE);
@@ -105,8 +100,7 @@ public class UX {
 			}
 		});		
 		root.getChildren().addAll(setControlLayout(start,0,1), setControlLayout(stop,BUTTON_DIMENSIONS,1),
-				setControlLayout(step,BUTTON_DIMENSIONS*2,1),setControlLayout(reset,BUTTON_DIMENSIONS*3,1));
-		
+				setControlLayout(step,BUTTON_DIMENSIONS*2,1),setControlLayout(reset,BUTTON_DIMENSIONS*3,1));		
 	}
 
 	private void stopSimulation() {
@@ -125,19 +119,16 @@ public class UX {
 		root.getChildren().remove(gridRoot);
 		gridRoot = simulationControl.returnVisualGrid();
 		root.getChildren().add(gridRoot);
-	}
-	
+	}	
 	
 	private void sliderInit(){
-		Slider slider = new Slider(1, 3, 5);
+		slider = new Slider(1, 5, 3);
 		slider.setShowTickMarks(true);
-		slider.setShowTickLabels(false);
-		slider.setMajorTickUnit(0.25f);
-		slider.setBlockIncrement(0.1f);
+		slider.setMajorTickUnit(1f);
+		//slider.setBlockIncrement(0.1f);
 		root.getChildren().add(setControlLayout(slider,BUTTON_DIMENSIONS*4,2));
 	}
-	
-	
+		
 	private void displaySliderText(){
 		sliderText = new Text(sliderTextX, sliderTextY, "Adjust speed");
 		sliderText.setFont(Font.font("Segoe UI Semibold", sliderTextSize));
@@ -184,8 +175,7 @@ public class UX {
 		instructionsText.setFill(Color.WHITE);
 		root.getChildren().add(instructionsText);
 	}
-	
-	
+		
 	private String getFile(String chosenFileName){
 		switch (chosenFileName){
 			case ("SEGREGATION"):
@@ -200,6 +190,5 @@ public class UX {
 				return "NONE CHOSEN";
 		}
 		return null;
-	}
-	
+	}	
 }

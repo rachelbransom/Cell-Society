@@ -1,5 +1,6 @@
 package simulation;
 
+import cellUtil.Grid;
 import cellsociety_team23.XMLParser;
 import simulation.types.*;
 
@@ -26,7 +27,8 @@ class SimulationFactory {
 		
 		switch (simulation){
 		case GAME_OF_LIFE:
-			return out = new GameOfLifeSimulation(parser.getGrid());
+			Grid initGrid = parser.getGrid();
+			return out = new GameOfLifeSimulation(initGrid);
 //		case SPREADING_FIRE:
 //			return out = new SpreadingFireSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 //		case SEGREGATION:

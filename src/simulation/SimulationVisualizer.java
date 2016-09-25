@@ -23,13 +23,6 @@ class SimulationVisualizer {
 		return myGridRoot;
 	}
 	
-
-	//TODO: update grid vs. initialize grid
-	//TODO: clear root between steps
-	
-//	private void initGridColor(Color[][] colorGrid){
-//		
-//	}
 	
 	private void updateGridColor(Color[][] colorGrid){
 		myGridRoot = new Group();
