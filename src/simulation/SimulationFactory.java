@@ -1,5 +1,6 @@
 package simulation;
 
+import cellUtil.Grid;
 import cellsociety_team23.XMLParser;
 import simulation.types.*;
 

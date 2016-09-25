@@ -68,6 +68,15 @@ public abstract class AbstractSimulation {
 		myCurrGrid = new Grid( myNextGrid );
 	};
 
+	
+	
+	
+	
+	Map<Enum, Color> getColorMap(){
+		return myColorMap;
+	};
+
+
 	public Color[][] showColorGrid() {
 		updateGrid();
 		
@@ -78,7 +87,7 @@ public abstract class AbstractSimulation {
 				
 				Actor currActor = myCurrGrid.getCell(i, j).getActor();
 				colorGrid[i][j] = myColorMap.get(currActor.getState());
-				System.out.println(colorGrid[i][j]);
+			
 			}
 		}
 		

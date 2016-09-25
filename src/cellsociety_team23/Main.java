@@ -20,5 +20,3 @@ public class Main extends Application {
 		launch(args);
 	}
 }
-
-//0.8125
