@@ -5,14 +5,14 @@ import simulation.types.*;
 
 class SimulationFactory {
 	String file;
-	private SimulationType situation;
+	private SimulationType simulation;
 	private XMLParser parser;
 	private AbstractSimulation out;
 	
 	public SimulationFactory(String chosenFile){
 		file = chosenFile;
 		parser = new XMLParser(file);
-		makeSimulation();
+		simulation = parser.getSimulationType();
 	}
 	
 	//TODO: Add Logic for building specific simulation types (i.e. game of life over 
@@ -23,7 +23,8 @@ class SimulationFactory {
 	}
 	
 	public AbstractSimulation makeSimulation(){
-		switch (situation){
+		
+		switch (simulation){
 		case GAME_OF_LIFE:
 			return out = new GameOfLifeSimulation(parser.getGrid());
 //		case SPREADING_FIRE:
@@ -31,8 +32,9 @@ class SimulationFactory {
 //		case SEGREGATION:
 //			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 		case WA_TOR_WORLD:
-			return out = new WaTorWorldSimulation(parser.getGrid());
+			return out = new WaTorWorldSimulation(parser.getGrid());		
+		default:
+			return out;
 		}
-		return out;
 	}
 }

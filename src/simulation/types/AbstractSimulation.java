@@ -2,18 +2,14 @@ package simulation.types;
 
 import java.util.Map;
 
+import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.Grid;
 import cellUtil.CellState.GameOfLife;
 import javafx.scene.paint.Color;
 
 /**
- * 
- *
  *	This class manages the current state of the grid. 
- *	Responsibility for returning 
- *
- *	Provides two relevant methods: getNextGridState
  *	
  *	@author George Bernard
  *
@@ -28,14 +24,12 @@ public abstract class AbstractSimulation {
 	public AbstractSimulation( Grid inputGrid ){
 		
 		mySize = inputGrid.getSize();
-		myCurrGrid = new Grid( inputGrid );
+		myCurrGrid = inputGrid;
 		
 		initColorMap();
 	}
 	
 	/*----------------- Abstract Methods -----------------------------*/	
-	
-	public abstract Color[][] showColorGrid();
 	
 	/**
 	 * Updates cell according to whichever rules the simulation is 
@@ -60,7 +54,7 @@ public abstract class AbstractSimulation {
 	 * @param 	grid  Reference to current Grid
 	 * @return		  Reference to the next Grid
 	 */
-	void updateGrid(){
+	protected void updateGrid(){
 
 		// Make copies of input Grid
 		myNextGrid  = new Grid(myCurrGrid.getSize());
@@ -88,6 +82,22 @@ public abstract class AbstractSimulation {
 		return count;
 	}
 
+	public Color[][] showColorGrid() {
+		updateGrid();
+		
+		Color[][] colorGrid = new Color[mySize][mySize];
+		
+		for (int i = 0; i < mySize; i++) {
+			for (int j = 0; j < mySize; j++) {
+				
+				Actor currActor = myCurrGrid.getCell(i, j).getActor();
+				colorGrid[i][j] = myColorMap.get(currActor.getState());
+				System.out.println(colorGrid[i][j]);
+			}
+		}
+		
+		return colorGrid;
+	}
 	
 	
 }
