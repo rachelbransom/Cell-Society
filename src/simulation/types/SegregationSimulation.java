@@ -82,9 +82,9 @@ public class SegregationSimulation extends AbstractSimulation {
 	}
 	
 	private float percentNeighborsSame(Enum state, Cell cell){
-		return numberNeighborsWithState(state, cell)/
-				(numberNeighborsWithState(Segregation.POP_ONE, cell) +
-						(numberNeighborsWithState(Segregation.POP_TWO, cell)));
+		return cell.numberNeighborsWithState(state)/
+				(cell.numberNeighborsWithState(Segregation.POP_ONE) +
+						(cell.numberNeighborsWithState(Segregation.POP_TWO)));
 	}
 	
 	private void relocateUnsatisfiedCitizens(){
