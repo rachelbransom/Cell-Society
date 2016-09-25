@@ -17,7 +17,7 @@ public class SegregationSimulation extends AbstractSimulation {
 	private double mySatisfactionThreshold; // Minimum ratio of population being comfortable with the current location
 	private Stack<Point> myEmptyCellPoints; //Holds empty cells 
 	private Stack<Cell> myUnsatisfiedCitizens; // Holds the unsatisfied Actors from one pass of the grid
-		
+	boolean initialCallToUpdateGrid = true;	
 	
 	private static final Enum AMP = Segregation.POP_ONE; // Short Nickname for population one
 	private static final Enum OHM = Segregation.POP_TWO; // Short Nickname for population two
@@ -26,18 +26,30 @@ public class SegregationSimulation extends AbstractSimulation {
 	public SegregationSimulation(Grid inputGrid, double satisfaction) {
 		super(inputGrid);
 		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
+		myEmptyCellPoints = new Stack<Point>();
+		myUnsatisfiedCitizens = new Stack<Cell>();
 	}
 
 	/*----------------- Overriden Methods -----------------------------*/
 	
+	
+	
+	
 	@Override
 	protected void updateGrid(){	
+		myNextGrid  = new Grid(myCurrGrid.getSize());
+		
 		for (int i = 0; i < this.mySize; i++) {
 			for (int j = 0; j < mySize; j++) {
 				updateCell( myCurrGrid.getCell(i, j));
 			}
 		}
+		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
+		if (!initialCallToUpdateGrid){
 		relocateUnsatisfiedCitizens();
+		myCurrGrid = new Grid(myNextGrid);
+		}
+		initialCallToUpdateGrid = false;
 	}
 	
 	@Override

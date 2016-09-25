@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 /**
  *	This class manages the current state of the grid. 
  *	
- *	@author George Bernard
+ *	@author George Bernard and Rachel Bransom
  *
  */
 public abstract class AbstractSimulation {
@@ -69,10 +69,6 @@ public abstract class AbstractSimulation {
 		myCurrGrid = new Grid( myNextGrid );
 	};
 	
-	Map<Enum, Color> getColorMap(){
-		return myColorMap;
-	};
-	
 	protected int numberNeighborsWithState(Enum state, Cell cell){
 		int count = 0;
 		for (Cell neighbor : cell.getNeighbors())
@@ -81,10 +77,6 @@ public abstract class AbstractSimulation {
 
 		return count;
 	}
-
-	
-	
-	
 	
 	Map<Enum, Color> getColorMap(){
 		return myColorMap;

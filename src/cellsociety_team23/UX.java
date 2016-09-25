@@ -83,13 +83,7 @@ public class UX {
 		
 
 		play.setOnAction((event) -> {
-			double speedMultiplier = slider.getValue();
-			KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY*speedMultiplier),
-                    e -> step());
-			animation = new Timeline();
-			animation.setCycleCount(Timeline.INDEFINITE);
-			animation.getKeyFrames().add(frame);
-			animation.play();	
+			playSimulation();	
 		});
 		stop.setOnAction((event) -> {
 			stopSimulation();				
@@ -111,6 +105,16 @@ public class UX {
 				setControlLayout(step,BUTTON_DIMENSIONS*2,1),setControlLayout(reset,BUTTON_DIMENSIONS*3,1));		
 	}
 
+	private void playSimulation() {
+		double speedMultiplier = slider.getValue();
+		KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY/speedMultiplier),
+		        e -> step());
+		animation = new Timeline();
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
+	}
+
 	private void stopSimulation() {
 		if (animation != null){
 			animation.stop();
@@ -121,6 +125,7 @@ public class UX {
 		if (simulationControl != null){
 			resetGridRoot();
 		}
+		checkSpeed();
 	}
 	
 	private void resetGridRoot() {
@@ -130,11 +135,16 @@ public class UX {
 	}	
 	
 	private void sliderInit(){
-		slider = new Slider(1, 5, 3);
-		slider.setShowTickMarks(true);
+		slider = new Slider(1, 10, 3);
 		slider.setMajorTickUnit(1f);
-		//slider.setBlockIncrement(0.1f);
 		root.getChildren().add(setControlLayout(slider,BUTTON_DIMENSIONS*4,2));
+	}
+	
+	private void checkSpeed(){
+		if (slider.isValueChanging() == true){
+			stopSimulation();
+			playSimulation();
+		}
 	}
 		
 	private void displaySliderText(){
