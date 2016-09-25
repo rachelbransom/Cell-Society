@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.Grid;
-import cellUtil.CellState.GameOfLife;
 import cellUtil.CellState.SpreadingFire;
 
 public class SpreadingFireSimulation extends AbstractSimulation {

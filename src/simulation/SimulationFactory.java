@@ -1,6 +1,5 @@
 package simulation;
 
-import cellUtil.Grid;
 import cellsociety_team23.XMLParser;
 import simulation.types.*;
 
@@ -33,7 +32,7 @@ class SimulationFactory {
 		case SEGREGATION:
 			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 		case WA_TOR_WORLD:
-			return out = new WaTorWorldSimulation(parser.getGrid());		
+			return out = new WaTorWorldSimulation(parser.getGrid(), 0, 0 , 0);		
 		default:
 			return out;
 		}
