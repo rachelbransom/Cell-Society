@@ -19,9 +19,16 @@ public class SimulationController {
 
 	}
 	
-	public Group returnVisualGrid(){
+	public Group returnCurrVisualGrid(){
+		Color[][] colorGrid = mySimulation.showCurrColorGrid();
+		myVisualizer = new SimulationVisualizer(colorGrid.length);
+		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
+		return gridRoot;
+	}
+	
+	public Group returnNextVisualGrid(){
 		
-		Color[][] colorGrid = mySimulation.showColorGrid();
+		Color[][] colorGrid = mySimulation.showNextColorGrid();
 		myVisualizer = new SimulationVisualizer(colorGrid.length);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
 		return gridRoot;

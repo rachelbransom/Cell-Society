@@ -68,17 +68,13 @@ public abstract class AbstractSimulation {
 		myCurrGrid = new Grid( myNextGrid );
 	};
 
-	
-	
-	
-	
-	Map<Enum, Color> getColorMap(){
-		return myColorMap;
-	};
-
-
-	public Color[][] showColorGrid() {
+	public Color[][] showNextColorGrid(){
 		updateGrid();
+		
+		return showCurrColorGrid();
+	}
+	
+	public Color[][] showCurrColorGrid() {
 		
 		Color[][] colorGrid = new Color[mySize][mySize];
 		
