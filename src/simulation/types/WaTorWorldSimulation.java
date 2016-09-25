@@ -23,8 +23,8 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	private static final int SEED = 1234;
 	
 	private Random myRand;
-	private int ReproductionThreshold;
-	private int EnergyThreshold;
+	private int ReproductionThreshold = 5;
+	private int EnergyThreshold = 5;
 	
 	public WaTorWorldSimulation(Grid inputGrid) {
 		super(inputGrid);
@@ -118,7 +118,10 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	private void moveActorToRandomNeighborWithState(Cell inputCell, Enum state){
 		
 		Collection<Cell> neighborsWithState = inputCell.getNeighborsWithState(state);
-		Cell randomEmptyNeighbor = getRandomCell(neighborsWithState);
+		Cell randomEmptyNeighbor;
+		
+		if(inputCell.numberNeighborsWithState(state) > 0) randomEmptyNeighbor = getRandomCell(neighborsWithState);
+		else return;
 		
 		if( ! randomEmptyNeighbor.getActor().isState(state)) throw new RuntimeException("Improper Empty Checking");
 		
@@ -134,6 +137,7 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	 * @return
 	 */
 	private Cell getRandomCell( Collection<Cell> from ){
+		
 		int i = myRand.nextInt(from.size());
 		return (Cell) from.toArray()[i];
 	}
