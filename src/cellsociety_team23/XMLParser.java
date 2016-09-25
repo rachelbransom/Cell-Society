@@ -81,7 +81,6 @@ public class XMLParser {
 
 	public String getTextByTag(String tag) {
 		return document.getElementsByTagName(tag).item(0).getTextContent();
-		//System.out.println(document.getElementsByTagName(tag).item(0).getTextContent());
 	}
 
 	public Enum<SimulationType> returnSimulationType(String situation) {

@@ -1,9 +1,8 @@
 package cellsociety_team23;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
 import javafx.collections.FXCollections;
+
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -21,6 +20,13 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import simulation.SimulationController;
 
+/**
+ *	This class manages the visualization window 
+ *	
+ *	@author Rachel Bransom
+ *
+ */
+
 public class UX {
 	private final String TITLE = "Cell Society";
 
@@ -31,7 +37,7 @@ public class UX {
 	private Group root = new Group();
 	private Group gridRoot = new Group();
 	private Timeline animation;
-	private Button start, stop, step, reset;
+	private Button play, stop, step, reset;
 	private Slider slider;
 	private ComboBox<String> comboBox;
 	private Rectangle gridBorder;
@@ -70,12 +76,13 @@ public class UX {
 	}
 	
 	private void buttonInit() {
-		start = new Button("PLAY");
+		play = new Button("PLAY");
 		stop = new Button("STOP");
 		step = new Button("STEP");
 		reset = new Button("RESET");
 		
-		start.setOnAction((event) -> {
+
+		play.setOnAction((event) -> {
 			playSimulation();	
 		});
 		stop.setOnAction((event) -> {
@@ -92,8 +99,9 @@ public class UX {
 				simulationControl.initializeSimulation(file);
 				resetGridRoot();
 			}
+
 		});		
-		root.getChildren().addAll(setControlLayout(start,0,1), setControlLayout(stop,BUTTON_DIMENSIONS,1),
+		root.getChildren().addAll(setControlLayout(play,0,1), setControlLayout(stop,BUTTON_DIMENSIONS,1),
 				setControlLayout(step,BUTTON_DIMENSIONS*2,1),setControlLayout(reset,BUTTON_DIMENSIONS*3,1));		
 	}
 

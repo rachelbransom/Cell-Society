@@ -34,21 +34,19 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		
 		if( currState.equals(GameOfLife.ALIVE) ) {
 			// Cell dies
-			if( numberAliveNeighbors(newCell) < 2 || numberAliveNeighbors(newCell) > 3){
-				newCell.setActor( new Actor(GameOfLife.DEAD) );
+			if( numberNeighborsWithState(GameOfLife.ALIVE, currCell) < 2 || 
+					numberNeighborsWithState(GameOfLife.ALIVE, currCell) > 3){
+				newCell.getActor().changeState(GameOfLife.DEAD);
 			}
 			// Cell Stays Alive
 			else{
 				newCell.setActor( new Actor(GameOfLife.ALIVE) );
 			}
 		}
-		
-		if( currState.equals(GameOfLife.DEAD) ){
-			// Cell Repopulates
-			if(numberAliveNeighbors(newCell) == 3){
-				newCell.setActor( new Actor(GameOfLife.ALIVE) ); 
-			}
-			// Cell Stays Dead
+		if(currState == GameOfLife.DEAD){
+			// Cell repopulates
+			if(numberNeighborsWithState(GameOfLife.ALIVE, currCell) == 3)
+				newCell.getActor().changeState(GameOfLife.ALIVE);
 			else{
 				newCell.setActor( new Actor(GameOfLife.DEAD) );
 			}
@@ -69,15 +67,5 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	
 	/*----------------- Helper / Private Methods -----------------------------*/
 
-	private int numberAliveNeighbors(Cell cell){
-		int count = 0;
-
-		for (Cell neighbor : cell.getNeighbors()){
-			if(neighbor.getActor().getState().equals(GameOfLife.ALIVE)){
-				count++;
-			}
-		}		
-		return count;
-	}
 
 }
