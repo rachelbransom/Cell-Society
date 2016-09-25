@@ -3,6 +3,8 @@ package cellUtil;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 
 public class Cell {
 		
@@ -26,7 +28,7 @@ public class Cell {
 	
 	public Cell(Cell that){
 		
-		newActorWithState( that.myActor.getState() );
+		this.myActor = new Actor( that.myActor );
 		this.myLocation = new Point(that.myLocation);
 		
 		this.myNeighbors = new ArrayList<Cell>();
@@ -41,9 +43,6 @@ public class Cell {
 		myActor = act;
 	}
 	
-	public void newActorWithState(Enum state){
-		this.myActor = new Actor(state);
-	}
 	
 	public Collection<Cell> getNeighbors(){
 		return myNeighbors;
@@ -53,5 +52,23 @@ public class Cell {
 		return (Point) myLocation.clone();
 	}
 	
+	public int numberNeighborsWithState(Enum state){
+		int count = 0;
+		
+		for(Cell c: myNeighbors){
+			if(c.getActor().isState(state)) count++;
+		}
+		
+		return count;
+	}
+	
+	public Collection<Cell> getNeighborsWithState(Enum state){
+		Collection<Cell> neighborsCopy = new ArrayList<Cell>();
+		
+		for(Cell neighbor: myNeighbors)
+			if(neighbor.getActor().isState(state)) neighborsCopy.add(neighbor);
+		
+		return neighborsCopy;
+	}
 	
 }

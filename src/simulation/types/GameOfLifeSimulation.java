@@ -19,7 +19,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	/*----------------- Overriden Methods -----------------------------*/
 
 	@Override
-	void updateGrid(){
+	protected void updateGrid(){
 		super.updateGrid();
 		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE);
 	}
@@ -35,22 +35,22 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		if( currState.equals(GameOfLife.ALIVE) ) {
 			// Cell dies
 			if( numberAliveNeighbors(newCell) < 2 || numberAliveNeighbors(newCell) > 3){
-				newCell.newActorWithState(GameOfLife.DEAD);
+				newCell.setActor( new Actor(GameOfLife.DEAD) );
 			}
 			// Cell Stays Alive
 			else{
-				newCell.newActorWithState(GameOfLife.ALIVE);
+				newCell.setActor( new Actor(GameOfLife.ALIVE) );
 			}
 		}
 		
 		if( currState.equals(GameOfLife.DEAD) ){
 			// Cell Repopulates
 			if(numberAliveNeighbors(newCell) == 3){
-				newCell.newActorWithState(GameOfLife.ALIVE); 
+				newCell.setActor( new Actor(GameOfLife.ALIVE) ); 
 			}
 			// Cell Stays Dead
 			else{
-				newCell.newActorWithState(GameOfLife.DEAD);
+				newCell.setActor( new Actor(GameOfLife.DEAD) );
 			}
 		}
 		
@@ -79,48 +79,5 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		}		
 		return count;
 	}
- 
-	/*
-	public static void main(String[] args){
-		int size = 3;
-
-		Grid g = new Grid(size);
-		Cell[] arr = new Cell[size];
-
-		// set middle column to alive, rest to dead
-		for(int i = 0; i < size; i++){
-			for(int j = 0; j < size; j++){
-				g.setCell(i, j, new Cell(i, j));
-				if (i == 1) g.getCell(i, j).getActor().changeState(GameOfLife.ALIVE);
-				else g.getCell(i, j).getActor().changeState(GameOfLife.DEAD);
-			}
-		}
-
-		GameOfLifeSimulation sim = new GameOfLifeSimulation(g); 
-
-		for(int run = 0; run < 5; run++){
-
-			Grid printGrid = sim.myCurrGrid;
-
-			for (int i = 0; i < arr.length; i++) {
-				for (int j = 0; j < arr.length; j++) {
-
-					Actor printActor = printGrid.getCell(i, j).getActor();
-
-					if(printActor.getState().equals(GameOfLife.ALIVE)) System.out.print(" # |");
-					if(printActor.getState().equals(GameOfLife.DEAD)) System.out.print("   |");
-				}
-
-
-				System.out.println("");
-			}
-
-			sim.updateGrid();
-
-			System.out.println("");
-		}
-
-	}
-	*/
 
 }

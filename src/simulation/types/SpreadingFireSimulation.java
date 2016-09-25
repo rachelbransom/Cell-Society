@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
-
+import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.Grid;
 import cellUtil.CellState.GameOfLife;
@@ -25,9 +25,6 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	/*----------------- Overridden Methods -----------------------------*/
 
-
-
-
 	@Override
 	public void updateGrid(){
 		super.updateGrid();
@@ -45,7 +42,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){
-			newCell.newActorWithState(SpreadingFire.EMPTY);
+			newCell.setActor( new Actor(SpreadingFire.EMPTY) );
 		}
 
 		// If cell has a tree then check for chance of burning from neighbors
@@ -53,7 +50,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 			for (Cell neighbor : currCell.getNeighbors())
 				if ( neighbor.getActor().getState().equals(SpreadingFire.BURNING) && myRandom.nextDouble() < myProbCatch ) {
 					// System.out.println(newCell.getLocation().toString() + "has burned");
-					newCell.newActorWithState(SpreadingFire.BURNING);
+					newCell.setActor( new Actor(SpreadingFire.BURNING) );
 				}
 
 		myNextGrid.setCell(location.x, location.y, newCell);
@@ -69,8 +66,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		myColorMap.put(SpreadingFire.BURNING, Color.RED);
 
 	}
-
-	/*
+	
 	public static void main(String[] args){
 		int size = 10;
 
@@ -86,7 +82,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 			}
 		}
 
-		SpreadingFireSimulation sim = new SpreadingFireSimulation(g, 0.1); 
+		SpreadingFireSimulation sim = new SpreadingFireSimulation(g, 0.5); 
 
 		for(int run = 0; run < 10; run++){
 
@@ -111,8 +107,6 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 			System.out.println("");
 		}
-
 	}
-	 */
 }
 
