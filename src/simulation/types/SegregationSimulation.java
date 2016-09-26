@@ -12,13 +12,8 @@ import javafx.scene.paint.Color;
 
 
 public class SegregationSimulation extends AbstractSimulation {
-<<<<<<< HEAD
-	private double mySatisfactionThreshold;
-	private Stack<Point> myEmptyCellPoints;
-=======
 	private double mySatisfactionThreshold; // Minimum ratio of population being comfortable with the current location
 	private Stack<Point> myEmptyCellPoints; //Holds empty cells 
->>>>>>> ee245e5ebf04edce8a2eea42db232ee40abe55ac
 	private Stack<Actor> myUnsatisfiedCitizens; // Holds the unsatisfied Actors from one pass of the grid
 	boolean initialCallToUpdateGrid = true;	
 	
@@ -35,18 +30,11 @@ public class SegregationSimulation extends AbstractSimulation {
 		myUnsatisfiedCitizens = new Stack<Actor>();
 	}
 
-<<<<<<< HEAD
-	/*----------------- Overriden Methods -----------------------------*/	
-	
-	@Override
-	protected void updateGrid(){	
-=======
 	/*----------------- Overriden Methods -----------------------------*/
 		
 	@Override
 	protected void updateGrid(){	
 		
->>>>>>> ee245e5ebf04edce8a2eea42db232ee40abe55ac
 		myNextGrid  = new Grid(myCurrGrid.getSize());
 		
 		for (int i = 0; i < this.mySize; i++) {
@@ -58,11 +46,7 @@ public class SegregationSimulation extends AbstractSimulation {
 		relocateUnsatisfiedCitizens();
 		myCurrGrid = myNextGrid;
 		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
-<<<<<<< HEAD
-=======
-		
->>>>>>> ee245e5ebf04edce8a2eea42db232ee40abe55ac
-	}
+		}
 	
 	@Override
 	protected void updateCell(Cell curr) {
@@ -76,11 +60,8 @@ public class SegregationSimulation extends AbstractSimulation {
 			myEmptyCellPoints.push(curr.getLocation());
 		}
 		else if (currState.equals(OHM)){
-<<<<<<< HEAD
-			if (percentNeighborsSame(Segregation.POP_ONE, curr) < mySatisfactionThreshold) {
-=======
+
 			if ( percentNeighborsSame(OHM, curr) <= mySatisfactionThreshold) {
->>>>>>> ee245e5ebf04edce8a2eea42db232ee40abe55ac
 				myUnsatisfiedCitizens.push(curr.getActor());
 				myEmptyCellPoints.push(curr.getLocation());
 			}
@@ -92,10 +73,6 @@ public class SegregationSimulation extends AbstractSimulation {
 			if (percentNeighborsSame(AMP, curr) <= mySatisfactionThreshold) {
 				myUnsatisfiedCitizens.push(curr.getActor());
 				myEmptyCellPoints.push(curr.getLocation());
-<<<<<<< HEAD
-				curr.setActor( new Actor(EMPTY) );
-=======
->>>>>>> ee245e5ebf04edce8a2eea42db232ee40abe55ac
 			}
 			else {
 				myNextGrid.setCell(location.x, location.y, newCell);
@@ -103,8 +80,6 @@ public class SegregationSimulation extends AbstractSimulation {
 		}
 	}
 	
-<<<<<<< HEAD
-=======
 	private double percentNeighborsSame(Enum state, Cell cell){
 		
 		double neighbors = (double) cell.numberNeighborsWithState(AMP) + cell.numberNeighborsWithState(OHM);
@@ -115,7 +90,6 @@ public class SegregationSimulation extends AbstractSimulation {
 			return 0;
 	}
 	
->>>>>>> ee245e5ebf04edce8a2eea42db232ee40abe55ac
 	private void relocateUnsatisfiedCitizens(){
 		Collections.shuffle(myEmptyCellPoints);
 		Collections.shuffle(myUnsatisfiedCitizens);
