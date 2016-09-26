@@ -1,5 +1,7 @@
 package cellsociety_team23;
 
+import java.util.ResourceBundle;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -25,11 +27,12 @@ import simulation.SimulationController;
  * This class manages the visualization window
  * 
  * @author Rachel Bransom
+ * @author Diane Hadley
  *
  */
 
 public class UX {
-	private final String TITLE = "Cell Society";
+	
 	private final int TITLE_SIZE = 80, INSTRUCTIONS_SIZE = 60, INSTRUCTIONSX = 10, INSTRUCTIONSY = 300,
 			SLIDER_TEXT_SIZE = 10, SLIDER_TEXT_X = 4 * BUTTON_DIMENSIONS + 25, SLIDER_MIN = 1, 
 			SLIDER_MAX = 10, SLIDER_DEFAULT = 3, SLIDER_TEXT_Y = Main.YSIZE - BUTTON_DIMENSIONS + 15 ;
@@ -44,24 +47,30 @@ public class UX {
 	private Rectangle gridBorder;
 	private Text cellSocietyText, instructionsText, sliderText;
 	private SimulationController simulationControl;
+	
+	private ResourceBundle myResources;
 
 	public static final int FRAMES_PER_SECOND = 1;
 	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private static int BUTTON_DIMENSIONS = Main.XSIZE / 10;
+	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	public static int GRID_START = Main.YSIZE - Main.XSIZE - BUTTON_DIMENSIONS;
 
 	public String getTitle() {
-		return TITLE;
+		return myResources.getString("Title");
+	}
+	
+	public UX() {
+		myResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
 	}
 
 	public Scene init() {
 		scene = new Scene(root, Main.XSIZE, Main.YSIZE, Color.BLACK);
-
+		
 		buttonInit();
 		sliderInit();
 		comboBoxInit();
 		gridBorderInit();
-
 		displayInstructions();
 		displayTitle();
 		displaySliderText();
@@ -71,10 +80,10 @@ public class UX {
 	}
 
 	private void buttonInit() {
-		play = new Button("PLAY");
-		stop = new Button("STOP");
-		step = new Button("STEP");
-		reset = new Button("RESET");
+		play = new Button(myResources.getString("PlayButton"));
+		stop = new Button(myResources.getString("StopButton"));
+		step = new Button(myResources.getString("StepButton"));
+		reset = new Button(myResources.getString("ResetButton"));
 
 		play.setOnAction((event) -> {
 			playSimulation();
@@ -166,10 +175,10 @@ public class UX {
 	/*----------------- Private / Helper Methods -----------------------------*/
 
 	private void comboBoxInit() {
-		ObservableList<String> xmlOptions = FXCollections.observableArrayList("SEGREGATION", "PREDATOR-PREY", "FIRE",
-				"GAME OF LIFE");
+		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
+				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"));
 		comboBox = new ComboBox<String>(xmlOptions);
-		comboBox.setValue("CHOOSE XML FILE");
+		comboBox.setValue(myResources.getString("ComboBoxText"));
 		root.getChildren().add(setControlLayout(comboBox, BUTTON_DIMENSIONS * 6, 4));
 	}
 
@@ -186,7 +195,7 @@ public class UX {
 	}
 
 	private void displayInstructions() {
-		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, "Please select \n an XML file \n and press 'RESET'");
+		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
 		root.getChildren().add(setTextLayout(instructionsText, INSTRUCTIONS_SIZE));
 	}
 
@@ -195,12 +204,12 @@ public class UX {
 	}
 
 	private void displaySliderText() {
-		sliderText = new Text(SLIDER_TEXT_X, SLIDER_TEXT_Y, "ADJUST SPEED");
+		sliderText = new Text(SLIDER_TEXT_X, SLIDER_TEXT_Y, myResources.getString("SliderText"));
 		root.getChildren().add(setTextLayout(sliderText, SLIDER_TEXT_SIZE));
 	}
 
 	private void displayTitle() {
-		cellSocietyText = new Text(0, BUTTON_DIMENSIONS + 10, "CELL SOCIETY");
+		cellSocietyText = new Text(0, BUTTON_DIMENSIONS + 10, myResources.getString("DisplayTitle"));
 		root.getChildren().add(setTextLayout(cellSocietyText, TITLE_SIZE));
 	}
 
