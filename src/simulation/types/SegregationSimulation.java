@@ -102,15 +102,6 @@ public class SegregationSimulation extends AbstractSimulation {
 		myColorMap.put(OHM, Color.BLUE);
 	}
 
-	/*----------------- Private / Helper Methods -----------------------------*/
-
-	private float percentNeighborsSame(Enum state, Cell cell){
-		float neighbors = (numberNeighborsWithState(Segregation.POP_ONE, cell) +
-				(numberNeighborsWithState(Segregation.POP_TWO, cell)));
-		if (neighbors!= 0)
-			return numberNeighborsWithState(state, cell)/neighbors;	
-		else
-			return 0;			
-	}
+	
 	
 }

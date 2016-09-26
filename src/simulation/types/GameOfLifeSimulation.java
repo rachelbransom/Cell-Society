@@ -28,28 +28,24 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	protected void updateCell(Cell currCell) {
 
 		GameOfLife currState = (GameOfLife) currCell.getActor().getState();
-
 		Point location = currCell.getLocation();
 		Cell newCell = new Cell( currCell );
+		int numAliveNeighbors = currCell.numberNeighborsWithState(GameOfLife.ALIVE);
 		
+		// If Cell is alive
 		if( currState.equals(GameOfLife.ALIVE) ) {
 			// Cell dies
-			if( numberNeighborsWithState(GameOfLife.ALIVE, currCell) < 2 || 
-					numberNeighborsWithState(GameOfLife.ALIVE, currCell) > 3){
-				newCell.getActor().changeState(GameOfLife.DEAD);
-			}
+			if( numAliveNeighbors < 2 || numAliveNeighbors > 3) newCell.getActor().changeState(GameOfLife.DEAD);
 			// Cell Stays Alive
-			else{
-				newCell.setActor( new Actor(GameOfLife.ALIVE) );
-			}
+			else 												newCell.setActor( new Actor(GameOfLife.ALIVE) );
 		}
+		
+		// If Cell is Dead
 		if(currState == GameOfLife.DEAD){
 			// Cell repopulates
-			if(numberNeighborsWithState(GameOfLife.ALIVE, currCell) == 3)
-				newCell.getActor().changeState(GameOfLife.ALIVE);
-			else{
-				newCell.setActor( new Actor(GameOfLife.DEAD) );
-			}
+			if( numAliveNeighbors == 3) newCell.getActor().changeState(GameOfLife.ALIVE);
+			// Cell Stays Dead
+			else						newCell.setActor( new Actor(GameOfLife.DEAD) );
 		}
 		
 		myNextGrid.setCell(location.x, location.y, newCell );		
