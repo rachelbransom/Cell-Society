@@ -1,12 +1,8 @@
 package simulation.types;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import cellUtil.Actor;
 import cellUtil.Cell;
@@ -59,7 +55,7 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 			
 			// If fish can reproduce, leave behind a fish
 			if(actorReference.getAge() % this.ReproductionThreshold == 0){
-				curr.getActor().changeState(FISH);
+				curr.setActor( new Actor(FISH, 0, 0) );
 			}
 			
 			actorReference.incrementAge();
@@ -140,12 +136,4 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 		return (Cell) from.toArray()[i];
 	}
 
-	private void initSharkAge(){
-		
-		for (int x = 0; x < mySize; x++) {
-			for (int y = 0; y < mySize; y++) {
-				
-			}
-		}
-	}
 }
