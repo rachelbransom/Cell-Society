@@ -32,7 +32,7 @@ class SimulationFactory {
 		case SEGREGATION:
 			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 		case WA_TOR_WORLD:
-			return out = new WaTorWorldSimulation(parser.getGrid(), 0, 0 , 0);		
+			return out = new WaTorWorldSimulation(parser.getGrid());		
 		default:
 			return out;
 		}
