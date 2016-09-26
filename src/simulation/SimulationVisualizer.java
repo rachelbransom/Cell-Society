@@ -1,5 +1,8 @@
 package simulation;
 
+/**
+ * @author Diane Hadley
+ */
 
 import cellsociety_team23.Main;
 import cellsociety_team23.UX;

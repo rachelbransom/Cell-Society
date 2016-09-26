@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
 
 //@authour: Rachel Bransom
+//@author: Diane Hadley
 
 public class SimulationController {
 
