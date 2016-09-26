@@ -23,7 +23,7 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	private int myFishReproductionAge = 1;
 	private int EnergyThreshold = 2;
 	
-	public WaTorWorldSimulation(Grid inputGrid, int FishReproduceAfter, int SharkReproduceAfter ,int SharkDieAfter ) {
+	public WaTorWorldSimulation(Grid inputGrid) {
 		super(inputGrid);
 		myRand = new Random(SEED);
 		myCurrGrid.setNeighbors(SimulationType.WA_TOR_WORLD);
