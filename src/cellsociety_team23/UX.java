@@ -43,7 +43,8 @@ public class UX {
 	private Timeline animation;
 	private Button play, stop, step, reset;
 	private Slider slider;
-	private ComboBox<String> comboBox;
+	private ComboBox<String> xmlComboBox;
+	private ComboBox<String> shapeComboBox;
 	private Rectangle gridBorder;
 	private Text cellSocietyText, instructionsText, sliderText;
 	private SimulationController simulationControl;
@@ -69,7 +70,8 @@ public class UX {
 		
 		buttonInit();
 		sliderInit();
-		comboBoxInit();
+		xmlComboBoxInit();
+		shapeComboBoxInit();
 		gridBorderInit();
 		displayInstructions();
 		displayTitle();
@@ -103,9 +105,7 @@ public class UX {
 
 	private void playSimulation() {
 		double speedMultiplier = slider.getValue();
-
 		KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY / speedMultiplier), e -> step());
-
 		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -126,11 +126,10 @@ public class UX {
 	}
 
 	private void resetSimulation() {
-		String file = getFile(getComboBoxValue());
+		String file = getFile(getXMLComboBoxValue());
 		stopSimulation();
 		if (!file.equals("NONE CHOSEN")) {
 			root.getChildren().removeAll(instructionsText, gridBorder);
-
 			simulationControl = new SimulationController();
 			simulationControl.initializeSimulation(file);
 			resetGridRoot();
@@ -155,7 +154,7 @@ public class UX {
 			playSimulation();
 		}
 	}
-
+	
 	private String getFile(String chosenFileName) {
 		switch (chosenFileName) {
 		case ("SEGREGATION"):
@@ -171,17 +170,38 @@ public class UX {
 		}
 		return null;
 	}
+	
+//	private String getShape(String chosenShape){
+//		switch(chosenShape) {
+//		case("SQUARE"):
+//			
+//		
+//		case("TRIANGLE"):
+//			
+//		}	
+//	}
+	
+	
 
 	/*----------------- Private / Helper Methods -----------------------------*/
 
-	private void comboBoxInit() {
+	private void xmlComboBoxInit() {
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
 				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"));
-		comboBox = new ComboBox<String>(xmlOptions);
-		comboBox.setValue(myResources.getString("ComboBoxText"));
-		root.getChildren().add(setControlLayout(comboBox, BUTTON_DIMENSIONS * 6, 4));
+		xmlComboBox = new ComboBox<String>(xmlOptions);
+		xmlComboBox.setValue(myResources.getString("XMLComboBoxText"));
+		root.getChildren().add(setControlLayout(xmlComboBox, BUTTON_DIMENSIONS * 6, 2));
 	}
 
+	private void shapeComboBoxInit() {
+		ObservableList<String> shapeOptions = FXCollections.observableArrayList(myResources.getString("Square"), 
+				myResources.getString("Triangle"));
+		shapeComboBox = new ComboBox<String>(shapeOptions);
+		shapeComboBox.setValue(myResources.getString("ShapeComboBoxText"));
+		root.getChildren().add(setControlLayout(shapeComboBox, BUTTON_DIMENSIONS * 8, 2));
+		
+	}
+	
 	private void sliderInit() {
 		slider = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_DEFAULT);
 		slider.setMajorTickUnit(1f);
@@ -199,8 +219,12 @@ public class UX {
 		root.getChildren().add(setTextLayout(instructionsText, INSTRUCTIONS_SIZE));
 	}
 
-	private String getComboBoxValue() {
-		return comboBox.getSelectionModel().getSelectedItem();
+	private String getXMLComboBoxValue() {
+		return xmlComboBox.getSelectionModel().getSelectedItem();
+	}
+	
+	private String getShapeComboBoxValue() {
+		return shapeComboBox.getSelectionModel().getSelectedItem();
 	}
 
 	private void displaySliderText() {
@@ -225,7 +249,7 @@ public class UX {
 		control.setLayoutY(Main.YSIZE - BUTTON_DIMENSIONS);
 		control.setPrefSize(BUTTON_DIMENSIONS * widthMultiplier, BUTTON_DIMENSIONS);
 		control.setFocusTraversable(false);
-		control.setStyle("-fx-font-size: 12; -fx-base: #1d1d1d");
+		control.setStyle("-fx-font-size: 11; -fx-base: #1d1d1d");
 		return control;
 	}
 }
