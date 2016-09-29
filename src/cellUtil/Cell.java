@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 public class Cell {
 		
 	private Collection<Cell> myNeighbors;

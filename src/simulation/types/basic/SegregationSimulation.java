@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Stack;
 import cellUtil.Actor;
 import cellUtil.Cell;
-import cellUtil.CellState.Segregation;
 import cellUtil.Grid;
+import cellUtil.CellState.Segregation;
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
+import simulation.types.hierarchy.AbstractSimulation;
 
 
 public class SegregationSimulation extends AbstractSimulation {
@@ -26,7 +26,7 @@ public class SegregationSimulation extends AbstractSimulation {
 	public SegregationSimulation(Grid inputGrid, double satisfaction) {
 		super(inputGrid);
 		mySatisfactionThreshold = satisfaction;
-		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
+		getCurrGrid().setNeighbors(SimulationType.SEGREGATION);
 		mySatisfactionThreshold = 0.5;
 		myEmptyCellPoints = new Stack<Point>();
 		myUnsatisfiedCitizens = new Stack<Actor>();
@@ -36,18 +36,9 @@ public class SegregationSimulation extends AbstractSimulation {
 		
 	@Override
 	protected void updateGrid(){	
-		
-		myNextGrid  = new Grid(myCurrGrid.getSize());
-		
-		for (int i = 0; i < this.mySize; i++) {
-			for (int j = 0; j < mySize; j++) {
-				updateCell( myCurrGrid.getCell(i, j));
-			}
-		}
-		
+		super.updateGrid();
 		relocateUnsatisfiedCitizens();
-		myCurrGrid = myNextGrid;
-		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
+		getCurrGrid().setNeighbors(SimulationType.SEGREGATION);
 		}
 	
 	@Override
@@ -68,7 +59,7 @@ public class SegregationSimulation extends AbstractSimulation {
 				myEmptyCellPoints.push(curr.getLocation());
 			}
 			else {
-				myNextGrid.setCell(location.x, location.y, newCell);
+				getNextGrid().setCell(location.x, location.y, newCell);
 			}
 		}
 		else if (currState.equals(AMP)){
@@ -77,7 +68,7 @@ public class SegregationSimulation extends AbstractSimulation {
 				myEmptyCellPoints.push(curr.getLocation());
 			}
 			else {
-				myNextGrid.setCell(location.x, location.y, newCell);
+				getNextGrid().setCell(location.x, location.y, newCell);
 			}
 		}
 	}
@@ -98,21 +89,19 @@ public class SegregationSimulation extends AbstractSimulation {
 		
 		while (!myUnsatisfiedCitizens.isEmpty()){
 			Point point = myEmptyCellPoints.pop();
-			myNextGrid.getCell(point.x, point.y).setActor(myUnsatisfiedCitizens.pop());
+			getCurrGrid().getCell(point.x, point.y).setActor(myUnsatisfiedCitizens.pop());
 		}
 		while (!myEmptyCellPoints.isEmpty()){
 			Point emptyPoint = myEmptyCellPoints.pop();
-			myNextGrid.getCell(emptyPoint.x, emptyPoint.y).setActor(new Actor(EMPTY));;
+			getCurrGrid().getCell(emptyPoint.x, emptyPoint.y).setActor(new Actor(EMPTY));;
 		}
 	}
 
 	@Override
-	protected void initColorMap() {
-		this.myColorMap = new HashMap<Enum, Color>();
-		
-		myColorMap.put(EMPTY, Color.WHITE);
-		myColorMap.put(AMP, Color.RED);
-		myColorMap.put(OHM, Color.BLUE);
+	protected void initColorMap() {		
+		getColorMap().put(EMPTY, Color.WHITE);
+		getColorMap().put(AMP, Color.RED);
+		getColorMap().put(OHM, Color.BLUE);
 	}
 
 	

@@ -1,5 +1,6 @@
-package simulation.types;
+package simulation.types.hierarchy;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import cellUtil.Actor;
@@ -15,16 +16,17 @@ import javafx.scene.paint.Color;
  */
 public abstract class AbstractSimulation {
 
-	protected Grid myCurrGrid;
-	protected Grid myNextGrid;
-	protected int mySize;
-	protected Map<Enum, Color> myColorMap;
+	private Grid myCurrGrid;
+	private Grid myNextGrid;
+	private int mySize;
+	private Map<Enum, Color> myColorMap;
 	
 	public AbstractSimulation( Grid inputGrid ){
 		
 		mySize = inputGrid.getSize();
 		myCurrGrid = inputGrid;
 		
+		myColorMap = new HashMap<Enum, Color>();
 		initColorMap();
 	}
 	
@@ -68,6 +70,22 @@ public abstract class AbstractSimulation {
 		myCurrGrid = new Grid( myNextGrid );
 	};
 
+	protected Grid getCurrGrid(){
+		return myCurrGrid;
+	}
+	
+	protected Grid getNextGrid(){
+		return myNextGrid;
+	}
+	
+	protected Map<Enum, Color> getColorMap(){
+		return myColorMap;
+	}
+	
+	protected int getSize(){
+		return mySize;
+	}
+	
 	public Color[][] showNextColorGrid(){
 		updateGrid();	
 		return showCurrColorGrid();

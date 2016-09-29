@@ -2,7 +2,7 @@ package simulation.types.advanced;
 
 import cellUtil.Cell;
 import cellUtil.Grid;
-import simulation.types.AbstractSimulation;
+import simulation.types.hierarchy.AbstractSimulation;
 
 public class AntSimulation extends AbstractSimulation {
 

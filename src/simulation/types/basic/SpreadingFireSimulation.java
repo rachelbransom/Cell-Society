@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
+import simulation.types.hierarchy.AbstractSimulation;
 import cellUtil.Actor;
 import cellUtil.BorderType;
 import cellUtil.Cell;
@@ -20,7 +20,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	public SpreadingFireSimulation( Grid inputGrid , double probCatch){
 		super( inputGrid );
-		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
+		getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 		myProbCatch = probCatch;
 		myRandom = new Random();
 	}
@@ -30,7 +30,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	@Override
 	public void updateGrid(){
 		super.updateGrid();
-		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
+		//getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 	}
 
 	@Override
@@ -55,17 +55,14 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 					newCell.setActor( new Actor(SpreadingFire.BURNING) );
 				}
 
-		myNextGrid.setCell(location.x, location.y, newCell);
-
+		getNextGrid().setCell(location.x, location.y, newCell);
 	}
 
 	@Override
 	protected void initColorMap() {
-		myColorMap = new HashMap<Enum, Color>();		
-
-		myColorMap.put(SpreadingFire.EMPTY, Color.YELLOW);
-		myColorMap.put(SpreadingFire.TREE, Color.GREEN);
-		myColorMap.put(SpreadingFire.BURNING, Color.RED);
+		getColorMap().put(SpreadingFire.EMPTY, Color.YELLOW);
+		getColorMap().put(SpreadingFire.TREE, Color.GREEN);
+		getColorMap().put(SpreadingFire.BURNING, Color.RED);
 
 	}
 	

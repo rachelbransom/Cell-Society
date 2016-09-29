@@ -67,25 +67,17 @@ public class Grid {
 	
 	public void setFullSquareNeighbors(int i, int j, Cell currCell){
 		
-		currCell.getNeighbors().clear();
+		cardinalNeighbors(i, j, currCell);
 		
 		// Top Left
 		if(inBounds(i - 1 , j - 1)) currCell.connectTo(getCell(i - 1, j - 1));
-		// Top Middle
-		if(inBounds(i     , j - 1)) currCell.connectTo(getCell(i    , j - 1 ));
 		// Top Right
 		if(inBounds(i + 1 , j - 1)) currCell.connectTo(getCell(i + 1, j - 1));
-		// Right Side
-		if(inBounds(i + 1 , j    )) currCell.connectTo(getCell(i + 1, j    ));
 		// Bottom Right
 		if(inBounds(i + 1 , j + 1)) currCell.connectTo(getCell(i + 1, j + 1));
-		// Bottom Middle
-		if(inBounds(i     , j + 1)) currCell.connectTo(getCell(i    , j + 1));
 		// Bottom Left
 		if(inBounds(i - 1 , j + 1)) currCell.connectTo(getCell(i - 1, j + 1));
-		// Left Side
-		if(inBounds(i - 1 , j    )) currCell.connectTo(getCell(i - 1, j    ));
-
+		
 	}
 	
 	public void cardinalNeighbors(int i, int j, Cell currCell){

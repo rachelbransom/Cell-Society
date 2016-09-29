@@ -6,6 +6,7 @@ import simulation.types.basic.GameOfLifeSimulation;
 import simulation.types.basic.SegregationSimulation;
 import simulation.types.basic.SpreadingFireSimulation;
 import simulation.types.basic.WaTorWorldSimulation;
+import simulation.types.hierarchy.AbstractSimulation;
 
 class SimulationFactory {
 	String file;
