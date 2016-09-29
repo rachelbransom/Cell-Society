@@ -1,4 +1,4 @@
-package simulation.types;
+package simulation.types.basic;
 
 import java.awt.Point;
 import java.util.Collections;
@@ -9,6 +9,8 @@ import cellUtil.Cell;
 import cellUtil.CellState.Segregation;
 import cellUtil.Grid;
 import javafx.scene.paint.Color;
+import simulation.types.AbstractSimulation;
+import simulation.types.SimulationType;
 
 
 public class SegregationSimulation extends AbstractSimulation {

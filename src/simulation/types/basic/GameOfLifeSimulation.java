@@ -1,19 +1,22 @@
-package simulation.types;
+package simulation.types.basic;
 
 import java.awt.Point;
 import java.util.HashMap;
 
 import cellUtil.Actor;
+import cellUtil.BorderType;
 import cellUtil.Cell;
 import cellUtil.CellState.GameOfLife;
 import cellUtil.Grid;
 import javafx.scene.paint.Color;
+import simulation.types.AbstractSimulation;
+import simulation.types.SimulationType;
 
 public class GameOfLifeSimulation extends AbstractSimulation {
 
 	public GameOfLifeSimulation(Grid grid){
 		super(grid);
-		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE);
+		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 	}
 
 	/*----------------- Overriden Methods -----------------------------*/
@@ -21,7 +24,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	@Override
 	protected void updateGrid(){
 		super.updateGrid();
-		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE);
+		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 	}
 
 	@Override

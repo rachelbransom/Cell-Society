@@ -1,11 +1,14 @@
-package simulation.types;
+package simulation.types.basic;
 
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
+import simulation.types.AbstractSimulation;
+import simulation.types.SimulationType;
 import cellUtil.Actor;
+import cellUtil.BorderType;
 import cellUtil.Cell;
 import cellUtil.Grid;
 import cellUtil.CellState.SpreadingFire;
@@ -17,7 +20,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	public SpreadingFireSimulation( Grid inputGrid , double probCatch){
 		super( inputGrid );
-		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE);
+		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 		myProbCatch = probCatch;
 		myRandom = new Random();
 	}
@@ -27,7 +30,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	@Override
 	public void updateGrid(){
 		super.updateGrid();
-		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE);
+		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 	}
 
 	@Override
