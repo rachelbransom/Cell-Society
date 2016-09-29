@@ -48,6 +48,11 @@ public class Cell {
 		return myNeighbors;
 	}
 	
+	public void connectTo(Cell that){
+		this.myNeighbors.add(that);
+		that.myNeighbors.add(this);
+	}
+	
 	public Point getLocation(){
 		return (Point) myLocation.clone();
 	}

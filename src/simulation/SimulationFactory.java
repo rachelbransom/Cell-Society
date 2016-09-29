@@ -2,6 +2,10 @@ package simulation;
 
 import cellsociety_team23.XMLParser;
 import simulation.types.*;
+import simulation.types.basic.GameOfLifeSimulation;
+import simulation.types.basic.SegregationSimulation;
+import simulation.types.basic.SpreadingFireSimulation;
+import simulation.types.basic.WaTorWorldSimulation;
 
 class SimulationFactory {
 	String file;
