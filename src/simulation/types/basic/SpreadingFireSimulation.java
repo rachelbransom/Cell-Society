@@ -1,7 +1,6 @@
 package simulation.types.basic;
 
 import java.awt.Point;
-import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
@@ -58,13 +57,5 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		getNextGrid().setCell(location.x, location.y, newCell);
 	}
 
-	@Override
-	protected void initColorMap() {
-		getColorMap().put(SpreadingFire.EMPTY, Color.YELLOW);
-		getColorMap().put(SpreadingFire.TREE, Color.GREEN);
-		getColorMap().put(SpreadingFire.BURNING, Color.RED);
-
-	}
-	
 }
 

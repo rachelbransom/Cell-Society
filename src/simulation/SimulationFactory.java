@@ -20,13 +20,6 @@ class SimulationFactory {
 		simulation = parser.getSimulationType();
 	}
 	
-	//TODO: Add Logic for building specific simulation types (i.e. game of life over 
-	
-	
-	public void giveFilename(){
-		
-	}
-	
 	public AbstractSimulation makeSimulation(){
 		
 		switch (simulation){

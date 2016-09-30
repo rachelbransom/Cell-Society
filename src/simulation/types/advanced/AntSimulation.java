@@ -22,11 +22,4 @@ public class AntSimulation extends AbstractSimulation {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	protected void initColorMap() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

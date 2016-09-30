@@ -54,11 +54,4 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		getNextGrid().setCell(location.x, location.y, newCell );		
 
 	}
-
-	@Override
-	protected void initColorMap() {
-		getColorMap().put(GameOfLife.DEAD, Color.WHITE);
-		getColorMap().put(GameOfLife.ALIVE, Color.BLACK);
-
-	}
 }

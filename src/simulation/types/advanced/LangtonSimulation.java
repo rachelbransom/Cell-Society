@@ -17,10 +17,4 @@ public class LangtonSimulation extends AbstractSimulation {
 
 	}
 
-	@Override
-	protected void initColorMap() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

@@ -96,14 +96,5 @@ public class SegregationSimulation extends AbstractSimulation {
 			getCurrGrid().getCell(emptyPoint.x, emptyPoint.y).setActor(new Actor(EMPTY));;
 		}
 	}
-
-	@Override
-	protected void initColorMap() {		
-		getColorMap().put(EMPTY, Color.WHITE);
-		getColorMap().put(AMP, Color.RED);
-		getColorMap().put(OHM, Color.BLUE);
-	}
-
-	
 	
 }

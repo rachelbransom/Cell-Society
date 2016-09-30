@@ -102,14 +102,6 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 		
 	}
 	
-	@Override
-	protected void initColorMap() {
-		getColorMap().put(OCEAN, Color.BLUE);
-		getColorMap().put(SHARK, Color.GRAY);
-		getColorMap().put(FISH, Color.GOLD);
-	
-	}
-
 	/*----------------- Private / Helper Methods -----------------------------*/
 	
 	private void moveActorToRandomNeighborWithState(Cell inputCell, Enum state){
@@ -153,5 +145,5 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 			}
 		
 	}
-
+	
 }
