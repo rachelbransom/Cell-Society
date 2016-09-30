@@ -19,8 +19,26 @@ public class AntSimulation extends AbstractSimulation {
 
 	@Override
 	protected void updateCell(Cell curr) {
-		// TODO Auto-generated method stub
 		
+		
+	}
+	
+	protected void antForage(){
+		// if ant has food item
+			// return to nest
+		//else
+			// find food source
+	}
+	
+	protected void returnAntToNest(){
+		//if any located at food source
+			// set ants orientation to the neighbor location with max pheremones
+		// x = forward location with max pheremones
+		// if X = null
+			// x = neighbor location with max home pheremones
+		// if x isn't null
+			//drop food pheremones()
+			//orientation = 
 	}
 
 	@Override
