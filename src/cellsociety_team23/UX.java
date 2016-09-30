@@ -169,6 +169,8 @@ public class UX {
 			return "NONE CHOSEN";
 		case ("NO SIMULATION TYPE"):
 			return ("NoSimulationType.xml");
+		case ("INVALID CELL STATE"):
+			return ("InvalidCellState.xml");
 		}
 		return null;
 	}
@@ -178,7 +180,7 @@ public class UX {
 	private void comboBoxInit() {
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
 				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"),
-				myResources.getString("NoSimulationType"));
+				myResources.getString("NoSimulationType"), myResources.getString("InvalidCellState"));
 		comboBox = new ComboBox<String>(xmlOptions);
 		comboBox.setValue(myResources.getString("ComboBoxText"));
 		root.getChildren().add(setControlLayout(comboBox, BUTTON_DIMENSIONS * 6, 4));
