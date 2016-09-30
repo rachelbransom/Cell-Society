@@ -2,7 +2,7 @@ package cell;
 
 import javafx.scene.paint.Color;
 
-public class Actor {
+public class Actor{
 	
 	private Enum myState;
 	private int myEnergy;

@@ -9,5 +9,4 @@ public enum SimulationType {
 	LANGTONS_LOOPS,
 	SLIME_MOLD, 
 	SUGARSCAPE;
-	}
 }

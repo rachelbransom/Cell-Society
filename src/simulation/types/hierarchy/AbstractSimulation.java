@@ -3,7 +3,6 @@ package simulation.types.hierarchy;
 import java.util.HashMap;
 import java.util.Map;
 
-import cell.Actor;
 import cell.Cell;
 import grid.Grid;
 import javafx.scene.paint.Color;
