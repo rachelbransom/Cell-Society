@@ -129,8 +129,7 @@ public class UX {
 		String file = getFile(getComboBoxValue());
 		stopSimulation();
 		if (!file.equals("NONE CHOSEN")) {
-			root.getChildren().removeAll(instructionsText, gridBorder);
-
+			//root.getChildren().removeAll(instructionsText, gridBorder);
 			simulationControl = new SimulationController();
 			simulationControl.initializeSimulation(file);
 			resetGridRoot();
@@ -168,6 +167,8 @@ public class UX {
 			return "Life.xml";
 		case ("CHOOSE XML FILE"):
 			return "NONE CHOSEN";
+		case ("NO SIMULATION TYPE"):
+			return ("NoSimulationType.xml");
 		}
 		return null;
 	}
@@ -176,7 +177,8 @@ public class UX {
 
 	private void comboBoxInit() {
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
-				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"));
+				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"),
+				myResources.getString("NoSimulationType"));
 		comboBox = new ComboBox<String>(xmlOptions);
 		comboBox.setValue(myResources.getString("ComboBoxText"));
 		root.getChildren().add(setControlLayout(comboBox, BUTTON_DIMENSIONS * 6, 4));

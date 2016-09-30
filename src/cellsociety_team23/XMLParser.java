@@ -12,6 +12,7 @@ import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.CellState;
 import cellUtil.Grid;
+import exceptions.NoSimulation;
 import simulation.types.SimulationType;
 
 public class XMLParser {
@@ -40,6 +41,13 @@ public class XMLParser {
 			document.getDocumentElement().normalize();
 
 			situation = (SimulationType) returnSimulationType(getTextByTag("situation"));
+			
+			try {testIfSimulation(situation);}
+			catch (NoSimulation e) { 
+				e.showDialogBox();
+				e.printStackTrace();
+			}
+			
 			title = getTextByTag("title");
 			author = getTextByTag("author");
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
@@ -93,8 +101,9 @@ public class XMLParser {
 			return SimulationType.SEGREGATION;
 		case "wator":
 			return SimulationType.WA_TOR_WORLD;
+		default :
+			return null;
 		}
-		return null;
 	}
 
 	public Enum returnCellState(SimulationType simType, int state) {
@@ -139,5 +148,12 @@ public class XMLParser {
 			break;
 		}
 		return null;
+	}
+	
+	/*----------------- Exceptions -----------------------------*/
+	
+	public static void testIfSimulation(SimulationType simulationType) throws NoSimulation {
+		if (simulationType == null)
+			throw new NoSimulation();
 	}
 }
