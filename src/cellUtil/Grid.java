@@ -50,26 +50,42 @@ public class Grid {
 		return inX && inY;
 	}
 
+	/**
+	 * Sets edge neighbors as connecting, thus forming a toroid
+	 */
+	private void setToroid(){
+		
+		// Connect Top and Bottom rows
+		for (int x = 0; x < mySize; x++) {
+			getCell(x, 0).connectTo(getCell(x, mySize - 1));
+		}
+		
+		// Connect Right and Left sides
+		for (int y = 0; y < myCellGrid.length; y++) {
+			getCell(0, y).connectTo(getCell(mySize - 1, y));
+		}
+	}
+	
 	public void setFullSquareNeighbors(int i, int j, Cell currCell){
 		
 		currCell.getNeighbors().clear();
-
+		
 		// Top Left
-		if(inBounds(i - 1 , j - 1)) currCell.getNeighbors().add(getCell(i - 1, j - 1));
+		if(inBounds(i - 1 , j - 1)) currCell.connectTo(getCell(i - 1, j - 1));
 		// Top Middle
-		if(inBounds(i     , j - 1)) currCell.getNeighbors().add(getCell(i    , j - 1 ));
+		if(inBounds(i     , j - 1)) currCell.connectTo(getCell(i    , j - 1 ));
 		// Top Right
-		if(inBounds(i + 1 , j - 1)) currCell.getNeighbors().add(getCell(i + 1, j - 1));
+		if(inBounds(i + 1 , j - 1)) currCell.connectTo(getCell(i + 1, j - 1));
 		// Right Side
-		if(inBounds(i + 1 , j    )) currCell.getNeighbors().add(getCell(i + 1, j    ));
+		if(inBounds(i + 1 , j    )) currCell.connectTo(getCell(i + 1, j    ));
 		// Bottom Right
-		if(inBounds(i + 1 , j + 1)) currCell.getNeighbors().add(getCell(i + 1, j + 1));
+		if(inBounds(i + 1 , j + 1)) currCell.connectTo(getCell(i + 1, j + 1));
 		// Bottom Middle
-		if(inBounds(i     , j + 1)) currCell.getNeighbors().add(getCell(i    , j + 1));
+		if(inBounds(i     , j + 1)) currCell.connectTo(getCell(i    , j + 1));
 		// Bottom Left
-		if(inBounds(i - 1 , j + 1)) currCell.getNeighbors().add(getCell(i - 1, j + 1));
+		if(inBounds(i - 1 , j + 1)) currCell.connectTo(getCell(i - 1, j + 1));
 		// Left Side
-		if(inBounds(i - 1 , j    )) currCell.getNeighbors().add(getCell(i - 1, j    ));
+		if(inBounds(i - 1 , j    )) currCell.connectTo(getCell(i - 1, j    ));
 
 	}
 	
@@ -77,13 +93,13 @@ public class Grid {
 		currCell.getNeighbors().clear();
 
 		// Top Middle
-		if(inBounds(i     , j - 1)) currCell.getNeighbors().add(getCell(i    , j - 1 ));
+		if(inBounds(i     , j - 1)) currCell.connectTo(getCell(i    , j - 1 ));
 		// Right Side
-		if(inBounds(i + 1 , j    )) currCell.getNeighbors().add(getCell(i + 1, j    ));
+		if(inBounds(i + 1 , j    )) currCell.connectTo(getCell(i + 1, j     ));
 		// Bottom Middle
-		if(inBounds(i     , j + 1)) currCell.getNeighbors().add(getCell(i    , j + 1));
+		if(inBounds(i     , j + 1)) currCell.connectTo(getCell(i    , j + 1 ));
 		// Left Side
-		if(inBounds(i - 1 , j    )) currCell.getNeighbors().add(getCell(i - 1, j    ));
+		if(inBounds(i - 1 , j    )) currCell.connectTo(getCell(i - 1, j     ));
 		
 	}
 	
@@ -102,5 +118,14 @@ public class Grid {
 				
 			}
 		}
+		
+	}
+	
+	public void setNeighbors(SimulationType simType, BorderType bordType){
+		
+		setNeighbors(simType);
+		
+		if(bordType.equals(BorderType.TOROID)) setToroid();
+		
 	}
 }

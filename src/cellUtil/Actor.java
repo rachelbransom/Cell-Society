@@ -5,8 +5,6 @@ import javafx.scene.paint.Color;
 public class Actor {
 	
 	private Enum myState;
-	private Color myColor;
-	
 	private int myEnergy;
 	private int myAge;
 	
@@ -25,14 +23,21 @@ public class Actor {
 	public Actor(Enum state, int energy, int age){
 		myState = state;
 		myEnergy = energy;
-		myAge = age;
+		myAge = 0;
 	}
-	
+
 	public Actor(Actor that){
 		this.myState  = that.myState ;
-		this.myEnergy = that.myEnergy;
-		this.myAge    = that.myAge;
-		
+		myEnergy = that.myEnergy;
+		myAge = that.myAge;
+	}
+	
+	public boolean isState(Enum state){
+		return myState.equals(state);
+	}
+	
+	public void changeState(Enum state){
+		myState = state;
 	}
 	
 	public void incrementEnergy(){
@@ -61,14 +66,6 @@ public class Actor {
 	
 	public Enum getState(){
 		return myState;
-	}
-	
-	public boolean isState(Enum state){
-		return myState.equals(state);
-	}
-	
-	public void changeState(Enum state){
-		myState = state;
 	}
 	
 }

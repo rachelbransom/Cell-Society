@@ -1,9 +1,9 @@
 <xmlfile>
-	<situation>fire</situation>
+	<situation></situation>
 	<title>Spreading of Fire</title>
 	<author>Angela B. Shiflet</author>
 	<global_config>0.4</global_config>
-	<grid_dimensions>50</grid_dimensions>
+	<grid_dimensions>10</grid_dimensions>
 	<states>3</states>
 	<cell0.0>2</cell0.0>
 	<cell0.1>1</cell0.1>
