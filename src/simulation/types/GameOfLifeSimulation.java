@@ -6,7 +6,7 @@ import java.util.HashMap;
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.CellState.GameOfLife;
-import cellUtil.Grid;
+import grid.Grid;
 import javafx.scene.paint.Color;
 
 public class GameOfLifeSimulation extends AbstractSimulation {

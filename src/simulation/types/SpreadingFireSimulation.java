@@ -7,7 +7,7 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 import cellUtil.Actor;
 import cellUtil.Cell;
-import cellUtil.Grid;
+import grid.Grid;
 import cellUtil.CellState.SpreadingFire;
 
 public class SpreadingFireSimulation extends AbstractSimulation {

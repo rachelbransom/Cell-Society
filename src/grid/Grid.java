@@ -1,4 +1,4 @@
-package cellUtil;
+package grid;
 
 import cellUtil.Cell;
 import simulation.types.SimulationType;

@@ -7,7 +7,7 @@ import java.util.Stack;
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.CellState.Segregation;
-import cellUtil.Grid;
+import grid.Grid;
 import javafx.scene.paint.Color;
 
 

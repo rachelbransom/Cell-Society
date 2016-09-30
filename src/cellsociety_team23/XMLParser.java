@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.CellState;
-import cellUtil.Grid;
+import grid.Grid;
 import simulation.types.SimulationType;
 
 public class XMLParser {

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import cellUtil.Actor;
 import cellUtil.Cell;
-import cellUtil.Grid;
+import grid.Grid;
 import cellUtil.CellState.WaTorWorld;
 import javafx.scene.paint.Color;
 
