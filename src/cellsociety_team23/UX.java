@@ -14,12 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
-import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import simulation.SimulationController;
 
@@ -33,9 +28,11 @@ import simulation.SimulationController;
 
 public class UX {
 	
-	private final int TITLE_SIZE = 80, INSTRUCTIONS_SIZE = 60, INSTRUCTIONSX = 10, INSTRUCTIONSY = 300,
-			SLIDER_TEXT_SIZE = 10, SLIDER_TEXT_X = 4 * BUTTON_DIMENSIONS + 25, SLIDER_MIN = 1, 
-			SLIDER_MAX = 10, SLIDER_DEFAULT = 3, SLIDER_TEXT_Y = Main.YSIZE - BUTTON_DIMENSIONS + 15 ;
+	private final int TITLE_X = 10, TITLE_Y = 100, 
+			CONTROLS_START_X = 10, CONTROLS_START_Y = 150, CONTROLS_SPACING = 45,
+			INSTRUCTIONSX = 275, INSTRUCTIONSY = 350,
+			SLIDER_TEXT_X = CONTROLS_START_X + 50, 
+			SLIDER_MIN = 1, SLIDER_MAX = 10, SLIDER_DEFAULT = 3;
 
 	private Scene scene;
 	private Group root = new Group();
@@ -45,17 +42,18 @@ public class UX {
 	private Slider slider;
 	private ComboBox<String> xmlComboBox;
 	private ComboBox<String> shapeComboBox;
-	private Rectangle gridBorder;
 	private Text cellSocietyText, instructionsText, sliderText;
-	private SimulationController simulationControl;
-	
+	private SimulationController simulationControl;	
 	private ResourceBundle myResources;
 
 	public static final int FRAMES_PER_SECOND = 1;
 	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-	private static int BUTTON_DIMENSIONS = Main.XSIZE / 10;
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
-	public static int GRID_START = Main.YSIZE - Main.XSIZE - BUTTON_DIMENSIONS;
+	private static final String CSS_FILE_NAME = "resources/UXStyling.css";
+	
+	public static int GRID_START_X = 250;
+	public static int GRID_START_Y = 300;
+	public static int GRID_SIZE = 430;
 
 	public String getTitle() {
 		return myResources.getString("Title");
@@ -67,20 +65,18 @@ public class UX {
 
 	public Scene init() {
 		scene = new Scene(root, Main.XSIZE, Main.YSIZE, Color.BLACK);
-		
+		scene.getStylesheets().add(CSS_FILE_NAME);
 		buttonInit();
 		sliderInit();
 		xmlComboBoxInit();
 		shapeComboBoxInit();
-		gridBorderInit();
 		displayInstructions();
 		displayTitle();
 		displaySliderText();
-
 		root.getChildren().add(gridRoot);
 		return scene;
 	}
-
+	
 	private void buttonInit() {
 		play = new Button(myResources.getString("PlayButton"));
 		stop = new Button(myResources.getString("StopButton"));
@@ -99,8 +95,8 @@ public class UX {
 		reset.setOnAction((event) -> {
 			resetSimulation();
 		});
-		root.getChildren().addAll(setControlLayout(play, 0, 1), setControlLayout(stop, BUTTON_DIMENSIONS, 1),
-				setControlLayout(step, BUTTON_DIMENSIONS * 2, 1), setControlLayout(reset, BUTTON_DIMENSIONS * 3, 1));
+		root.getChildren().addAll(setControlLayout(play, 0), setControlLayout(stop, CONTROLS_SPACING),
+				setControlLayout(step, CONTROLS_SPACING * 2), setControlLayout(reset, CONTROLS_SPACING * 3));
 	}
 
 	private void playSimulation() {
@@ -129,7 +125,6 @@ public class UX {
 		String file = getFile(getXMLComboBoxValue());
 		stopSimulation();
 		if (!file.equals("NONE CHOSEN")) {
-			root.getChildren().removeAll(instructionsText, gridBorder);
 			simulationControl = new SimulationController();
 			simulationControl.initializeSimulation(file);
 			resetGridRoot();
@@ -190,7 +185,7 @@ public class UX {
 				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"));
 		xmlComboBox = new ComboBox<String>(xmlOptions);
 		xmlComboBox.setValue(myResources.getString("XMLComboBoxText"));
-		root.getChildren().add(setControlLayout(xmlComboBox, BUTTON_DIMENSIONS * 6, 2));
+		root.getChildren().add(setControlLayout(xmlComboBox, CONTROLS_SPACING * 5));
 	}
 
 	private void shapeComboBoxInit() {
@@ -198,25 +193,20 @@ public class UX {
 				myResources.getString("Triangle"));
 		shapeComboBox = new ComboBox<String>(shapeOptions);
 		shapeComboBox.setValue(myResources.getString("ShapeComboBoxText"));
-		root.getChildren().add(setControlLayout(shapeComboBox, BUTTON_DIMENSIONS * 8, 2));
+		root.getChildren().add(setControlLayout(shapeComboBox, CONTROLS_SPACING * 6));
 		
 	}
 	
 	private void sliderInit() {
 		slider = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_DEFAULT);
 		slider.setMajorTickUnit(1f);
-		root.getChildren().add(setControlLayout(slider, BUTTON_DIMENSIONS * 4, 2));
-	}
-
-	private void gridBorderInit() {
-		gridBorder = new Rectangle(0, GRID_START, Main.XSIZE, Main.XSIZE);
-		gridBorder.setFill(Color.LIGHTGRAY);
-		root.getChildren().add(gridBorder);
+		root.getChildren().add(setControlLayout(slider, CONTROLS_SPACING * 4));
 	}
 
 	private void displayInstructions() {
 		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
-		root.getChildren().add(setTextLayout(instructionsText, INSTRUCTIONS_SIZE));
+		instructionsText.getStyleClass().add("instructions");
+		root.getChildren().add(instructionsText);
 	}
 
 	private String getXMLComboBoxValue() {
@@ -228,28 +218,22 @@ public class UX {
 	}
 
 	private void displaySliderText() {
-		sliderText = new Text(SLIDER_TEXT_X, SLIDER_TEXT_Y, myResources.getString("SliderText"));
-		root.getChildren().add(setTextLayout(sliderText, SLIDER_TEXT_SIZE));
+		sliderText = new Text(SLIDER_TEXT_X, CONTROLS_START_Y + CONTROLS_SPACING*4, myResources.getString("SliderText"));
+		sliderText.getStyleClass().add("slider");
+		root.getChildren().add(sliderText);
 	}
 
 	private void displayTitle() {
-		cellSocietyText = new Text(0, BUTTON_DIMENSIONS + 10, myResources.getString("DisplayTitle"));
-		root.getChildren().add(setTextLayout(cellSocietyText, TITLE_SIZE));
+		cellSocietyText = new Text(TITLE_X, TITLE_Y, myResources.getString("DisplayTitle"));
+		cellSocietyText.getStyleClass().add("title");
+		root.getChildren().add(cellSocietyText);
 	}
 
-	private Text setTextLayout(Text text, int size) {
-		text.setFont(Font.font("Segoe UI Semibold", FontWeight.BOLD, size));
-		text.setFill(Color.WHITE);
-		text.setTextAlignment(TextAlignment.CENTER);
-		return text;
-	}
-
-	private Control setControlLayout(Control control, int layoutX, int widthMultiplier) {
-		control.setLayoutX(layoutX);
-		control.setLayoutY(Main.YSIZE - BUTTON_DIMENSIONS);
-		control.setPrefSize(BUTTON_DIMENSIONS * widthMultiplier, BUTTON_DIMENSIONS);
+	private Control setControlLayout(Control control, int layoutY) {
+		control.setLayoutX(CONTROLS_START_X);
+		control.setLayoutY(CONTROLS_START_Y + layoutY);
 		control.setFocusTraversable(false);
-		control.setStyle("-fx-font-size: 11; -fx-base: #1d1d1d");
+		control.getStyleClass().add("control");
 		return control;
 	}
 }

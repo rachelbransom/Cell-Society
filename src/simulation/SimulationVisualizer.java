@@ -4,11 +4,12 @@ package simulation;
  * @author Diane Hadley
  */
 
-import cellsociety_team23.Main;
 import cellsociety_team23.UX;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Polygon;
+
 import javafx.scene.shape.Shape;
 
 class SimulationVisualizer {
@@ -17,7 +18,7 @@ class SimulationVisualizer {
 	private Shape[][] myShapeGrid;
 	private Group myGridRoot;
 	
-	SimulationVisualizer(int size){
+	SimulationVisualizer(int size, Shape shape){
 		initShapeGrid(size);		
 	}
 
@@ -48,13 +49,16 @@ class SimulationVisualizer {
 		}		
 	}
 
+	
+	
 	private void formatRectangle(int i, int j, Rectangle shapeInGrid) {
-		shapeInGrid.setWidth(Main.XSIZE/myShapeGrid[0].length);
-		shapeInGrid.setHeight(Main.XSIZE/myShapeGrid.length);
-		shapeInGrid.setX(Main.XSIZE/myShapeGrid[0].length*j);
-		shapeInGrid.setY(Main.XSIZE/myShapeGrid.length*i + UX.GRID_START);
+		shapeInGrid.setWidth(UX.GRID_SIZE/myShapeGrid[0].length);
+		shapeInGrid.setHeight(UX.GRID_SIZE/myShapeGrid.length);
+		shapeInGrid.setX(UX.GRID_START_X+ UX.GRID_SIZE/myShapeGrid[0].length*j);
+		shapeInGrid.setY(UX.GRID_START_Y + UX.GRID_SIZE/myShapeGrid.length*i);
 		
 		
 	}
+	
 	
 }
