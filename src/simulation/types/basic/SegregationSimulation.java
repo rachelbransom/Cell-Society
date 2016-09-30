@@ -43,36 +43,27 @@ public class SegregationSimulation extends AbstractSimulation {
 	
 	@Override
 	protected void updateCell(Cell curr) {
-		
+
 		Segregation currState = (Segregation) curr.getActor().getState();
-		
+
 		Point location = curr.getLocation();
 		Cell newCell = new Cell(curr);
-		
+
 		if (currState.equals(EMPTY)) {
 			myEmptyCellPoints.push(curr.getLocation());
 		}
-		else if (currState.equals(OHM)){
+		else{ // Population Neighbor Logic
+			if ( percentNeighborsSame(curr.getActor().getState(), curr) <= mySatisfactionThreshold) {
+				myUnsatisfiedCitizens.push(curr.getActor());
+				myEmptyCellPoints.push(curr.getLocation());
+			}
+			else {
+				getNextGrid().setCell(location.x, location.y, newCell);
+			}
+		}
 
-			if ( percentNeighborsSame(OHM, curr) <= mySatisfactionThreshold) {
-				myUnsatisfiedCitizens.push(curr.getActor());
-				myEmptyCellPoints.push(curr.getLocation());
-			}
-			else {
-				getNextGrid().setCell(location.x, location.y, newCell);
-			}
-		}
-		else if (currState.equals(AMP)){
-			if (percentNeighborsSame(AMP, curr) <= mySatisfactionThreshold) {
-				myUnsatisfiedCitizens.push(curr.getActor());
-				myEmptyCellPoints.push(curr.getLocation());
-			}
-			else {
-				getNextGrid().setCell(location.x, location.y, newCell);
-			}
-		}
 	}
-	
+
 	private double percentNeighborsSame(Enum state, Cell cell){
 		
 		double neighbors = (double) cell.numberNeighborsWithState(AMP) + cell.numberNeighborsWithState(OHM);
