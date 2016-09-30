@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-<<<<<<< HEAD
-	<classpathentry including="**/visuals/|cell/|cellUtil/|cellsociety_team23/|grid/|gridUtility/|logic/|resources/|simulation/" kind="src" path="src"/>
-=======
-	<classpathentry including="cellUtil/|cellsociety_team23/|exceptions/|foragingAnts/|logic/|resources/|simulation/" kind="src" path="src"/>
->>>>>>> origin
+	<classpathentry excluding="src/|lib/|doc/|data/" kind="src" path=""/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
