@@ -1,7 +1,11 @@
 package grid;
 
+<<<<<<< HEAD:src/grid/Grid.java
 import cell.BorderType;
 import cell.Cell;
+=======
+import cellUtil.Cell;
+>>>>>>> origin:src/cellUtil/Grid.java
 import simulation.types.SimulationType;
 
 public class Grid {
@@ -95,6 +99,7 @@ public class Grid {
 		if(inBounds(i - 1 , j    )) currCell.connectTo(getCell(i - 1, j     ));
 		
 	}
+	
 	
 	public void setNeighbors(SimulationType simType){
 
