@@ -1,6 +1,6 @@
 package simulation.types.hierarchy;
 
-import cellUtil.Grid;
+import grid.Grid;
 
 public abstract class AbstractSequentialSimulation extends AbstractSimulation{
 

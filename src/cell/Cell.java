@@ -1,4 +1,4 @@
-package cellUtil;
+package cell;
 
 import java.awt.Point;
 import java.util.ArrayList;

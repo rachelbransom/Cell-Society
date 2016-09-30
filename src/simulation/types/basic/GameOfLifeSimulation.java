@@ -3,11 +3,11 @@ package simulation.types.basic;
 import java.awt.Point;
 import java.util.HashMap;
 
-import cellUtil.Actor;
-import cellUtil.BorderType;
-import cellUtil.Cell;
-import cellUtil.Grid;
-import cellUtil.CellState.GameOfLife;
+import cell.Actor;
+import cell.BorderType;
+import cell.Cell;
+import cell.CellState.GameOfLife;
+import grid.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractSimulation;

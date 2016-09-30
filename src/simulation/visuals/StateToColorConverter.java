@@ -3,8 +3,8 @@ package simulation.visuals;
 import java.util.HashMap;
 import java.util.Map;
 
-import cellUtil.CellState.*;
-import cellUtil.Grid;
+import cell.CellState.*;
+import grid.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.basic.*;
 import simulation.types.advanced.*;

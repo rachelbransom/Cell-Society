@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/visuals/|cellUtil/|cellsociety_team23/|gridUtility/|logic/|resources/|simulation/" kind="src" path="src"/>
+	<classpathentry including="**/visuals/|cell/|cellUtil/|cellsociety_team23/|grid/|gridUtility/|logic/|resources/|simulation/" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
-import cellUtil.BorderType;
-import cellUtil.Actor;
-import cellUtil.Cell;
-import cellUtil.Grid;
-import cellUtil.CellState.WaTorWorld;
+import cell.Actor;
+import cell.BorderType;
+import cell.Cell;
+import cell.CellState.WaTorWorld;
+import grid.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractSimulation;

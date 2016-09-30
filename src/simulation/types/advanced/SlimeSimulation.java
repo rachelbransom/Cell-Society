@@ -1,7 +1,7 @@
 package simulation.types.advanced;
 
-import cellUtil.Cell;
-import cellUtil.Grid;
+import cell.Cell;
+import grid.Grid;
 import simulation.types.hierarchy.AbstractSimulation;
 
 public class SlimeSimulation extends AbstractSimulation {

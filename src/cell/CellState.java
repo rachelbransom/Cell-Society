@@ -1,4 +1,4 @@
-package cellUtil;
+package cell;
 
 public final class CellState {
 	

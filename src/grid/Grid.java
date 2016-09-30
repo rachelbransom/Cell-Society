@@ -1,5 +1,7 @@
-package cellUtil;
+package grid;
 
+import cell.BorderType;
+import cell.Cell;
 import simulation.types.SimulationType;
 
 public class Grid {
@@ -67,7 +69,7 @@ public class Grid {
 	
 	public void setFullSquareNeighbors(int i, int j, Cell currCell){
 		
-		cardinalNeighbors(i, j, currCell);
+		setSideNeighbors(i, j, currCell);
 		
 		// Top Left
 		if(inBounds(i - 1 , j - 1)) currCell.connectTo(getCell(i - 1, j - 1));
@@ -80,7 +82,7 @@ public class Grid {
 		
 	}
 	
-	public void cardinalNeighbors(int i, int j, Cell currCell){
+	public void setSideNeighbors(int i, int j, Cell currCell){
 		currCell.getNeighbors().clear();
 
 		// Top Middle
@@ -104,7 +106,7 @@ public class Grid {
 				
 				if( simType.equals(SimulationType.WA_TOR_WORLD) ||
 						simType.equals(SimulationType.SPREADING_FIRE)) 
-						cardinalNeighbors(i, j, getCell(i, j));
+						setSideNeighbors(i, j, getCell(i, j));
 				
 			}
 		}
