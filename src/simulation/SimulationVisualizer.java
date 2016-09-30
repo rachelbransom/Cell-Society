@@ -18,7 +18,7 @@ class SimulationVisualizer {
 	private Shape[][] myShapeGrid;
 	private Group myGridRoot;
 	
-	SimulationVisualizer(int size, Shape shape){
+	SimulationVisualizer(int size){
 		initShapeGrid(size);		
 	}
 

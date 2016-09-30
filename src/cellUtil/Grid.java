@@ -1,5 +1,6 @@
 package cellUtil;
 
+import cellUtil.Cell;
 import simulation.types.SimulationType;
 
 public class Grid {
@@ -85,6 +86,7 @@ public class Grid {
 		if(inBounds(i - 1 , j    )) currCell.getNeighbors().add(getCell(i - 1, j    ));
 		
 	}
+	
 	
 	public void setNeighbors(SimulationType simType){
 

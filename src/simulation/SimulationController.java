@@ -12,10 +12,12 @@ public class SimulationController {
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
 	
-	public void initializeSimulation(String filename){		
-		SimulationFactory sf = new SimulationFactory(filename);
-		mySimulation = sf.makeSimulation();
+	public void initializeSimulation(String filename){		  
+		SimulationFactory factory = new SimulationFactory(filename);
+		mySimulation = factory.makeSimulation();
 	}
+	
+	
 	
 	public Group returnCurrVisualGrid(){
 		Color[][] colorGrid = mySimulation.showCurrColorGrid();
