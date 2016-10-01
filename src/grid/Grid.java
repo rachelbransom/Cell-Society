@@ -3,7 +3,7 @@ package grid;
 import cellUtil.Cell;
 import simulation.types.SimulationType;
 
-public class Grid {
+public abstract class Grid {
 
 	private Cell[][] myCellGrid;
 	private int mySize;
@@ -50,42 +50,9 @@ public class Grid {
 		return inX && inY;
 	}
 
-	public void setFullSquareNeighbors(int i, int j, Cell currCell){
-		
-		currCell.getNeighbors().clear();
-
-		// Top Left
-		if(inBounds(i - 1 , j - 1)) currCell.getNeighbors().add(getCell(i - 1, j - 1));
-		// Top Middle
-		if(inBounds(i     , j - 1)) currCell.getNeighbors().add(getCell(i    , j - 1 ));
-		// Top Right
-		if(inBounds(i + 1 , j - 1)) currCell.getNeighbors().add(getCell(i + 1, j - 1));
-		// Right Side
-		if(inBounds(i + 1 , j    )) currCell.getNeighbors().add(getCell(i + 1, j    ));
-		// Bottom Right
-		if(inBounds(i + 1 , j + 1)) currCell.getNeighbors().add(getCell(i + 1, j + 1));
-		// Bottom Middle
-		if(inBounds(i     , j + 1)) currCell.getNeighbors().add(getCell(i    , j + 1));
-		// Bottom Left
-		if(inBounds(i - 1 , j + 1)) currCell.getNeighbors().add(getCell(i - 1, j + 1));
-		// Left Side
-		if(inBounds(i - 1 , j    )) currCell.getNeighbors().add(getCell(i - 1, j    ));
-
-	}
+	public abstract void setFullNeighbors(int i, int j, Cell currCell);
 	
-	public void cardinalNeighbors(int i, int j, Cell currCell){
-		currCell.getNeighbors().clear();
-
-		// Top Middle
-		if(inBounds(i     , j - 1)) currCell.getNeighbors().add(getCell(i    , j - 1 ));
-		// Right Side
-		if(inBounds(i + 1 , j    )) currCell.getNeighbors().add(getCell(i + 1, j    ));
-		// Bottom Middle
-		if(inBounds(i     , j + 1)) currCell.getNeighbors().add(getCell(i    , j + 1));
-		// Left Side
-		if(inBounds(i - 1 , j    )) currCell.getNeighbors().add(getCell(i - 1, j    ));
-		
-	}
+	public abstract void setCardinalNeighbors(int i, int j, Cell currCell);
 	
 	
 	public void setNeighbors(SimulationType simType){
@@ -94,11 +61,11 @@ public class Grid {
 			for (int j = 0; j < mySize; j++) {
 				
 				if( simType.equals(SimulationType.GAME_OF_LIFE) ||
-						simType.equals(SimulationType.SEGREGATION)) setFullSquareNeighbors(i, j, getCell(i, j));
+						simType.equals(SimulationType.SEGREGATION)) setFullNeighbors(i, j, getCell(i, j));
 				
 				if( simType.equals(SimulationType.WA_TOR_WORLD) ||
 						simType.equals(SimulationType.SPREADING_FIRE)) 
-						cardinalNeighbors(i, j, getCell(i, j));
+						setCardinalNeighbors(i, j, getCell(i, j));
 				
 			}
 		}

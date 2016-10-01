@@ -123,10 +123,11 @@ public class UX {
 
 	private void resetSimulation() {
 		String file = getFile(getXMLComboBoxValue());
+		String shape = getShape(getShapeComboBoxValue());
 		stopSimulation();
 		if (!file.equals("NONE CHOSEN")) {
 			simulationControl = new SimulationController();
-			simulationControl.initializeSimulation(file);
+			simulationControl.initializeSimulation(file, shape);
 			resetGridRoot();
 		}
 	}
@@ -166,15 +167,17 @@ public class UX {
 		return null;
 	}
 	
-//	private String getShape(String chosenShape){
-//		switch(chosenShape) {
-//		case("SQUARE"):
-//			
-//		
-//		case("TRIANGLE"):
-//			
-//		}	
-//	}
+	private String getShape(String chosenShape){
+		switch(chosenShape) {
+		case("SQUARE"):
+			return "Rectangle";
+		case("TRIANGLE"):
+			return "Triangle";
+		case("HEXAGON"):
+			return "Hexagon";
+		}
+		return null;
+	}
 	
 	
 
@@ -190,7 +193,7 @@ public class UX {
 
 	private void shapeComboBoxInit() {
 		ObservableList<String> shapeOptions = FXCollections.observableArrayList(myResources.getString("Square"), 
-				myResources.getString("Triangle"));
+				myResources.getString("Triangle"), myResources.getString("Hexagon"));
 		shapeComboBox = new ComboBox<String>(shapeOptions);
 		shapeComboBox.setValue(myResources.getString("ShapeComboBoxText"));
 		root.getChildren().add(setControlLayout(shapeComboBox, CONTROLS_SPACING * 6));

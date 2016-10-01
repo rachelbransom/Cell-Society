@@ -12,7 +12,7 @@ public class SimulationController {
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
 	
-	public void initializeSimulation(String filename){		  
+	public void initializeSimulation(String filename, String shape){		  
 		SimulationFactory factory = new SimulationFactory(filename);
 		mySimulation = factory.makeSimulation();
 	}
