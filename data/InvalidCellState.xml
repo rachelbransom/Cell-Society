@@ -5,12 +5,12 @@
 	<global_config>0.4</global_config>
 	<grid_dimensions>50</grid_dimensions>
 	<states>3</states>
-	<cell0.0>2</cell0.0>
+	<cell0.0>8</cell0.0>
 	<cell0.1>1</cell0.1>
 	<cell0.2>2</cell0.2>
 	<cell0.3>0</cell0.3>
 	<cell0.4>1</cell0.4>
-	<cell0.5>2</cell0.5>
+	<cell0.5>4</cell0.5>
 	<cell0.6>1</cell0.6>
 	<cell0.7>0</cell0.7>
 	<cell0.8>0</cell0.8>

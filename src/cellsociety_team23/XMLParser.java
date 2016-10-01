@@ -11,7 +11,12 @@ import org.w3c.dom.NodeList;
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.CellState;
+
 import grid.Grid;
+
+import exceptions.InvalidCellState;
+import exceptions.NoSimulation;
+
 import simulation.types.SimulationType;
 
 public class XMLParser {
@@ -40,23 +45,38 @@ public class XMLParser {
 			document.getDocumentElement().normalize();
 
 			situation = (SimulationType) returnSimulationType(getTextByTag("situation"));
+
+			try {
+				testIfSimulation(situation);
+			} catch (NoSimulation e) {
+				e.callDialogBox();
+				e.printStackTrace();
+			}
+
 			title = getTextByTag("title");
 			author = getTextByTag("author");
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
 			grid = new Grid(gridDimensions);
-			
-			for (int i = 0; i < gridDimensions ; i++) {
-				for (int j = 0; j < gridDimensions ; j++) {
+
+			for (int i = 0; i < gridDimensions; i++) {
+				for (int j = 0; j < gridDimensions; j++) {
 					Cell currCell = new Cell(i, j);
-					int currCellState = Integer.parseInt( getTextByTag("cell" + i + "." + j ) );
-					Actor currAct = new Actor( returnCellState( situation, currCellState ) );
-					currCell.setActor( currAct );
+					int currCellState = Integer.parseInt(getTextByTag("cell" + i + "." + j));
+
+					try {
+						testIfValidCellState(currCellState, situation);
+					} catch (InvalidCellState e) {
+						e.callDialogBox();
+						e.printStackTrace();
+					}
+
+					Actor currAct = new Actor(returnCellState(situation, currCellState));
+					currCell.setActor(currAct);
 					grid.setCell(i, j, currCell);
 				}
 			}
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,8 +113,9 @@ public class XMLParser {
 			return SimulationType.SEGREGATION;
 		case "wator":
 			return SimulationType.WA_TOR_WORLD;
+		default:
+			return null;
 		}
-		return null;
 	}
 
 	public Enum returnCellState(SimulationType simType, int state) {
@@ -139,5 +160,19 @@ public class XMLParser {
 			break;
 		}
 		return null;
+	}
+
+	/*----------------- Exceptions -----------------------------*/
+
+	public static void testIfSimulation(SimulationType simulationType) throws NoSimulation {
+		if (simulationType == null)
+			throw new NoSimulation();
+	}
+
+	public static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
+		if (((0 > state || 1 < state) && (simulationType.equals(SimulationType.GAME_OF_LIFE)))
+				|| (0 > state || 2 < state)) {
+			throw new InvalidCellState();
+		}
 	}
 }

@@ -26,4 +26,7 @@ public final class CellState {
 		EMPTY;
 	}
 	
+	public enum LangtonInstruction{
+		
+	}
 }

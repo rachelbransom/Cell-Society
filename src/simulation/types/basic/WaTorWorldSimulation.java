@@ -1,14 +1,17 @@
-package simulation.types;
+package simulation.types.basic;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
+import cellUtil.BorderType;
 import cellUtil.Actor;
 import cellUtil.Cell;
 import grid.Grid;
 import cellUtil.CellState.WaTorWorld;
 import javafx.scene.paint.Color;
+import simulation.types.AbstractSimulation;
+import simulation.types.SimulationType;
 
 
 public class WaTorWorldSimulation extends AbstractSimulation {
@@ -133,10 +136,10 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	 * @return
 	 */
 	private Cell getRandomCell( Collection<Cell> from ){
-		
 		int i = myRand.nextInt(from.size());
 		return (Cell) from.toArray()[i];
 	}
+	
 	private void initSharkAgeAndEnergy(){
 		
 		for (int x = 0; x < mySize; x++) 

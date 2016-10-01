@@ -163,6 +163,10 @@ public class UX {
 			return "Life.xml";
 		case ("CHOOSE XML FILE"):
 			return "NONE CHOSEN";
+		case ("NO SIMULATION TYPE"):
+			return ("NoSimulationType.xml");
+		case ("INVALID CELL STATE"):
+			return ("InvalidCellState.xml");
 		}
 		return null;
 	}
