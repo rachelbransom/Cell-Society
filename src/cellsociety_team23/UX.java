@@ -107,7 +107,7 @@ public class UX {
 	}
 
 	private void playSimulation() {
-		//root.getChildren().add(this.simulationControl.getSimulationChart());
+		root.getChildren().add(this.simulationControl.getSimulationChart());
 		double speedMultiplier = slider.getValue();
 		KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY / speedMultiplier), e -> step());
 		animation = new Timeline();

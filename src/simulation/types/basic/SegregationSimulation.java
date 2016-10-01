@@ -34,15 +34,21 @@ public class SegregationSimulation extends AbstractSimulation {
 
 	/*----------------- Overriden Methods -----------------------------*/
 		
-	protected void update(){
-		updateAndChangeGrid();
-		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
-	}
 	@Override
 	protected void updateGrid(){	
-		super.updateGrid();
+		
+		myNextGrid  = new Grid(myCurrGrid.getSize());
+		
+		for (int i = 0; i < this.mySize; i++) {
+			for (int j = 0; j < mySize; j++) {
+				updateCell( myCurrGrid.getCell(i, j));
+			}
+		}
+		
 		relocateUnsatisfiedCitizens();
-	}
+		myCurrGrid = myNextGrid;
+		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
+		}
 	
 	@Override
 	protected void updateCell(Cell curr) {

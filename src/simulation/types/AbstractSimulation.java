@@ -48,8 +48,6 @@ public abstract class AbstractSimulation {
 	
 	protected abstract void initPopulationMap();
 	
-	
-	
 	/*----------------- Implemented methods -----------------------------*/
 	
 	/**
@@ -61,13 +59,11 @@ public abstract class AbstractSimulation {
 	 * @param 	grid  Reference to current Grid
 	 * @return		  Reference to the next Grid
 	 */
-	
-	protected void update(){
-		updateAndChangeGrid();
-	}
-	
 	protected void updateGrid(){
 
+		// Make copies of input Grid
+		myNextGrid  = new Grid(myCurrGrid.getSize());
+		
 		// Update each cell
 		for (int i = 0; i < myCurrGrid.getSize(); i++) {
 			for (int j = 0; j < myCurrGrid.getSize(); j++) {
@@ -75,15 +71,8 @@ public abstract class AbstractSimulation {
 			}
 		}
 		
-	};
-	
-	protected void updateAndChangeGrid() {
-		myNextGrid = new Grid(myCurrGrid.getSize());
-		updateGrid();
 		myCurrGrid = new Grid( myNextGrid );
-		
-	}
-
+	};
 
 	public Color[][] showNextColorGrid(){
 		updateGrid();	

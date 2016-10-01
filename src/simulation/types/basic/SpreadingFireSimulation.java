@@ -29,7 +29,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	@Override
 	public void updateGrid(){
-		super.updateAndChangeGrid();
+		super.updateGrid();
 		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 	}
 
@@ -70,8 +70,6 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	}
 	
 	protected void initPopulationMap(){
-		myPopulationMap = new HashMap<Color, Integer>();
-		
 		myPopulationMap.put(Color.YELLOW, 0);
 		myPopulationMap.put(Color.GREEN, 0);
 		myPopulationMap.put(Color.RED, 0);
