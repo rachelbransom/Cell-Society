@@ -10,7 +10,7 @@ public class Main extends Application {
 	public static int YSIZE = 750;
 	
 	public void start(Stage stage) {
-		userEx = new UX();
+		userEx = new UX(XSIZE, YSIZE);
 		stage.setTitle(userEx.getTitle());
 		stage.setScene(userEx.init());
 		stage.setResizable(false);

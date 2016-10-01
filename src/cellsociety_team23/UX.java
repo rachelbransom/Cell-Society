@@ -2,10 +2,12 @@ package cellsociety_team23;
 
 import java.util.ResourceBundle;
 
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -45,6 +47,12 @@ public class UX {
 	private Text cellSocietyText, instructionsText, sliderText;
 	private SimulationController simulationControl;	
 	private ResourceBundle myResources;
+	private LineChart<Number, Number> myChart;
+	private NumberAxis xAxis;
+	private NumberAxis yAxis;
+	
+	private int XSIZE;
+	private int YSIZE;
 
 	public static final int FRAMES_PER_SECOND = 1;
 	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
@@ -59,12 +67,14 @@ public class UX {
 		return myResources.getString("Title");
 	}
 	
-	public UX() {
+	public UX(int XSIZE, int YSIZE) {
 		myResources = ResourceBundle.getBundle(RESOURCE_FILE_NAME);
+		this.XSIZE = XSIZE;
+		this.YSIZE = YSIZE;
 	}
 
 	public Scene init() {
-		scene = new Scene(root, Main.XSIZE, Main.YSIZE, Color.BLACK);
+		scene = new Scene(root, XSIZE, YSIZE, Color.BLACK);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		buttonInit();
 		sliderInit();
@@ -73,6 +83,7 @@ public class UX {
 		displayInstructions();
 		displayTitle();
 		displaySliderText();
+		lineChartInit();
 		root.getChildren().add(gridRoot);
 		return scene;
 	}
@@ -210,6 +221,16 @@ public class UX {
 		root.getChildren().add(setControlLayout(slider, CONTROLS_SPACING * 4));
 	}
 
+	private void lineChartInit(){
+		xAxis = new NumberAxis();
+		xAxis.setLabel(myResources.getString("ChartXAxis"));
+		yAxis = new NumberAxis();
+		yAxis.setLabel(myResources.getString("ChartYAxis"));
+		myChart = new LineChart<Number, Number>(xAxis, yAxis);
+		root.getChildren().add(myChart);
+		
+	}
+	
 	private void displayInstructions() {
 		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
 		instructionsText.getStyleClass().add("instructions");
@@ -223,6 +244,7 @@ public class UX {
 	private String getShapeComboBoxValue() {
 		return shapeComboBox.getSelectionModel().getSelectedItem();
 	}
+	
 
 	private void displaySliderText() {
 		sliderText = new Text(SLIDER_TEXT_X, CONTROLS_START_Y + CONTROLS_SPACING*4, myResources.getString("SliderText"));
