@@ -8,12 +8,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+
 import cell.Actor;
 import cell.Cell;
 import cell.CellState;
 import grid.Grid;
+
 import exceptions.InvalidCellState;
 import exceptions.NoSimulation;
+
 import simulation.types.SimulationType;
 
 public class XMLParser {

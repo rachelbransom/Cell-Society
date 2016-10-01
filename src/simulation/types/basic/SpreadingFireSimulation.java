@@ -9,8 +9,11 @@ import cell.Cell;
 import cell.CellState.SpreadingFire;
 import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
+
+
 import simulation.types.hierarchy.AbstractSimulation;
 import grid.Grid;
+
 
 public class SpreadingFireSimulation extends AbstractSimulation {
 
