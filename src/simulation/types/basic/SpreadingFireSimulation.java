@@ -8,8 +8,11 @@ import grid.BorderType;
 import cell.Cell;
 import cell.CellState.SpreadingFire;
 import simulation.types.SimulationType;
+
+
 import simulation.types.hierarchy.AbstractSimulation;
 import grid.Grid;
+
 
 public class SpreadingFireSimulation extends AbstractSimulation {
 

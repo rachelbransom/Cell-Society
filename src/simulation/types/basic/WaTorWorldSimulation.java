@@ -3,6 +3,7 @@ package simulation.types.basic;
 import java.util.Collection;
 import java.util.Random;
 
+
 import cell.Actor;
 import grid.BorderType;
 import cell.Cell;

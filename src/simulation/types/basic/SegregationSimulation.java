@@ -8,6 +8,7 @@ import java.util.Stack;
 import cell.Actor;
 import cell.Cell;
 import cell.CellState.Segregation;
+
 import grid.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
