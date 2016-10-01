@@ -1,10 +1,10 @@
-package simulation.types;
+package simulation.types.hierarchy;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import cellUtil.Actor;
-import cellUtil.Cell;
-import cellUtil.Grid;
+import cell.Cell;
+import grid.Grid;
 import javafx.scene.paint.Color;
 
 /**
@@ -15,17 +15,13 @@ import javafx.scene.paint.Color;
  */
 public abstract class AbstractSimulation {
 
-	protected Grid myCurrGrid;
-	protected Grid myNextGrid;
-	protected int mySize;
-	protected Map<Enum, Color> myColorMap;
+	private Grid myCurrGrid;
+	private Grid myNextGrid;
+	private int mySize;
 	
-	public AbstractSimulation( Grid inputGrid ){
-		
+	public AbstractSimulation( Grid inputGrid ){		
 		mySize = inputGrid.getSize();
 		myCurrGrid = inputGrid;
-		
-		initColorMap();
 	}
 	
 	/*----------------- Abstract Methods -----------------------------*/	
@@ -39,9 +35,7 @@ public abstract class AbstractSimulation {
 	 * @param curr Cell to be updated to next state.
 	 */
 	protected abstract void updateCell(Cell curr);
-	
-	protected abstract void initColorMap();
-	
+		
 	/*----------------- Implemented methods -----------------------------*/
 	
 	/**
@@ -68,26 +62,24 @@ public abstract class AbstractSimulation {
 		myCurrGrid = new Grid( myNextGrid );
 	};
 
-	public Color[][] showNextColorGrid(){
-		updateGrid();	
-		return showCurrColorGrid();
+	protected Grid getCurrGrid(){
+		return myCurrGrid;
 	}
 	
-	public Color[][] showCurrColorGrid() {
-		
-		Color[][] colorGrid = new Color[mySize][mySize];
-		
-		for (int i = 0; i < mySize; i++) {
-			for (int j = 0; j < mySize; j++) {
-				
-				Actor currActor = myCurrGrid.getCell(i, j).getActor();
-				colorGrid[i][j] = myColorMap.get(currActor.getState());
-			
-			}
-		}
-		
-		return colorGrid;
+	protected Grid getNextGrid(){
+		return myNextGrid;
 	}
 	
+	protected int getSize(){
+		return mySize;
+	}
 	
+	public Grid showCurrGrid(){
+		return new Grid(myCurrGrid);
+	}
+	
+	public Grid showNextGrid(){
+		updateGrid();
+		return showCurrGrid();
+	}
 }

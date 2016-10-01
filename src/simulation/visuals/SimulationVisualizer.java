@@ -1,4 +1,4 @@
-package simulation;
+package simulation.visuals;
 
 /**
  * @author Diane Hadley
@@ -12,21 +12,20 @@ import javafx.scene.shape.Polygon;
 
 import javafx.scene.shape.Shape;
 
-class SimulationVisualizer {
+public class SimulationVisualizer {
 	
 	
 	private Shape[][] myShapeGrid;
 	private Group myGridRoot;
 	
-	SimulationVisualizer(int size){
+	public SimulationVisualizer(int size){
 		initShapeGrid(size);		
 	}
 
-	Group returnVisualGrid(Color[][] colorGrid){
+	public Group returnVisualGrid(Color[][] colorGrid){
 		updateGridColor(colorGrid);
 		return myGridRoot;
 	}
-	
 	
 	private void updateGridColor(Color[][] colorGrid){
 		myGridRoot = new Group();

@@ -2,7 +2,9 @@ package simulation;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
+import simulation.types.hierarchy.AbstractSimulation;
+import simulation.visuals.SimulationVisualizer;
+import simulation.visuals.StateToColorConverter;
 
 //@authour: Rachel Bransom
 //@author: Diane Hadley
@@ -20,17 +22,18 @@ public class SimulationController {
 	
 	
 	public Group returnCurrVisualGrid(){
-		Color[][] colorGrid = mySimulation.showCurrColorGrid();
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
+		return makeGridRoot(colorGrid);
+	}
+	
+	public Group returnNextVisualGrid(){
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid();
+		return makeGridRoot(colorGrid);
+	}	
+	
+	private Group makeGridRoot( Color[][] colorGrid ){
 		myVisualizer = new SimulationVisualizer(colorGrid.length);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
 		return gridRoot;
 	}
-	
-	public Group returnNextVisualGrid(){
-		
-		Color[][] colorGrid = mySimulation.showNextColorGrid();
-		myVisualizer = new SimulationVisualizer(colorGrid.length);
-		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
-		return gridRoot;
-	}	
 }

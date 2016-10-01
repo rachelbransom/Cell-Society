@@ -1,8 +1,8 @@
 package simulation.types.advanced;
 
-import cellUtil.Cell;
-import cellUtil.Grid;
-import simulation.types.AbstractSimulation;
+import cell.Cell;
+import grid.Grid;
+import simulation.types.hierarchy.AbstractSimulation;
 
 public class AntSimulation extends AbstractSimulation {
 
@@ -40,11 +40,4 @@ public class AntSimulation extends AbstractSimulation {
 			//drop food pheremones()
 			//orientation = 
 	}
-
-	@Override
-	protected void initColorMap() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

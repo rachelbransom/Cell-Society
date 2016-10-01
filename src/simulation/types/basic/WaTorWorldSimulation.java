@@ -4,14 +4,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
-import cellUtil.BorderType;
-import cellUtil.Actor;
-import cellUtil.Cell;
-import cellUtil.Grid;
-import cellUtil.CellState.WaTorWorld;
+import cell.Actor;
+import cell.BorderType;
+import cell.Cell;
+import cell.CellState.WaTorWorld;
+import grid.Grid;
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
+import simulation.types.hierarchy.AbstractSimulation;
 
 
 public class WaTorWorldSimulation extends AbstractSimulation {
@@ -29,7 +29,7 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	public WaTorWorldSimulation(Grid inputGrid) {
 		super(inputGrid);
 		myRand = new Random(SEED);
-		myCurrGrid.setNeighbors(SimulationType.WA_TOR_WORLD);
+		getCurrGrid().setNeighbors(SimulationType.WA_TOR_WORLD);
 		initSharkAgeAndEnergy();
 	}
 
@@ -39,9 +39,9 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	protected void updateGrid(){
 
 		// Updates in sequential order, rather than in parallel
-		for (int i = 0; i < this.mySize; i++) {
-			for (int j = 0; j < mySize; j++) {
-				updateCell( myCurrGrid.getCell(i, j));
+		for (int i = 0; i < getSize(); i++) {
+			for (int j = 0; j < getSize(); j++) {
+				updateCell( getCurrGrid().getCell(i, j));
 			}
 		}
 	}
@@ -102,16 +102,6 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 		
 	}
 	
-	@Override
-	protected void initColorMap() {
-		this.myColorMap = new HashMap<Enum, Color>();
-		
-		myColorMap.put(OCEAN, Color.BLUE);
-		myColorMap.put(SHARK, Color.GRAY);
-		myColorMap.put(FISH, Color.GOLD);
-	
-	}
-
 	/*----------------- Private / Helper Methods -----------------------------*/
 	
 	private void moveActorToRandomNeighborWithState(Cell inputCell, Enum state){
@@ -142,12 +132,12 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	
 	private void initSharkAgeAndEnergy(){
 		
-		for (int x = 0; x < mySize; x++) 
-			for (int y = 0; y < mySize; y++) {
+		for (int x = 0; x < getSize(); x++) 
+			for (int y = 0; y < getSize(); y++) {
 				
-				Cell currCell = myCurrGrid.getCell(x, y);
+				Cell currCell = getCurrGrid().getCell(x, y);
 				
-				if( myCurrGrid.getCell(x, y).getActor().isState(SHARK) ){
+				if( getCurrGrid().getCell(x, y).getActor().isState(SHARK) ){
 					currCell.setActor( new Actor(SHARK, EnergyThreshold, 1) );
 				}
 				
@@ -155,5 +145,5 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 			}
 		
 	}
-
+	
 }

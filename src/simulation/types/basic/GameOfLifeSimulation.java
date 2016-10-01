@@ -3,20 +3,20 @@ package simulation.types.basic;
 import java.awt.Point;
 import java.util.HashMap;
 
-import cellUtil.Actor;
-import cellUtil.BorderType;
-import cellUtil.Cell;
-import cellUtil.CellState.GameOfLife;
-import cellUtil.Grid;
+import cell.Actor;
+import cell.BorderType;
+import cell.Cell;
+import cell.CellState.GameOfLife;
+import grid.Grid;
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
+import simulation.types.hierarchy.AbstractSimulation;
 
 public class GameOfLifeSimulation extends AbstractSimulation {
 
 	public GameOfLifeSimulation(Grid grid){
 		super(grid);
-		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
+		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 	}
 
 	/*----------------- Overriden Methods -----------------------------*/
@@ -24,7 +24,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	@Override
 	protected void updateGrid(){
 		super.updateGrid();
-		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
+		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 	}
 
 	@Override
@@ -51,20 +51,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 			else						newCell.setActor( new Actor(GameOfLife.DEAD) );
 		}
 		
-		myNextGrid.setCell(location.x, location.y, newCell );		
+		getNextGrid().setCell(location.x, location.y, newCell );		
 
 	}
-
-	@Override
-	protected void initColorMap() {
-		myColorMap = new HashMap<Enum, Color>();
-
-		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
-		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
-
-	}
-	
-	/*----------------- Helper / Private Methods -----------------------------*/
-
-
 }
