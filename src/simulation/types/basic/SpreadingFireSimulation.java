@@ -11,8 +11,11 @@ import cell.CellState.SpreadingFire;
 >>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08
 import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
+
+
 import simulation.types.hierarchy.AbstractSimulation;
 import grid.Grid;
+
 
 public class SpreadingFireSimulation extends AbstractSimulation {
 	private int tree, burning, counter;

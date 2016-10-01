@@ -15,6 +15,7 @@ import javafx.scene.chart.XYChart;
 import cell.Actor;
 import cell.Cell;
 import cell.CellState.Segregation;
+
 import grid.Grid;
 >>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08
 import javafx.scene.paint.Color;

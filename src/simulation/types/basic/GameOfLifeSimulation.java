@@ -4,10 +4,12 @@ import javafx.scene.chart.*;
 import java.awt.Point;
 import java.util.HashMap;
 
+
 import cell.Actor;
 import cell.BorderType;
 import cell.Cell;
 import cell.CellState.GameOfLife;
+
 import grid.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
