@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+<<<<<<< HEAD
 	<classpathentry including="cellUtil/|cellsociety_team23/|exceptions/|foragingAnts/|graph/|logic/|resources/|simulation/" kind="src" path="src"/>
+=======
+	<classpathentry excluding="src/|lib/|doc/|data/" kind="src" path=""/>
+	<classpathentry kind="src" path="src"/>
+>>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

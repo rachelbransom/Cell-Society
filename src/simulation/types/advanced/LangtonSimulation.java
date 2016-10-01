@@ -4,6 +4,9 @@ import cellUtil.Cell;
 import cellUtil.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
+import cell.Cell;
+import grid.Grid;
+import simulation.types.hierarchy.AbstractSimulation;
 
 public class LangtonSimulation extends AbstractSimulation {
 
@@ -14,12 +17,6 @@ public class LangtonSimulation extends AbstractSimulation {
 
 	@Override
 	protected void updateCell(Cell curr) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void initColorMap() {
 		// TODO Auto-generated method stub
 
 	}

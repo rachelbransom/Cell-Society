@@ -5,7 +5,9 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
+import simulation.types.hierarchy.AbstractSimulation;
+import simulation.visuals.SimulationVisualizer;
+import simulation.visuals.StateToColorConverter;
 
 //@authour: Rachel Bransom
 //@author: Diane Hadley
@@ -19,20 +21,7 @@ public class SimulationController {
 		SimulationFactory factory = new SimulationFactory(filename);
 		mySimulation = factory.makeSimulation();
 	}
-	
-	public Group returnCurrVisualGrid() {
-		Color[][] colorGrid = mySimulation.showCurrColorGrid();
-		myVisualizer = new SimulationVisualizer(colorGrid.length);
-		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
-		return gridRoot;
-	}
-	
-	public Group returnNextVisualGrid(){
-		Color[][] colorGrid = mySimulation.showNextColorGrid();
-		myVisualizer = new SimulationVisualizer(colorGrid.length);
-		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
-		return gridRoot;
-	}	
+
 	
 	public LineChart<Number,Number> getSimulationChart(){
 		return mySimulation.getMyChart();
@@ -41,5 +30,22 @@ public class SimulationController {
 	public void setSimulationChartLayout(int x, int y){
 		mySimulation.setMyChartLayout(x, y);
 	}
+
 	
+	
+	public Group returnCurrVisualGrid(){
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
+		return makeGridRoot(colorGrid);
+	}
+	
+	public Group returnNextVisualGrid(){
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid();
+		return makeGridRoot(colorGrid);
+	}	
+	
+	private Group makeGridRoot( Color[][] colorGrid ){
+		myVisualizer = new SimulationVisualizer(colorGrid.length);
+		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
+		return gridRoot;
+	}
 }

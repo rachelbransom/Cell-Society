@@ -4,14 +4,22 @@ import java.awt.Point;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Stack;
+<<<<<<< HEAD
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.CellState.Segregation;
 import cellUtil.Grid;
 import javafx.scene.chart.XYChart;
+=======
+
+import cell.Actor;
+import cell.Cell;
+import cell.CellState.Segregation;
+import grid.Grid;
+>>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
+import simulation.types.hierarchy.AbstractSimulation;
 
 public class SegregationSimulation extends AbstractSimulation {
 	private double mySatisfactionThreshold; // Minimum ratio of population being
@@ -32,7 +40,7 @@ public class SegregationSimulation extends AbstractSimulation {
 	public SegregationSimulation(Grid inputGrid, double satisfaction) {
 		super(inputGrid);
 		mySatisfactionThreshold = satisfaction;
-		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
+		getCurrGrid().setNeighbors(SimulationType.SEGREGATION);
 		mySatisfactionThreshold = 0.5;
 		myEmptyCellPoints = new Stack<Point>();
 		myUnsatisfiedCitizens = new Stack<Actor>();
@@ -42,24 +50,13 @@ public class SegregationSimulation extends AbstractSimulation {
 	/*----------------- Overriden Methods -----------------------------*/
 
 	@Override
-	protected void updateGrid() {
 
-		myNextGrid = new Grid(myCurrGrid.getSize());
-
-		for (int i = 0; i < this.mySize; i++) {
-			for (int j = 0; j < mySize; j++) {
-				updateCell(myCurrGrid.getCell(i, j));
-			}
-		}
-
+	protected void updateGrid(){	
+		super.updateGrid();
 		relocateUnsatisfiedCitizens();
-		myCurrGrid = myNextGrid;
-		myCurrGrid.setNeighbors(SimulationType.SEGREGATION);
-		counter++;
-		System.out.print(populationOne);
-		this.updateChart();
-	}
-
+		getCurrGrid().setNeighbors(SimulationType.SEGREGATION);
+		}
+	
 	@Override
 	protected void updateCell(Cell curr) {
 
@@ -70,31 +67,23 @@ public class SegregationSimulation extends AbstractSimulation {
 
 		if (currState.equals(EMPTY)) {
 			myEmptyCellPoints.push(curr.getLocation());
-		} else if (currState.equals(OHM)) {
 
-			if (percentNeighborsSame(OHM, curr) <= mySatisfactionThreshold) {
-				populationOne--;
-				setCitizenToUnsatisfied(curr);
-			} else {
-				myNextGrid.setCell(location.x, location.y, newCell);
+		}
+		else{ // Population Neighbor Logic
+			if ( percentNeighborsSame(curr.getActor().getState(), curr) <= mySatisfactionThreshold) {
+				myUnsatisfiedCitizens.push(curr.getActor());
+				myEmptyCellPoints.push(curr.getLocation());
 			}
-		} else if (currState.equals(AMP)) {
-			if (percentNeighborsSame(AMP, curr) <= mySatisfactionThreshold) {
-				populationTwo--;
-				setCitizenToUnsatisfied(curr);
-			} else {
-				myNextGrid.setCell(location.x, location.y, newCell);
+			else {
+				getNextGrid().setCell(location.x, location.y, newCell);
 			}
 		}
+
 	}
 
-	private void setCitizenToUnsatisfied(Cell curr) {
-		myUnsatisfiedCitizens.push(curr.getActor());
-		myEmptyCellPoints.push(curr.getLocation());
-	}
 
-	private double percentNeighborsSame(Enum state, Cell cell) {
-
+	private double percentNeighborsSame(Enum state, Cell cell){
+		
 		double neighbors = (double) cell.numberNeighborsWithState(AMP) + cell.numberNeighborsWithState(OHM);
 
 		if (neighbors != 0)
@@ -109,16 +98,12 @@ public class SegregationSimulation extends AbstractSimulation {
 
 		while (!myUnsatisfiedCitizens.isEmpty()) {
 			Point point = myEmptyCellPoints.pop();
-			if (myUnsatisfiedCitizens.peek().isState(AMP)) {
-				populationTwo++;
-			} else {
-				populationOne++;
-			}
-			myNextGrid.getCell(point.x, point.y).setActor(myUnsatisfiedCitizens.pop());
+
+			getCurrGrid().getCell(point.x, point.y).setActor(myUnsatisfiedCitizens.pop());
 		}
 		while (!myEmptyCellPoints.isEmpty()) {
 			Point emptyPoint = myEmptyCellPoints.pop();
-			myNextGrid.getCell(emptyPoint.x, emptyPoint.y).setActor(new Actor(EMPTY));
+			getCurrGrid().getCell(emptyPoint.x, emptyPoint.y).setActor(new Actor(EMPTY));;
 		}
 	}
 

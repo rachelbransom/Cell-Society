@@ -8,10 +8,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import cellUtil.Actor;
-import cellUtil.Cell;
-import cellUtil.CellState;
-import cellUtil.Grid;
+import cell.Actor;
+import cell.Cell;
+import cell.CellState;
+import grid.Grid;
 import exceptions.InvalidCellState;
 import exceptions.NoSimulation;
 import simulation.types.SimulationType;

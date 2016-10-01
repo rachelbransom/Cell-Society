@@ -4,14 +4,14 @@ import javafx.scene.chart.*;
 import java.awt.Point;
 import java.util.HashMap;
 
-import cellUtil.Actor;
-import cellUtil.BorderType;
-import cellUtil.Cell;
-import cellUtil.CellState.GameOfLife;
-import cellUtil.Grid;
+import cell.Actor;
+import cell.BorderType;
+import cell.Cell;
+import cell.CellState.GameOfLife;
+import grid.Grid;
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
+import simulation.types.hierarchy.AbstractSimulation;
 
 public class GameOfLifeSimulation extends AbstractSimulation {
 	private int myAliveCells;
@@ -19,17 +19,18 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 
 	public GameOfLifeSimulation(Grid grid) {
 		super(grid);
-		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
+
 		initPopulationGraph();
+		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
+
 	}
 
 	@Override
 	protected void updateGrid() {
 		super.updateGrid();
-		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 		counter++;
 		this.updateChart();
-
+		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 	}
 
 	@Override

@@ -1,18 +1,18 @@
 package simulation.types.basic;
 
 import java.awt.Point;
-import java.util.HashMap;
 import java.util.Random;
 
 import javafx.scene.chart.XYChart;
+import cell.Actor;
+import cell.BorderType;
+import cell.Cell;
+import cell.CellState.SpreadingFire;
+>>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08
 import javafx.scene.paint.Color;
-import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
-import cellUtil.Actor;
-import cellUtil.BorderType;
-import cellUtil.Cell;
-import cellUtil.Grid;
-import cellUtil.CellState.SpreadingFire;
+import simulation.types.hierarchy.AbstractSimulation;
+import grid.Grid;
 
 public class SpreadingFireSimulation extends AbstractSimulation {
 	private int tree, burning, counter;
@@ -21,8 +21,9 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	public SpreadingFireSimulation( Grid inputGrid , double probCatch){
 		super( inputGrid );
+
 		initPopulationCounts(inputGrid);
-		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
+		getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 		myProbCatch = probCatch;
 		myRandom = new Random();
 		initPopulationGraph();
@@ -33,9 +34,9 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	@Override
 	public void updateGrid(){
 		super.updateGrid();
-		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 		counter++;
 		this.updateChart();
+		getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 	}
 
 	@Override
@@ -63,9 +64,9 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 					newCell.setActor( new Actor(SpreadingFire.BURNING) );
 				}
 
-		myNextGrid.setCell(location.x, location.y, newCell);
-
+		getNextGrid().setCell(location.x, location.y, newCell);
 	}
+
 
 	@Override
 	protected void initColorMap() {
@@ -105,5 +106,6 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		lineChart.getData().get(0).getData().addAll(new XYChart.Data(counter, tree),
 				new XYChart.Data(counter, burning));
 	}
+
 }
 

@@ -4,6 +4,10 @@ import cellUtil.Cell;
 import cellUtil.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
+import cell.Cell;
+import grid.Grid;
+import simulation.types.hierarchy.AbstractSimulation;
+
 
 public class SugarSimulation extends AbstractSimulation {
 
@@ -18,14 +22,5 @@ public class SugarSimulation extends AbstractSimulation {
 
 	}
 
-	@Override
-	protected void initColorMap() {
-		// TODO Auto-generated method stub
-
-	}
-	
-	protected void initPopulationMap(){
-		//TODO
-	}
 
 }
