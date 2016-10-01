@@ -29,7 +29,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	@Override
 	public void updateGrid(){
-		super.updateGrid();
+		super.updateAndChangeGrid();
 		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 	}
 

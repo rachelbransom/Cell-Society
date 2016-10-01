@@ -34,7 +34,7 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 	}
 
 	/*----------------- Overriden Methods -----------------------------*/
-
+	/*
 	@Override
 	protected void updateGrid(){
 
@@ -44,7 +44,7 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 				updateCell( myCurrGrid.getCell(i, j));
 			}
 		}
-	}
+	}*/
 	
 	@Override
 	protected void updateCell(Cell curr) {

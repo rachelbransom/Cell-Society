@@ -16,6 +16,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	private int myAliveCells;
 	private int myDeadCells;
 	private int counter;
+	
 	public GameOfLifeSimulation(Grid grid) {
 		super(grid);
 		myCurrGrid.setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
@@ -31,6 +32,9 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		lineChart.getData().add(series);
 	}
 
+	protected void update(){
+		super.updateAndChangeGrid();
+	}
 	
 	@Override
 	protected void updateGrid() {
