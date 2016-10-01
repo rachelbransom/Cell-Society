@@ -1,0 +1,28 @@
+
+.title{ 
+  -fx-font-size: 100;
+  -fx-font-weight: bold; 
+}
+
+.instructions{
+  -fx-font-size: 40;
+}
+
+.slider{
+  -fx-font-size: 10; 
+}
+
+.title, .instructions, .slider{
+  -fx-fill: #ffffff;
+  -fx-text-alignment:center;
+
+}
+
+
+.control{
+  -fx-font-size: 12; 
+  -fx-base: #1d1d1d;
+  -fx-background-radius: 7;
+  -fx-pref-width: 170;
+  -fx-pref-height: 25;
+}
