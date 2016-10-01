@@ -3,45 +3,62 @@ package cell;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class Cell {
 		
 	private Collection<Cell> myNeighbors;
-	
 	private Point myLocation;
-	
-	private Actor myActor;
+	private List<Actor> myActors;
+	private Floor<Double> myFloor;
 	
 	public Cell(){
-		this.myActor = new Actor();
-		this.myLocation = new Point();
-		this.myNeighbors = new ArrayList<Cell>();
+		myActors = new ArrayList<Actor>(1);
+		myActors.add(new Actor());
+		
+		myLocation = new Point();
+		myNeighbors = new HashSet<Cell>();
+		myFloor = new Floor<Double>();
 	}
 	
 	public Cell(int x, int y){
-		this.myActor = new Actor();
-		this.myLocation = new Point(x, y);
-		this.myNeighbors = new ArrayList<Cell>();
+		this();
+		myLocation.setLocation(x, y);	
+		}
+	
+	public Cell(int x, int y, Actor act){
+		this(x, y);
+		setActor( new Actor(act) );
 	}
 	
 	public Cell(Cell that){
+		this();
+		setActor( new Actor(that.getActor()) );
+		myLocation.setLocation(that.myLocation);
 		
-		this.myActor = new Actor( that.myActor );
-		this.myLocation = new Point(that.myLocation);
-		
-		this.myNeighbors = new ArrayList<Cell>();
-		this.myNeighbors.addAll(that.myNeighbors);
+		myNeighbors = new ArrayList<Cell>();
+		myNeighbors.addAll(that.myNeighbors);
 	}
 	
 	public Actor getActor(){
-		return myActor;
+		return myActors.get(0);
+	}
+	
+	public Collection<Actor> getActors(){
+		return myActors;
 	}
 	
 	public void setActor(Actor act){
-		myActor = act;
+		myActors.set(0, act);
 	}
 	
+	public void setActors( Collection<Actor> actors){
+		myActors = new ArrayList<Actor>();
+		for (Actor actor : actors) {
+			myActors.add( new Actor( actor ));
+		}
+	}
 	
 	public Collection<Cell> getNeighbors(){
 		return myNeighbors;
@@ -54,6 +71,10 @@ public class Cell {
 	
 	public Point getLocation(){
 		return (Point) myLocation.clone();
+	}
+	
+	public Floor<Double> getFloor(){
+		return myFloor;
 	}
 	
 	public int numberNeighborsWithState(Enum state){

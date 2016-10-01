@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.HashMap;
 
 import cell.Actor;
-import cell.BorderType;
+import grid.BorderType;
 import cell.Cell;
 import cell.CellState.GameOfLife;
 import grid.Grid;
