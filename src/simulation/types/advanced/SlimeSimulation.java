@@ -1,8 +1,8 @@
 package simulation.types.advanced;
 
-import cellUtil.Cell;
-import cellUtil.Grid;
-import simulation.types.AbstractSimulation;
+import cell.Cell;
+import grid.Grid;
+import simulation.types.hierarchy.AbstractSimulation;
 
 public class SlimeSimulation extends AbstractSimulation {
 
@@ -13,12 +13,6 @@ public class SlimeSimulation extends AbstractSimulation {
 
 	@Override
 	protected void updateCell(Cell curr) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void initColorMap() {
 		// TODO Auto-generated method stub
 
 	}

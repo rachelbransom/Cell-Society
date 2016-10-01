@@ -1,9 +1,10 @@
 package grid;
 
-import cellUtil.Cell;
+import cell.BorderType;
+import cell.Cell;
 import simulation.types.SimulationType;
 
-public abstract class Grid {
+public class Grid {
 
 	private Cell[][] myCellGrid;
 	private int mySize;
@@ -50,9 +51,50 @@ public abstract class Grid {
 		return inX && inY;
 	}
 
-	public abstract void setFullNeighbors(int i, int j, Cell currCell);
+	/**
+	 * Sets edge neighbors as connecting, thus forming a toroid
+	 */
+	private void setToroid(){
+		
+		// Connect Top and Bottom rows
+		for (int x = 0; x < mySize; x++) {
+			getCell(x, 0).connectTo(getCell(x, mySize - 1));
+		}
+		
+		// Connect Right and Left sides
+		for (int y = 0; y < myCellGrid.length; y++) {
+			getCell(0, y).connectTo(getCell(mySize - 1, y));
+		}
+	}
 	
-	public abstract void setCardinalNeighbors(int i, int j, Cell currCell);
+	public void setFullSquareNeighbors(int i, int j, Cell currCell){
+		
+		setSideNeighbors(i, j, currCell);
+		
+		// Top Left
+		if(inBounds(i - 1 , j - 1)) currCell.connectTo(getCell(i - 1, j - 1));
+		// Top Right
+		if(inBounds(i + 1 , j - 1)) currCell.connectTo(getCell(i + 1, j - 1));
+		// Bottom Right
+		if(inBounds(i + 1 , j + 1)) currCell.connectTo(getCell(i + 1, j + 1));
+		// Bottom Left
+		if(inBounds(i - 1 , j + 1)) currCell.connectTo(getCell(i - 1, j + 1));
+		
+	}
+	
+	public void setSideNeighbors(int i, int j, Cell currCell){
+		currCell.getNeighbors().clear();
+
+		// Top Middle
+		if(inBounds(i     , j - 1)) currCell.connectTo(getCell(i    , j - 1 ));
+		// Right Side
+		if(inBounds(i + 1 , j    )) currCell.connectTo(getCell(i + 1, j     ));
+		// Bottom Middle
+		if(inBounds(i     , j + 1)) currCell.connectTo(getCell(i    , j + 1 ));
+		// Left Side
+		if(inBounds(i - 1 , j    )) currCell.connectTo(getCell(i - 1, j     ));
+		
+	}
 	
 	
 	public void setNeighbors(SimulationType simType){
@@ -61,13 +103,22 @@ public abstract class Grid {
 			for (int j = 0; j < mySize; j++) {
 				
 				if( simType.equals(SimulationType.GAME_OF_LIFE) ||
-						simType.equals(SimulationType.SEGREGATION)) setFullNeighbors(i, j, getCell(i, j));
+						simType.equals(SimulationType.SEGREGATION)) setFullSquareNeighbors(i, j, getCell(i, j));
 				
 				if( simType.equals(SimulationType.WA_TOR_WORLD) ||
 						simType.equals(SimulationType.SPREADING_FIRE)) 
-						setCardinalNeighbors(i, j, getCell(i, j));
+						setSideNeighbors(i, j, getCell(i, j));
 				
 			}
 		}
+		
+	}
+	
+	public void setNeighbors(SimulationType simType, BorderType bordType){
+		
+		setNeighbors(simType);
+		
+		if(bordType.equals(BorderType.TOROID)) setToroid();
+		
 	}
 }

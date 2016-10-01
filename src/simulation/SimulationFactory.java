@@ -6,6 +6,7 @@ import simulation.types.basic.GameOfLifeSimulation;
 import simulation.types.basic.SegregationSimulation;
 import simulation.types.basic.SpreadingFireSimulation;
 import simulation.types.basic.WaTorWorldSimulation;
+import simulation.types.hierarchy.AbstractSimulation;
 
 class SimulationFactory {
 	String file;
@@ -17,13 +18,6 @@ class SimulationFactory {
 		file = chosenFile;
 		parser = new XMLParser(file);
 		simulation = parser.getSimulationType();
-	}
-	
-	//TODO: Add Logic for building specific simulation types (i.e. game of life over 
-	
-	
-	public void giveFilename(){
-		
 	}
 	
 	public AbstractSimulation makeSimulation(){
