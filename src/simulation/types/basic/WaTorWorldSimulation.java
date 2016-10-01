@@ -111,6 +111,14 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 		myColorMap.put(FISH, Color.GOLD);
 	
 	}
+	
+	protected void initPopulationMap(){
+		myPopulationMap = new HashMap<Color, Integer>();
+		
+		myPopulationMap.put(Color.BLUE, 0);
+		myPopulationMap.put(Color.GRAY, 0);
+		myPopulationMap.put(Color.GOLD, 0);
+	}
 
 	/*----------------- Private / Helper Methods -----------------------------*/
 	

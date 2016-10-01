@@ -32,7 +32,7 @@ public class XMLParser {
 		parseFile();
 	}
 
-	public void parseFile() {
+	private void parseFile() {
 
 		try {
 			File XMLFile = new File("data/" + file + "/");
@@ -55,6 +55,7 @@ public class XMLParser {
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
+			
 			grid = new Grid(gridDimensions);
 
 			for (int i = 0; i < gridDimensions; i++) {
@@ -69,9 +70,9 @@ public class XMLParser {
 						e.printStackTrace();
 					}
 
-					Actor currAct = new Actor(returnCellState(situation, currCellState));
-					currCell.setActor(currAct);
-					grid.setCell(i, j, currCell);
+			Actor currAct = new Actor(returnCellState(situation, currCellState));
+			currCell.setActor(currAct);
+			grid.setCell(i, j, currCell);
 				}
 			}
 
@@ -87,6 +88,10 @@ public class XMLParser {
 	public double getGlobalConfiguration() {
 		return globalConfig;
 	}
+	
+	public int getNumberOfStates(){
+		return states;
+	}
 
 	public int getGridDimensions() {
 		return gridDimensions;
@@ -96,11 +101,11 @@ public class XMLParser {
 		return grid;
 	}
 
-	public String getTextByTag(String tag) {
+	private String getTextByTag(String tag) {
 		return document.getElementsByTagName(tag).item(0).getTextContent();
 	}
 
-	public Enum<SimulationType> returnSimulationType(String situation) {
+	private Enum<SimulationType> returnSimulationType(String situation) {
 		switch (situation) {
 		case "life":
 			return SimulationType.GAME_OF_LIFE;
@@ -115,7 +120,7 @@ public class XMLParser {
 		}
 	}
 
-	public Enum returnCellState(SimulationType simType, int state) {
+	private Enum returnCellState(SimulationType simType, int state) {
 		switch (simType) {
 		case GAME_OF_LIFE:
 			switch (state) {
@@ -161,12 +166,12 @@ public class XMLParser {
 
 	/*----------------- Exceptions -----------------------------*/
 
-	public static void testIfSimulation(SimulationType simulationType) throws NoSimulation {
+	private static void testIfSimulation(SimulationType simulationType) throws NoSimulation {
 		if (simulationType == null)
 			throw new NoSimulation();
 	}
 
-	public static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
+	private static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
 		if (((0 > state || 1 < state) && (simulationType.equals(SimulationType.GAME_OF_LIFE)))
 				|| (0 > state || 2 < state)) {
 			throw new InvalidCellState();

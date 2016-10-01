@@ -1,6 +1,9 @@
 package simulation;
 
+import graph.PopulationGraph;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
 import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
 
@@ -17,9 +20,7 @@ public class SimulationController {
 		mySimulation = factory.makeSimulation();
 	}
 	
-	
-	
-	public Group returnCurrVisualGrid(){
+	public Group returnCurrVisualGrid() {
 		Color[][] colorGrid = mySimulation.showCurrColorGrid();
 		myVisualizer = new SimulationVisualizer(colorGrid.length);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
@@ -27,10 +28,14 @@ public class SimulationController {
 	}
 	
 	public Group returnNextVisualGrid(){
-		
 		Color[][] colorGrid = mySimulation.showNextColorGrid();
 		myVisualizer = new SimulationVisualizer(colorGrid.length);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
 		return gridRoot;
 	}	
+	
+	public LineChart<Number,Number> getSimulationChart(){
+		return mySimulation.getMyChart();
+	}
+	
 }

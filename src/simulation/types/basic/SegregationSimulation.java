@@ -114,6 +114,14 @@ public class SegregationSimulation extends AbstractSimulation {
 		myColorMap.put(AMP, Color.RED);
 		myColorMap.put(OHM, Color.BLUE);
 	}
+	
+	protected void initPopulationMap(){
+		myPopulationMap = new HashMap<Color, Integer>();
+		
+		myPopulationMap.put(Color.WHITE, 0);
+		myPopulationMap.put(Color.RED, 0);
+		myPopulationMap.put(Color.BLUE, 0);
+	}
 
 	
 	

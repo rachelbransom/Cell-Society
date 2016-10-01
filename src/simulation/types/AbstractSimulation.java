@@ -5,6 +5,7 @@ import java.util.Map;
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.Grid;
+import javafx.scene.chart.LineChart;
 import javafx.scene.paint.Color;
 
 /**
@@ -19,6 +20,8 @@ public abstract class AbstractSimulation {
 	protected Grid myNextGrid;
 	protected int mySize;
 	protected Map<Enum, Color> myColorMap;
+	protected Map<Color, Integer> myPopulationMap;
+	protected LineChart<Number, Number> lineChart;
 	
 	public AbstractSimulation( Grid inputGrid ){
 		
@@ -26,6 +29,7 @@ public abstract class AbstractSimulation {
 		myCurrGrid = inputGrid;
 		
 		initColorMap();
+		initPopulationMap();
 	}
 	
 	/*----------------- Abstract Methods -----------------------------*/	
@@ -41,6 +45,8 @@ public abstract class AbstractSimulation {
 	protected abstract void updateCell(Cell curr);
 	
 	protected abstract void initColorMap();
+	
+	protected abstract void initPopulationMap();
 	
 	/*----------------- Implemented methods -----------------------------*/
 	
@@ -67,6 +73,8 @@ public abstract class AbstractSimulation {
 		
 		myCurrGrid = new Grid( myNextGrid );
 	};
+	
+
 
 	public Color[][] showNextColorGrid(){
 		updateGrid();	
@@ -82,12 +90,21 @@ public abstract class AbstractSimulation {
 				
 				Actor currActor = myCurrGrid.getCell(i, j).getActor();
 				colorGrid[i][j] = myColorMap.get(currActor.getState());
-			
+				
 			}
 		}
 		
 		return colorGrid;
 	}
+	
+	public Map<Color,Integer> getPopuationMap(){
+		return myPopulationMap;
+	}
+
+	public LineChart<Number, Number> getMyChart() {
+		return lineChart;
+	}
+	/*----------------- Overriden Methods -----------------------------*/
 	
 	
 }

@@ -1,6 +1,8 @@
 package simulation;
 
 import cellsociety_team23.XMLParser;
+import graph.PopulationGraph;
+import javafx.scene.Node;
 import simulation.types.*;
 import simulation.types.basic.GameOfLifeSimulation;
 import simulation.types.basic.SegregationSimulation;
@@ -19,12 +21,6 @@ class SimulationFactory {
 		simulation = parser.getSimulationType();
 	}
 	
-	//TODO: Add Logic for building specific simulation types (i.e. game of life over 
-	
-	
-	public void giveFilename(){
-		
-	}
 	
 	public AbstractSimulation makeSimulation(){
 		
@@ -41,4 +37,7 @@ class SimulationFactory {
 			return out;
 		}
 	}
+	
+	
+	
 }

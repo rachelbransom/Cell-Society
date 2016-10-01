@@ -2,6 +2,7 @@ package simulation.types.advanced;
 
 import cellUtil.Cell;
 import cellUtil.Grid;
+import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
 
 public class SlimeSimulation extends AbstractSimulation {
@@ -21,6 +22,10 @@ public class SlimeSimulation extends AbstractSimulation {
 	protected void initColorMap() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	protected void initPopulationMap(){
+		//TO DO
 	}
 
 }
