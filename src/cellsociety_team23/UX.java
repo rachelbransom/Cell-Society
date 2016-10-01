@@ -107,6 +107,7 @@ public class UX {
 	}
 
 	private void playSimulation() {
+		this.simulationControl.setSimulationChartLayout(GRID_START_X-65, GRID_START_Y-175);
 		root.getChildren().add(this.simulationControl.getSimulationChart());
 		double speedMultiplier = slider.getValue();
 		KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY / speedMultiplier), e -> step());
@@ -208,7 +209,6 @@ public class UX {
 		shapeComboBox = new ComboBox<String>(shapeOptions);
 		shapeComboBox.setValue(myResources.getString("ShapeComboBoxText"));
 		root.getChildren().add(setControlLayout(shapeComboBox, CONTROLS_SPACING * 6));
-		
 	}
 	
 	private void sliderInit() {

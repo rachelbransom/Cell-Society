@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Random;
 
+import javafx.scene.chart.XYChart;
 import javafx.scene.paint.Color;
 import simulation.types.AbstractSimulation;
 import simulation.types.SimulationType;
@@ -14,15 +15,17 @@ import cellUtil.Grid;
 import cellUtil.CellState.SpreadingFire;
 
 public class SpreadingFireSimulation extends AbstractSimulation {
-
+	private int tree, burning, counter;
 	private double myProbCatch;
 	private Random myRandom;
 
 	public SpreadingFireSimulation( Grid inputGrid , double probCatch){
 		super( inputGrid );
+		initPopulationCounts(inputGrid);
 		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 		myProbCatch = probCatch;
 		myRandom = new Random();
+		initPopulationGraph();
 	}
 
 	/*----------------- Overridden Methods -----------------------------*/
@@ -31,6 +34,8 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	public void updateGrid(){
 		super.updateGrid();
 		myCurrGrid.setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
+		counter++;
+		this.updateChart();
 	}
 
 	@Override
@@ -44,6 +49,9 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){
+			if (currState.equals(SpreadingFire.BURNING)){
+				burning--;
+			}
 			newCell.setActor( new Actor(SpreadingFire.EMPTY) );
 		}
 
@@ -51,7 +59,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		if( currState == SpreadingFire.TREE )
 			for (Cell neighbor : currCell.getNeighbors())
 				if ( neighbor.getActor().getState().equals(SpreadingFire.BURNING) && myRandom.nextDouble() < myProbCatch ) {
-					// System.out.println(newCell.getLocation().toString() + "has burned");
+					burning++;
 					newCell.setActor( new Actor(SpreadingFire.BURNING) );
 				}
 
@@ -69,11 +77,33 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 	}
 	
-	protected void initPopulationMap(){
-		myPopulationMap.put(Color.YELLOW, 0);
-		myPopulationMap.put(Color.GREEN, 0);
-		myPopulationMap.put(Color.RED, 0);
+//	private void initPopulationCounts(Grid grid){
+//		for (int i=0; i<grid.getSize(); i++){
+//			for (int j=0; j<grid.getSize(); j++){
+//				switch ( (SpreadingFire) grid.getCell(i, j).getActor().getState() ){
+//					
+//				}
+//			}
+//		}
+//	}
+	
+	private void initPopulationGraph(){
+		tree = 0;
+		burning = 0;
+		super.initPopulationGraphSuper();
+		
+		XYChart.Series series1 = new XYChart.Series<>();
+		XYChart.Series series2 = new XYChart.Series<>();
+		series1.getData().add(new XYChart.Data<Number, Number>(0, 0));
+		series2.getData().add(new XYChart.Data<Number, Number>(0, 0));
+		lineChart.getData().addAll(series1, series2);
 	}
 	
+	private void updateChart() {
+		XYChart.Series series1 = new XYChart.Series<>();
+		XYChart.Series series2 = new XYChart.Series<>();
+		lineChart.getData().get(0).getData().addAll(new XYChart.Data(counter, tree),
+				new XYChart.Data(counter, burning));
+	}
 }
 

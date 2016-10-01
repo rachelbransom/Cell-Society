@@ -1,13 +1,17 @@
-package simulation.types;
+package simulation.types.hierarchy;
 
+import java.util.HashMap;
 import java.util.Map;
 
+<<<<<<< HEAD:src/simulation/types/AbstractSimulation.java
 import cellUtil.Actor;
 import cellUtil.Cell;
 import cellUtil.Grid;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+=======
+import cell.Cell;
+import grid.Grid;
+>>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08:src/simulation/types/hierarchy/AbstractSimulation.java
 import javafx.scene.paint.Color;
 
 /**
@@ -18,19 +22,18 @@ import javafx.scene.paint.Color;
  */
 public abstract class AbstractSimulation {
 
-	protected Grid myCurrGrid;
-	protected Grid myNextGrid;
 	protected int mySize;
 	protected Map<Enum, Color> myColorMap;
+	protected Map<Color, Integer> myPopulationMap;
 	protected LineChart<Number, Number> lineChart;
-	
-	public AbstractSimulation( Grid inputGrid ){
-		
+	private Grid myCurrGrid;
+	private Grid myNextGrid;
+
+	public AbstractSimulation( Grid inputGrid ){		
 		mySize = inputGrid.getSize();
 		myCurrGrid = inputGrid;
 		
-		initColorMap();
-		
+
 	}
 	
 	/*----------------- Abstract Methods -----------------------------*/	
@@ -44,10 +47,8 @@ public abstract class AbstractSimulation {
 	 * @param curr Cell to be updated to next state.
 	 */
 	protected abstract void updateCell(Cell curr);
-	
-	protected abstract void initColorMap();
-	
-	
+
+
 	/*----------------- Implemented methods -----------------------------*/
 	
 	/**
@@ -74,50 +75,30 @@ public abstract class AbstractSimulation {
 		myCurrGrid = new Grid( myNextGrid );
 	};
 
-	public Color[][] showNextColorGrid(){
-		updateGrid();	
-		return showCurrColorGrid();
-	}
-	
-	public Color[][] showCurrColorGrid() {
-		
-		Color[][] colorGrid = new Color[mySize][mySize];
-		
-		for (int i = 0; i < mySize; i++) {
-			for (int j = 0; j < mySize; j++) {
-				
-				Actor currActor = myCurrGrid.getCell(i, j).getActor();
-				colorGrid[i][j] = myColorMap.get(currActor.getState());
-				
-			}
-		}
-		
-		return colorGrid;
+	protected Grid getCurrGrid(){
+		return myCurrGrid;
 	}
 	
 	
-	protected void initPopulationGraphSuper(){
-		NumberAxis xAxis = new NumberAxis();
-		NumberAxis yAxis = new NumberAxis();
-		
-		xAxis.setLabel("Time");
-		yAxis.setLabel("Alive");
-		xAxis.setForceZeroInRange(false);
-		xAxis.setAutoRanging(false);
-		lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-		lineChart.setMaxHeight(250);
-		lineChart.setPrefWidth(505);
-	}
-
 	public LineChart<Number, Number> getMyChart() {
 		return lineChart;
 	}
-	
-	public void setMyChartLayout(int x, int y){
-		lineChart.setLayoutX(x);
-		lineChart.setLayoutY(y);
-	}
 	/*----------------- Overriden Methods -----------------------------*/
+
+	protected Grid getNextGrid(){
+		return myNextGrid;
+	}
 	
+	protected int getSize(){
+		return mySize;
+	}
+
+	public Grid showCurrGrid(){
+		return new Grid(myCurrGrid);
+	}
 	
+	public Grid showNextGrid(){
+		updateGrid();
+		return showCurrGrid();
+	}
 }

@@ -38,4 +38,8 @@ public class SimulationController {
 		return mySimulation.getMyChart();
 	}
 	
+	public void setSimulationChartLayout(int x, int y){
+		mySimulation.setMyChartLayout(x, y);
+	}
+	
 }

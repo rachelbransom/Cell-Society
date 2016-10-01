@@ -47,7 +47,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 			}
 			// Cell Stays Alive
 			else {
-				stayAlice(newCell);
+				stayAlive(newCell);
 			}
 		}
 
@@ -78,7 +78,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		newCell.setActor(new Actor(GameOfLife.DEAD));
 	}
 
-	private void stayAlice(Cell newCell) {
+	private void stayAlive(Cell newCell) {
 		newCell.setActor(new Actor(GameOfLife.ALIVE));
 	}
 
@@ -91,30 +91,15 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 
 	}
 
-	protected void initPopulationMap() {
-		myPopulationMap = new HashMap<Color, Integer>();
-
-		myPopulationMap.put(Color.WHITE, 0);
-		myPopulationMap.put(Color.BLACK, 0);
-
-	}
-
+	
 	private void initPopulationGraph() {
 		myAliveCells = 0;
-		// myDeadCells = 0;
-
-		NumberAxis xAxis = new NumberAxis();
-		NumberAxis yAxis = new NumberAxis();
-
-		xAxis.setLabel("Time");
-		yAxis.setLabel("Alive");
+		super.initPopulationGraphSuper();
 		
-		xAxis.setForceZeroInRange(false);
-		xAxis.setAutoRanging(false);
-		lineChart = new LineChart<Number, Number>(xAxis, yAxis);
 		XYChart.Series series = new XYChart.Series<>();
 		series.getData().add(new XYChart.Data<Number, Number>(0, 0));
 		lineChart.getData().add(series);
+
 	}
 
 	/*----------------- Helper / Private Methods -----------------------------*/
