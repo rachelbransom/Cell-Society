@@ -14,7 +14,7 @@ public class PopulationGraph {
 	private HashMap<Color,Integer> myMap;
 	private LineChart myLineChart;
 	private NumberAxis xAxis, yAxis;
-	private final int X_AXIS_MAX = 5, X_AXIS_INTERVAL = 5;
+	private final int X_AXIS_MAX = 200, X_AXIS_INTERVAL = 5;
 	private int counter;
 	
 	public PopulationGraph(HashMap<Color,Integer> initialMap){
@@ -25,13 +25,20 @@ public class PopulationGraph {
 	public void update(HashMap<Color,Integer> map){
 		counter++;
 		int i = 0;
+		
+//		for (Color color: myMap.keySet()){
+//			myMap.put(color, 0);
+//		}
+		
 		for (Color color: myInitialPopulationMap.keySet()){
-			if (map.containsKey(color)){
-				myMap.put(color, map.get(color));
-			}
-			else {
-				myMap.put(color, 0);
-			}
+//			System.out.println("Color: " + color + ", Number: " + map.get(color));
+//			if (myMap.containsKey(color)){
+//				//System.out.println(map.get(color));
+//				myMap.put(color, map.get(color));
+//			}
+//			else {
+//				myMap.put(color, 0);
+//			}
 			series.get(i).getData().add(new XYChart.Data(counter, map.get(color)));
 			i++;
 		}
@@ -45,7 +52,11 @@ public class PopulationGraph {
 		for (Color color: myInitialPopulationMap.keySet()){
 			XYChart.Series<Number,Number> chart = new XYChart.Series<Number,Number>();
 			chart.getData().add(new XYChart.Data(counter, myInitialPopulationMap.get(color)));
-			//add colors
+			
+			System.out.println(color.toString().substring(2, color.toString().length()-2));
+			System.out.println(Color.RED.toString());
+			//chart.nodeProperty().get().setStyle("-fx-stroke: #FFFFFF;");
+			//chart.nodeProperty().get().setStyle();
 			series.add(chart);
 		}
 		
@@ -53,9 +64,13 @@ public class PopulationGraph {
 		yAxis = new NumberAxis();
 		
 		xAxis.setForceZeroInRange(false);
-		xAxis.setAutoRanging(false);
+		//xAxis.setAutoRanging(false);
+		xAxis.setTickMarkVisible(false);
+		xAxis.setTickLabelsVisible(false);
 		
 		myLineChart = new LineChart<Number,Number>(xAxis, yAxis);
+		myLineChart.setPrefWidth(485);
+		myLineChart.setPrefHeight(220);
 		myLineChart.getData().addAll(series);
 		
 	}

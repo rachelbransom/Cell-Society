@@ -20,7 +20,7 @@ public class SimulationVisualizer {
 
 	private Shape[][] myShapeGrid;
 	private Group myGridRoot;
-	private HashMap<Color, Integer> populationMap = new HashMap<Color, Integer>();
+	private HashMap<Color, Integer> populationMap;// = new HashMap<Color, Integer>();
 	
 	public SimulationVisualizer(int size) {
 		initShapeGrid(size);
@@ -32,6 +32,7 @@ public class SimulationVisualizer {
 	}
 
 	private void updateGridColor(Color[][] colorGrid) {
+		populationMap = new HashMap<Color, Integer>();
 		myGridRoot = new Group();
 		for (int i = 0; i < myShapeGrid.length; i++) {
 			for (int j = 0; j < myShapeGrid.length; j++) {

@@ -86,7 +86,6 @@ public class UX {
 		displayInstructions();
 		displayTitle();
 		displaySliderText();
-		lineChartInit();
 		root.getChildren().add(gridRoot);
 		
 		return scene;
@@ -162,7 +161,7 @@ public class UX {
 		gridRoot = simulationControl.returnCurrVisualGrid();
 		root.getChildren().add(gridRoot);
 		
-		simulationControl.setMyLineChartLayout(GRID_START_X, GRID_START_Y-200);
+		simulationControl.setMyLineChartLayout(GRID_START_X-40, GRID_START_Y-185);
 		root.getChildren().add(simulationControl.getPopulationChart());
 	}
 
@@ -247,15 +246,6 @@ public class UX {
 		root.getChildren().add(setControlLayout(slider, CONTROLS_SPACING * 4));
 	}
 
-	private void lineChartInit(){
-		xAxis = new NumberAxis();
-		//xAxis.setLabel(myResources.getString("ChartXAxis"));
-		yAxis = new NumberAxis();
-		//yAxis.setLabel(myResources.getString("ChartYAxis"));
-		myChart = new LineChart<Number, Number>(xAxis, yAxis);
-		//root.getChildren().add(myChart);
-		
-	}
 	
 	private void displayInstructions() {
 		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
