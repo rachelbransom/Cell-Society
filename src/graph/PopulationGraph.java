@@ -14,7 +14,7 @@ public class PopulationGraph {
 	private HashMap<Color,Integer> myMap;
 	private LineChart myLineChart;
 	private NumberAxis xAxis, yAxis;
-	private final int X_AXIS_MAX = 200, X_AXIS_INTERVAL = 5;
+	private final int X_AXIS_MAX = 20, X_AXIS_INTERVAL = 1;
 	private int counter;
 	
 	public PopulationGraph(HashMap<Color,Integer> initialMap){
@@ -26,20 +26,17 @@ public class PopulationGraph {
 		counter++;
 		int i = 0;
 		
-//		for (Color color: myMap.keySet()){
-//			myMap.put(color, 0);
-//		}
 		
 		for (Color color: myInitialPopulationMap.keySet()){
 //			System.out.println("Color: " + color + ", Number: " + map.get(color));
-//			if (myMap.containsKey(color)){
-//				//System.out.println(map.get(color));
-//				myMap.put(color, map.get(color));
-//			}
-//			else {
-//				myMap.put(color, 0);
-//			}
-			series.get(i).getData().add(new XYChart.Data(counter, map.get(color)));
+			if (map.containsKey(color)){
+				//System.out.println(map.get(color));
+				myMap.put(color, map.get(color));
+			}
+			else {
+				myMap.put(color, 0);
+			}
+			series.get(i).getData().add(new XYChart.Data(counter, myMap.get(color)));
 			i++;
 		}
 		
@@ -64,7 +61,7 @@ public class PopulationGraph {
 		yAxis = new NumberAxis();
 		
 		xAxis.setForceZeroInRange(false);
-		//xAxis.setAutoRanging(false);
+		xAxis.setAutoRanging(false);
 		xAxis.setTickMarkVisible(false);
 		xAxis.setTickLabelsVisible(false);
 		

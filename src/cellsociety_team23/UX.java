@@ -136,7 +136,6 @@ public class UX {
 	private void step() {
 		if (simulationControl != null) {
 			advanceGridRoot();
-			advancePopulationGraph();
 			
 		}
 		checkSpeed();
@@ -162,17 +161,15 @@ public class UX {
 		root.getChildren().add(gridRoot);
 		
 		simulationControl.setMyLineChartLayout(GRID_START_X-40, GRID_START_Y-185);
-		root.getChildren().add(simulationControl.getPopulationChart());
+		root.getChildren().remove(graphRoot);
+		graphRoot = simulationControl.getPopulationChart();
+		root.getChildren().add(graphRoot);
 	}
 
 	private void advanceGridRoot() {
 		root.getChildren().remove(gridRoot);
 		gridRoot = simulationControl.returnNextVisualGrid();
 		root.getChildren().add(gridRoot);
-	}
-	
-	private void advancePopulationGraph(){
-		
 	}
 	
 	private void checkSpeed() {

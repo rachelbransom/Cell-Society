@@ -56,8 +56,10 @@ public class SimulationController {
 		return gridRoot;
 	}
 	
-	public LineChart getPopulationChart(){
-		return myPopulationGraph.getMyLineChart();
+	public Group getPopulationChart(){
+		Group graphRoot = new Group();
+		graphRoot.getChildren().add(myPopulationGraph.getMyLineChart());
+		return graphRoot;
 	}
 	
 	public void setMyLineChartLayout(int x, int y){
