@@ -1,5 +1,6 @@
 package simulation.types.basic;
 
+import javafx.scene.chart.*;
 import java.awt.Point;
 import java.util.HashMap;
 
@@ -15,17 +16,22 @@ import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractSimulation;
 
 public class GameOfLifeSimulation extends AbstractSimulation {
+	private int myAliveCells;
+	private int counter;
 
-	public GameOfLifeSimulation(Grid grid){
+	public GameOfLifeSimulation(Grid grid) {
 		super(grid);
+
+		//initPopulationGraph();
 		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
+
 	}
 
-	/*----------------- Overriden Methods -----------------------------*/
-
 	@Override
-	protected void updateGrid(){
+	protected void updateGrid() {
 		super.updateGrid();
+		counter++;
+		//this.updateChart();
 		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 	}
 
@@ -34,26 +40,67 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 
 		GameOfLife currState = (GameOfLife) currCell.getActor().getState();
 		Point location = currCell.getLocation();
-		Cell newCell = new Cell( currCell );
+		Cell newCell = new Cell(currCell);
 		int numAliveNeighbors = currCell.numberNeighborsWithState(GameOfLife.ALIVE);
-		
-		// If Cell is alive
-		if( currState.equals(GameOfLife.ALIVE) ) {
+
+		if (currState.equals(GameOfLife.ALIVE)) {
 			// Cell dies
-			if( numAliveNeighbors < 2 || numAliveNeighbors > 3) newCell.getActor().changeState(GameOfLife.DEAD);
+			if (numAliveNeighbors < 2 || numAliveNeighbors > 3) {
+				kill(newCell);
+			}
 			// Cell Stays Alive
-			else 												newCell.setActor( new Actor(GameOfLife.ALIVE) );
+			else {
+				stayAlive(newCell);
+			}
 		}
-		
-		// If Cell is Dead
-		if(currState == GameOfLife.DEAD){
-			// Cell repopulates
-			if( numAliveNeighbors == 3) newCell.getActor().changeState(GameOfLife.ALIVE);
+
+		if (currState == GameOfLife.DEAD) {
+			if (numAliveNeighbors == 3) {
+				birth(newCell);
+			}
 			// Cell Stays Dead
-			else						newCell.setActor( new Actor(GameOfLife.DEAD) );
+			else
+				stayDead(newCell);
 		}
-		
-		getNextGrid().setCell(location.x, location.y, newCell );		
+
+		myNextGrid.setCell(location.x, location.y, newCell);
 
 	}
+
+	private void kill(Cell newCell) {
+		newCell.getActor().changeState(GameOfLife.DEAD);
+		myAliveCells--;
+	}
+
+	private void birth(Cell newCell) {
+		newCell.getActor().changeState(GameOfLife.ALIVE);
+		myAliveCells++;
+	}
+
+	private void stayDead(Cell newCell) {
+		newCell.setActor(new Actor(GameOfLife.DEAD));
+	}
+
+	private void stayAlive(Cell newCell) {
+		newCell.setActor(new Actor(GameOfLife.ALIVE));
+	}
+
+//	@Override
+//	protected void initColorMap() {
+//		myColorMap = new HashMap<Enum, Color>();
+//
+//		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
+//		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
+//
+//	}
+
+	
+
+	/*----------------- Helper / Private Methods -----------------------------*/
+
+//	private void updateChart() {
+//		XYChart.Series series = new XYChart.Series<>();
+//		lineChart.getData().get(0).getData().add(new XYChart.Data(counter, myAliveCells));
+//
+//	}
 }

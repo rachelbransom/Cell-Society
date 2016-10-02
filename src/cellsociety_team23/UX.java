@@ -2,6 +2,8 @@ package cellsociety_team23;
 
 import java.util.ResourceBundle;
 
+import com.sun.javafx.geom.Rectangle;
+import com.sun.javafx.geom.Shape;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Slider;
@@ -39,17 +42,21 @@ public class UX {
 	private Scene scene;
 	private Group root = new Group();
 	private Group gridRoot = new Group();
+	private Group graphRoot = new Group();
 	private Timeline animation;
 	private Button play, stop, step, reset;
 	private Slider slider;
 	private ComboBox<String> xmlComboBox;
 	private ComboBox<String> shapeComboBox;
+	private ComboBox<String> cellStateComboBox;
 	private Text cellSocietyText, instructionsText, sliderText;
 	private SimulationController simulationControl;	
 	private ResourceBundle myResources;
 	private LineChart<Number, Number> myChart;
 	private NumberAxis xAxis;
 	private NumberAxis yAxis;
+	private Boolean withGridOutlines;
+	private CheckBox gridLineCheckBox;
 	
 	private int XSIZE;
 	private int YSIZE;
@@ -60,6 +67,7 @@ public class UX {
 	private static final String CSS_FILE_NAME = "resources/UXStyling.css";
 	
 	public static int GRID_START_X = 250;
+	
 	public static int GRID_START_Y = 300;
 	public static int GRID_SIZE = 430;
 
@@ -76,24 +84,31 @@ public class UX {
 	public Scene init() {
 		scene = new Scene(root, XSIZE, YSIZE, Color.BLACK);
 		scene.getStylesheets().add(CSS_FILE_NAME);
+		
 		buttonInit();
+		buttonActionInit();
 		sliderInit();
 		xmlComboBoxInit();
 		shapeComboBoxInit();
 		displayInstructions();
 		displayTitle();
 		displaySliderText();
-		lineChartInit();
+		displayGridLineCheckBox();
+		cellStateComboBoxInit();
 		root.getChildren().add(gridRoot);
+		
 		return scene;
 	}
+
 	
 	private void buttonInit() {
 		play = new Button(myResources.getString("PlayButton"));
 		stop = new Button(myResources.getString("StopButton"));
 		step = new Button(myResources.getString("StepButton"));
 		reset = new Button(myResources.getString("ResetButton"));
-
+	}
+	
+	private void buttonActionInit(){
 		play.setOnAction((event) -> {
 			playSimulation();
 		});
@@ -128,6 +143,7 @@ public class UX {
 	private void step() {
 		if (simulationControl != null) {
 			advanceGridRoot();
+			
 		}
 		checkSpeed();
 	}
@@ -139,14 +155,21 @@ public class UX {
 		if (!file.equals("NONE CHOSEN")) {
 			simulationControl = new SimulationController();
 			simulationControl.initializeSimulation(file, shape);
+			//root.getChildren().add(simulationControl.getPopulationChart());
 			resetGridRoot();
 		}
 	}
 
 	private void resetGridRoot() {
 		root.getChildren().remove(gridRoot);
-		gridRoot = simulationControl.returnCurrVisualGrid();
+		Boolean withGridOutlines = gridLineCheckBox.isSelected();
+		gridRoot = simulationControl.returnCurrVisualGrid(withGridOutlines);
 		root.getChildren().add(gridRoot);
+		
+		simulationControl.setMyLineChartLayout(GRID_START_X-40, GRID_START_Y-185);
+		root.getChildren().remove(graphRoot);
+		graphRoot = simulationControl.getPopulationChart();
+		root.getChildren().add(graphRoot);
 	}
 
 	private void advanceGridRoot() {
@@ -154,7 +177,7 @@ public class UX {
 		gridRoot = simulationControl.returnNextVisualGrid();
 		root.getChildren().add(gridRoot);
 	}
-
+	
 	private void checkSpeed() {
 		if (slider.isValueChanging() == true) {
 			stopSimulation();
@@ -176,6 +199,10 @@ public class UX {
 			return "NONE CHOSEN";
 		case ("NO SIMULATION TYPE"):
 			return ("NoSimulationType.xml");
+		case ("SLIME MOLD"):
+			return ("Slime.xml");
+		case ("SUGAR AND SPICE"):
+			return ("SugarAndSpice.xml");
 		case ("INVALID CELL STATE"):
 			return ("InvalidCellState.xml");
 		}
@@ -200,7 +227,9 @@ public class UX {
 
 	private void xmlComboBoxInit() {
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
-				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"));
+				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"),
+				myResources.getString("SlimeMold"), myResources.getString("SugarScape"),
+				myResources.getString("NoSimulationType"), myResources.getString("InvalidCellState"));
 		xmlComboBox = new ComboBox<String>(xmlOptions);
 		xmlComboBox.setValue(myResources.getString("XMLComboBoxText"));
 		root.getChildren().add(setControlLayout(xmlComboBox, CONTROLS_SPACING * 5));
@@ -212,7 +241,14 @@ public class UX {
 		shapeComboBox = new ComboBox<String>(shapeOptions);
 		shapeComboBox.setValue(myResources.getString("ShapeComboBoxText"));
 		root.getChildren().add(setControlLayout(shapeComboBox, CONTROLS_SPACING * 6));
-		
+	}
+	
+	private void cellStateComboBoxInit(){
+		ObservableList<String> stateOptions = FXCollections.observableArrayList(myResources.getString("Random"), 
+				myResources.getString("XMLVals"), myResources.getString("Probability"));
+		cellStateComboBox = new ComboBox<String>(stateOptions);
+		cellStateComboBox.setValue(myResources.getString("StateComboBoxText"));
+		root.getChildren().add(setControlLayout(cellStateComboBox, CONTROLS_SPACING*8));
 	}
 	
 	private void sliderInit() {
@@ -221,15 +257,6 @@ public class UX {
 		root.getChildren().add(setControlLayout(slider, CONTROLS_SPACING * 4));
 	}
 
-	private void lineChartInit(){
-		xAxis = new NumberAxis();
-		xAxis.setLabel(myResources.getString("ChartXAxis"));
-		yAxis = new NumberAxis();
-		yAxis.setLabel(myResources.getString("ChartYAxis"));
-		myChart = new LineChart<Number, Number>(xAxis, yAxis);
-		root.getChildren().add(myChart);
-		
-	}
 	
 	private void displayInstructions() {
 		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
@@ -251,6 +278,14 @@ public class UX {
 		sliderText.getStyleClass().add("slider");
 		root.getChildren().add(sliderText);
 	}
+	
+	private void displayGridLineCheckBox(){
+		gridLineCheckBox = new CheckBox();
+		gridLineCheckBox.setText("GRID LINES");
+		root.getChildren().add(setControlLayout(gridLineCheckBox,315));
+		gridLineCheckBox.setLayoutX(50);
+
+	}
 
 	private void displayTitle() {
 		cellSocietyText = new Text(TITLE_X, TITLE_Y, myResources.getString("DisplayTitle"));
@@ -265,4 +300,5 @@ public class UX {
 		control.getStyleClass().add("control");
 		return control;
 	}
+	
 }

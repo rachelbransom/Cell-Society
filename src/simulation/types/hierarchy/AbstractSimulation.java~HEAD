@@ -3,13 +3,15 @@ package simulation.types.hierarchy;
 import java.util.HashMap;
 import java.util.Map;
 
+<<<<<<< HEAD:src/simulation/types/AbstractSimulation.java
+import cellUtil.Actor;
+import cellUtil.Cell;
+import cellUtil.Grid;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+=======
 import cell.Cell;
-
 import grid.Grid;
-
+>>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08:src/simulation/types/hierarchy/AbstractSimulation.java
 import javafx.scene.paint.Color;
 
 /**
@@ -20,14 +22,18 @@ import javafx.scene.paint.Color;
  */
 public abstract class AbstractSimulation {
 
+	protected int mySize;
+	protected Map<Enum, Color> myColorMap;
+	protected Map<Color, Integer> myPopulationMap;
 	protected LineChart<Number, Number> lineChart;
 	private Grid myCurrGrid;
-	protected Grid myNextGrid;
-	private int mySize;
-	
+	private Grid myNextGrid;
+
 	public AbstractSimulation( Grid inputGrid ){		
 		mySize = inputGrid.getSize();
-		myCurrGrid = inputGrid;		
+		myCurrGrid = inputGrid;
+		
+
 	}
 	
 	/*----------------- Abstract Methods -----------------------------*/	
@@ -73,41 +79,20 @@ public abstract class AbstractSimulation {
 		return myCurrGrid;
 	}
 	
+	
+	public LineChart<Number, Number> getMyChart() {
+		return lineChart;
+	}
+	/*----------------- Overriden Methods -----------------------------*/
 
 	protected Grid getNextGrid(){
 		return myNextGrid;
-
 	}
 	
 	protected int getSize(){
 		return mySize;
 	}
-	
 
-	protected void initPopulationGraphSuper(){
-		NumberAxis xAxis = new NumberAxis();
-		NumberAxis yAxis = new NumberAxis();
-		
-		xAxis.setLabel("Time");
-		yAxis.setLabel("Alive");
-		xAxis.setForceZeroInRange(false);
-		xAxis.setAutoRanging(false);
-		lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-		lineChart.setMaxHeight(250);
-		lineChart.setPrefWidth(505);
-	}
-
-//	public LineChart<Number, Number> getMyChart() {
-//		return lineChart;
-//	}
-	
-//	public void setMyChartLayout(int x, int y){
-//		lineChart.setLayoutX(x);
-//		lineChart.setLayoutY(y);
-//	}
-	/*----------------- Overriden Methods -----------------------------*/
-	
-	
 	public Grid showCurrGrid(){
 		return new Grid(myCurrGrid);
 	}

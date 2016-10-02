@@ -1,5 +1,9 @@
 package simulation.types.advanced;
 
+import cellUtil.Cell;
+import cellUtil.Grid;
+import javafx.scene.paint.Color;
+import simulation.types.AbstractSimulation;
 import cell.Cell;
 import grid.Grid;
 import simulation.types.hierarchy.AbstractSimulation;

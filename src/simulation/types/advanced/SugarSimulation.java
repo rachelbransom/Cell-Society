@@ -7,6 +7,7 @@ import cell.Floor;
 import grid.Grid;
 import simulation.types.hierarchy.AbstractSimulation;
 
+
 public class SugarSimulation extends AbstractSimulation {
 	
 	// Agent Related Instance Variables
@@ -107,4 +108,5 @@ public class SugarSimulation extends AbstractSimulation {
 			}
 		}
 	}
+
 }
