@@ -8,11 +8,11 @@ import com.sun.javafx.geom.Shape;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -59,6 +59,7 @@ public class UX {
 	private NumberAxis yAxis;
 	private Boolean withGridOutlines;
 	private CheckBox gridLineCheckBox;
+
 	
 	private int XSIZE;
 	private int YSIZE;
@@ -218,7 +219,7 @@ public class UX {
 	private String getShape(String chosenShape){
 		switch(chosenShape) {
 		case("SQUARE"):
-			return "Rectangle";
+			return "Square";
 		case("TRIANGLE"):
 			return "Triangle";
 		case("HEXAGON"):

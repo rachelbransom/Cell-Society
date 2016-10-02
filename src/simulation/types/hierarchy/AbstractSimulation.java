@@ -55,9 +55,9 @@ public abstract class AbstractSimulation {
 	 * @return		  Reference to the next Grid
 	 */
 	protected void updateGrid(){
-
+		
 		// Make copies of input Grid
-		myNextGrid  = new Grid(myCurrGrid.getSize());
+		myNextGrid  = new Grid(myCurrGrid.getSize(), myCurrGrid.getShape());
 		
 		// Update each cell
 		for (int i = 0; i < myCurrGrid.getSize(); i++) {
