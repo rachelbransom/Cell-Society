@@ -118,8 +118,8 @@ public class UX {
 	}
 
 	private void playSimulation() {
-		this.simulationControl.setSimulationChartLayout(GRID_START_X-65, GRID_START_Y-175);
-		root.getChildren().add(this.simulationControl.getSimulationChart());
+		//this.simulationControl.setSimulationChartLayout(GRID_START_X-65, GRID_START_Y-175);
+		//root.getChildren().add(this.simulationControl.getSimulationChart());
 		double speedMultiplier = slider.getValue();
 		KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY / speedMultiplier), e -> step());
 		animation = new Timeline();
@@ -137,6 +137,7 @@ public class UX {
 	private void step() {
 		if (simulationControl != null) {
 			advanceGridRoot();
+			advancePopulationGraph();
 			
 		}
 		checkSpeed();
@@ -149,20 +150,30 @@ public class UX {
 		if (!file.equals("NONE CHOSEN")) {
 			simulationControl = new SimulationController();
 			simulationControl.initializeSimulation(file, shape);
+			//root.getChildren().add(simulationControl.getPopulationChart());
 			resetGridRoot();
 		}
 	}
+	
+	
 
 	private void resetGridRoot() {
 		root.getChildren().remove(gridRoot);
 		gridRoot = simulationControl.returnCurrVisualGrid();
 		root.getChildren().add(gridRoot);
+		
+		simulationControl.setMyLineChartLayout(GRID_START_X, GRID_START_Y-200);
+		root.getChildren().add(simulationControl.getPopulationChart());
 	}
 
 	private void advanceGridRoot() {
 		root.getChildren().remove(gridRoot);
 		gridRoot = simulationControl.returnNextVisualGrid();
 		root.getChildren().add(gridRoot);
+	}
+	
+	private void advancePopulationGraph(){
+		
 	}
 	
 	private void checkSpeed() {
@@ -186,6 +197,10 @@ public class UX {
 			return "NONE CHOSEN";
 		case ("NO SIMULATION TYPE"):
 			return ("NoSimulationType.xml");
+		case ("SLIME MOLD"):
+			return ("Slime.xml");
+		case ("SUGAR AND SPICE"):
+			return ("SugarAndSpice.xml");
 		case ("INVALID CELL STATE"):
 			return ("InvalidCellState.xml");
 		}
@@ -211,6 +226,7 @@ public class UX {
 	private void xmlComboBoxInit() {
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
 				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"),
+				myResources.getString("SlimeMold"), myResources.getString("SugarScape"),
 				myResources.getString("NoSimulationType"), myResources.getString("InvalidCellState"));
 		xmlComboBox = new ComboBox<String>(xmlOptions);
 		xmlComboBox.setValue(myResources.getString("XMLComboBoxText"));
@@ -233,11 +249,11 @@ public class UX {
 
 	private void lineChartInit(){
 		xAxis = new NumberAxis();
-		xAxis.setLabel(myResources.getString("ChartXAxis"));
+		//xAxis.setLabel(myResources.getString("ChartXAxis"));
 		yAxis = new NumberAxis();
-		yAxis.setLabel(myResources.getString("ChartYAxis"));
+		//yAxis.setLabel(myResources.getString("ChartYAxis"));
 		myChart = new LineChart<Number, Number>(xAxis, yAxis);
-		root.getChildren().add(myChart);
+		//root.getChildren().add(myChart);
 		
 	}
 	

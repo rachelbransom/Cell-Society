@@ -4,20 +4,12 @@ import java.awt.Point;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Stack;
-<<<<<<< HEAD
-import cellUtil.Actor;
-import cellUtil.Cell;
-import cellUtil.CellState.Segregation;
-import cellUtil.Grid;
-import javafx.scene.chart.XYChart;
-=======
 
 import cell.Actor;
 import cell.Cell;
 import cell.CellState.Segregation;
 
 import grid.Grid;
->>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08
 import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractSimulation;
@@ -108,38 +100,23 @@ public class SegregationSimulation extends AbstractSimulation {
 		}
 	}
 
-	@Override
-	protected void initColorMap() {
-		this.myColorMap = new HashMap<Enum, Color>();
-
-		myColorMap.put(EMPTY, Color.WHITE);
-		myColorMap.put(AMP, Color.RED);
-		myColorMap.put(OHM, Color.BLUE);
-	}
-
-	protected void initPopulationMap() {
-		myPopulationMap = new HashMap<Color, Integer>();
-
-		myPopulationMap.put(Color.WHITE, 0);
-		myPopulationMap.put(Color.RED, 0);
-		myPopulationMap.put(Color.BLUE, 0);
-	}
+	
 
 	protected void initPopulationGraph() {
 		populationOne = 0;
 		populationTwo = 0;
 		super.initPopulationGraphSuper();
 
-		XYChart.Series series1 = new XYChart.Series<>();
-		XYChart.Series series2 = new XYChart.Series<>();
-		lineChart.getData().addAll(series1, series2);
+		//XYChart.Series series1 = new XYChart.Series<>();
+		//XYChart.Series series2 = new XYChart.Series<>();
+		//lineChart.getData().addAll(series1, series2);
 	}
 
 	protected void updateChart() {
-		XYChart.Series series1 = new XYChart.Series<>();
-		XYChart.Series series2 = new XYChart.Series<>();
-		lineChart.getData().get(0).getData().addAll(new XYChart.Data(counter, populationOne),
-				new XYChart.Data(counter, populationTwo));
+		//XYChart.Series series1 = new XYChart.Series<>();
+		//XYChart.Series series2 = new XYChart.Series<>();
+		//lineChart.getData().get(0).getData().addAll(new XYChart.Data(counter, populationOne),
+				//new XYChart.Data(counter, populationTwo));
 
 	}
 

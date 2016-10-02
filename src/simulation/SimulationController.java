@@ -1,5 +1,7 @@
 package simulation;
 
+import java.util.HashMap;
+
 import graph.PopulationGraph;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -16,6 +18,8 @@ public class SimulationController {
 
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
+	private HashMap<Color, Integer> populationMap;
+	private PopulationGraph myPopulationGraph;
 	
 	public void initializeSimulation(String filename, String shape){		  
 		SimulationFactory factory = new SimulationFactory(filename);
@@ -23,29 +27,42 @@ public class SimulationController {
 	}
 
 	
-	public LineChart<Number,Number> getSimulationChart(){
-		return mySimulation.getMyChart();
-	}
+//	public LineChart<Number,Number> getSimulationChart(){
+//		return mySimulation.getMyChart();
+//	}
 	
-	public void setSimulationChartLayout(int x, int y){
-		mySimulation.setMyChartLayout(x, y);
-	}
-
-	
+//	public void setSimulationChartLayout(int x, int y){
+//		mySimulation.setMyChartLayout(x, y);
+//	}
 	
 	public Group returnCurrVisualGrid(){
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
-		return makeGridRoot(colorGrid);
+		myVisualizer = new SimulationVisualizer(colorGrid.length);
+		Group gridRoot = makeGridRoot(colorGrid);
+		myPopulationGraph = new PopulationGraph(myVisualizer.getPopulationMap());
+		return gridRoot;
 	}
 	
 	public Group returnNextVisualGrid(){
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid();
-		return makeGridRoot(colorGrid);
+		Group gridRoot = makeGridRoot(colorGrid);
+		myPopulationGraph.update(myVisualizer.getPopulationMap());
+		return gridRoot;
 	}	
 	
 	private Group makeGridRoot( Color[][] colorGrid ){
-		myVisualizer = new SimulationVisualizer(colorGrid.length);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
+		
 		return gridRoot;
 	}
+	
+	public LineChart getPopulationChart(){
+		return myPopulationGraph.getMyLineChart();
+	}
+	
+	public void setMyLineChartLayout(int x, int y){
+		myPopulationGraph.setMyLineChartLayout(x, y);
+	}
+	
+
 }

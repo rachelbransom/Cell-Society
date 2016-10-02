@@ -4,13 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cell.CellState.*;
-<<<<<<< HEAD
-import cellUtil.CellState.GameOfLife;
-import cellUtil.CellState.Segregation;
-import cellUtil.CellState.SpreadingFire;
-import cellUtil.CellState.WaTorWorld;
-=======
->>>>>>> 8c7f8b03adcacf4ed37493f9bbd99b49dd48af08
+
 import grid.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.basic.*;

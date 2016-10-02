@@ -3,9 +3,6 @@ package simulation.types.hierarchy;
 import java.util.HashMap;
 import java.util.Map;
 
-import cellUtil.Actor;
-import cellUtil.Cell;
-import cellUtil.Grid;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -23,22 +20,14 @@ import javafx.scene.paint.Color;
  */
 public abstract class AbstractSimulation {
 
-
-	protected Grid myCurrGrid;
-	protected Grid myNextGrid;
-	protected int mySize;
-	protected Map<Enum, Color> myColorMap;
 	protected LineChart<Number, Number> lineChart;
 	private Grid myCurrGrid;
-	private Grid myNextGrid;
+	protected Grid myNextGrid;
 	private int mySize;
 	
 	public AbstractSimulation( Grid inputGrid ){		
 		mySize = inputGrid.getSize();
-		myCurrGrid = inputGrid;
-
-		initColorMap();
-		
+		myCurrGrid = inputGrid;		
 	}
 	
 	/*----------------- Abstract Methods -----------------------------*/	
@@ -108,14 +97,14 @@ public abstract class AbstractSimulation {
 		lineChart.setPrefWidth(505);
 	}
 
-	public LineChart<Number, Number> getMyChart() {
-		return lineChart;
-	}
+//	public LineChart<Number, Number> getMyChart() {
+//		return lineChart;
+//	}
 	
-	public void setMyChartLayout(int x, int y){
-		lineChart.setLayoutX(x);
-		lineChart.setLayoutY(y);
-	}
+//	public void setMyChartLayout(int x, int y){
+//		lineChart.setLayoutX(x);
+//		lineChart.setLayoutY(y);
+//	}
 	/*----------------- Overriden Methods -----------------------------*/
 	
 	

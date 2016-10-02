@@ -22,7 +22,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	public GameOfLifeSimulation(Grid grid) {
 		super(grid);
 
-		initPopulationGraph();
+		//initPopulationGraph();
 		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 
 	}
@@ -31,7 +31,7 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	protected void updateGrid() {
 		super.updateGrid();
 		counter++;
-		this.updateChart();
+		//this.updateChart();
 		getCurrGrid().setNeighbors(SimulationType.GAME_OF_LIFE, BorderType.TOROID);
 	}
 
@@ -85,31 +85,22 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 		newCell.setActor(new Actor(GameOfLife.ALIVE));
 	}
 
-	@Override
-	protected void initColorMap() {
-		myColorMap = new HashMap<Enum, Color>();
-
-		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
-		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
-
-	}
+//	@Override
+//	protected void initColorMap() {
+//		myColorMap = new HashMap<Enum, Color>();
+//
+//		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
+//		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
+//
+//	}
 
 	
-	private void initPopulationGraph() {
-		myAliveCells = 0;
-		super.initPopulationGraphSuper();
-		
-		XYChart.Series series = new XYChart.Series<>();
-		series.getData().add(new XYChart.Data<Number, Number>(0, 0));
-		lineChart.getData().add(series);
-
-	}
 
 	/*----------------- Helper / Private Methods -----------------------------*/
 
-	private void updateChart() {
-		XYChart.Series series = new XYChart.Series<>();
-		lineChart.getData().get(0).getData().add(new XYChart.Data(counter, myAliveCells));
-
-	}
+//	private void updateChart() {
+//		XYChart.Series series = new XYChart.Series<>();
+//		lineChart.getData().get(0).getData().add(new XYChart.Data(counter, myAliveCells));
+//
+//	}
 }
