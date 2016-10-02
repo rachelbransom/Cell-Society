@@ -61,6 +61,7 @@ public class UX {
 	private static final String CSS_FILE_NAME = "resources/UXStyling.css";
 	
 	public static int GRID_START_X = 250;
+	
 	public static int GRID_START_Y = 300;
 	public static int GRID_SIZE = 430;
 

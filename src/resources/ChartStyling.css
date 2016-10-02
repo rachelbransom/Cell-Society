@@ -1,0 +1,56 @@
+.chart-plot-background {
+	-fx-background-color: #000000;
+}
+
+.chart-vertical-grid-lines {
+	-fx-stroke:  #ffffff;
+}
+
+.line{
+	-fx-fill: #ffffff;
+}
+
+.N0xff0000ff{
+	-fx-fill: #ff0000;
+}
+
+.N0x0000ffff{
+	-fx-fill: #0000ff;
+}
+
+.N0xa9a9a9ff{
+	-fx-fill: #a9a9a9;
+}
+
+.N0xdaa520ff{
+	-fx-fill: #daa520;
+}
+
+.N0x20b2aaff{
+	-fx-fill: #20b2aa;
+}
+
+.N0xdeb887ff{
+	-fx-fill: #deb887;
+}
+
+.N0xff4500ff{
+	-fx-fill: #ff4500;
+}
+
+.N0x006400ff{
+	-fx-fill: #006400;
+}
+
+.N0xffffffff{
+	-fx-fill: #ffffff;
+}
+
+.N0x000000ff{
+	-fx-fill: #000000;
+}
+
+
+
+
+
