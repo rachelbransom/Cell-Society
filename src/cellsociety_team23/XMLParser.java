@@ -72,12 +72,25 @@ public class XMLParser {
 						e.callDialogBox();
 						e.printStackTrace();
 					}
+					
+					if (situation == SimulationType.SUGARSCAPE){
+						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "."+ j));
+						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "."+ j));
+						
+						currCell.getFloor().contents().set(0, (double) sugarFloor);
+						currCell.getFloor().contents().add(1, (double) spiceFloor);
+					}
+					
 
 			Actor currAct = new Actor(returnCellState(situation, currCellState));
 			currCell.setActor(currAct);
 			grid.setCell(i, j, currCell);
 				}
 			}
+			
+			
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,6 +131,10 @@ public class XMLParser {
 			return SimulationType.SEGREGATION;
 		case "wator":
 			return SimulationType.WA_TOR_WORLD;
+		case "slime":
+			return SimulationType.SLIME_MOLD;
+		case "sugar":
+			return SimulationType.SUGARSCAPE;
 		default:
 			return null;
 		}

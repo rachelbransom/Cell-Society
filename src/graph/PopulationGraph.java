@@ -26,7 +26,6 @@ public class PopulationGraph {
 		counter++;
 		int i = 0;
 		for (Color color: myInitialPopulationMap.keySet()){
-			i++;
 			if (map.containsKey(color)){
 				myMap.put(color, map.get(color));
 			}
@@ -34,6 +33,7 @@ public class PopulationGraph {
 				myMap.put(color, 0);
 			}
 			series.get(i).getData().add(new XYChart.Data(counter, map.get(color)));
+			i++;
 		}
 		
 	}
