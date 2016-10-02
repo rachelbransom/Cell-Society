@@ -4,18 +4,17 @@ package simulation.visuals;
  * @author Diane Hadley
  */
 
-import cellsociety_team23.UX;
+
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Polygon;
+
 
 import javafx.scene.shape.Shape;
 
 public class SimulationVisualizer {
 	
 	
-	private Shape[][] myShapeGrid; //CellShape[][] Polygon extends shape
+	private Shape[][] myShapeGrid; 
 	private Group myGridRoot;
 	private String myShape;
 	private CellShape myCellShape;
@@ -23,6 +22,7 @@ public class SimulationVisualizer {
 	public SimulationVisualizer(int size, String shape){
 		initShapeGrid(size);	
 		myShape = shape;
+		getShape(size);
 	}
 
 	public Group returnVisualGrid(Color[][] colorGrid){
@@ -40,23 +40,23 @@ public class SimulationVisualizer {
 		}
 	}
 
-	private void getShape(){
+	private void getShape(int size){
 		switch(myShape) {
 		case("Square"):
-			myCellShape = new Square();
+			myCellShape = new Square(size);
 		case("Triangle"):
-			myCellShape = new Triangle();
+			myCellShape = new Triangle(size);
 		case("Hexagon"):
-			myCellShape = new Hexagon(); 
+			myCellShape = new Hexagon(size); 
 		}
 	}
 	
 	private void initShapeGrid(int size){
-		myShapeGrid = new Shape[size][size]; //CellShape		
+		myShapeGrid = new Shape[size][size]; 	
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {				
-				Rectangle shapeInGrid = new Rectangle();			
-				formatRectangle(i, j, shapeInGrid);				
+				Shape shapeInGrid;			
+				shapeInGrid = myCellShape.formatShape(i, j, myShapeGrid);				
 				myShapeGrid[i][j] = shapeInGrid;				
 			}
 		}		
@@ -64,14 +64,7 @@ public class SimulationVisualizer {
 
 	
 	
-	private void formatRectangle(int i, int j, Rectangle shapeInGrid) {
-		shapeInGrid.setWidth(UX.GRID_SIZE/myShapeGrid[0].length);
-		shapeInGrid.setHeight(UX.GRID_SIZE/myShapeGrid.length);
-		shapeInGrid.setX(UX.GRID_START_X + UX.GRID_SIZE/myShapeGrid[0].length*j);
-		shapeInGrid.setY(UX.GRID_START_Y + UX.GRID_SIZE/myShapeGrid.length*i);
-		
-		
-	}
+	
 	
 	
 }
