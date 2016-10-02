@@ -18,12 +18,15 @@ public class SimulationController {
 
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
+	private String myShape;
 	private HashMap<Color, Integer> populationMap;
 	private PopulationGraph myPopulationGraph;
 	
 	public void initializeSimulation(String filename, String shape){		  
-		SimulationFactory factory = new SimulationFactory(filename);
+		myShape = shape;
+		SimulationFactory factory = new SimulationFactory(filename, myShape);
 		mySimulation = factory.makeSimulation();
+		
 	}
 
 	
@@ -37,7 +40,7 @@ public class SimulationController {
 	
 	public Group returnCurrVisualGrid(Boolean withGridOutlines){
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
-		myVisualizer = new SimulationVisualizer(colorGrid.length, withGridOutlines);
+		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape, withGridOutlines);
 		Group gridRoot = makeGridRoot(colorGrid);
 		myPopulationGraph = new PopulationGraph(myVisualizer.getPopulationMap());
 		return gridRoot;

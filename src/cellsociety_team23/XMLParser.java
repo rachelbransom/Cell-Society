@@ -13,11 +13,12 @@ import cell.Actor;
 import cell.Cell;
 import cell.CellState;
 import grid.Grid;
-
 import exceptions.InvalidCellState;
 import exceptions.NoSimulation;
 
 import simulation.types.SimulationType;
+import simulation.visuals.Hexagon;
+import simulation.visuals.Triangle;
 
 public class XMLParser {
 	Document document;
@@ -29,10 +30,13 @@ public class XMLParser {
 	private int gridDimensions;
 	private int states;
 	private Grid grid;
+	private String shape;
 
-	public XMLParser(String chosenFileName) {
+	public XMLParser(String chosenFileName, String shape) {
 		file = chosenFileName;
+		this.shape = shape;
 		parseFile();
+		
 	}
 
 	private void parseFile() {
@@ -58,9 +62,7 @@ public class XMLParser {
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
-			
-			grid = new Grid(gridDimensions);
-
+			grid = new Grid(gridDimensions, shape);
 			for (int i = 0; i < gridDimensions; i++) {
 				for (int j = 0; j < gridDimensions; j++) {
 					Cell currCell = new Cell(i, j);
@@ -184,6 +186,8 @@ public class XMLParser {
 		return null;
 	}
 
+
+	
 	/*----------------- Exceptions -----------------------------*/
 
 	private static void testIfSimulation(SimulationType simulationType) throws NoSimulation {
