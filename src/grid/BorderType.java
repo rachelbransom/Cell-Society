@@ -1,4 +1,4 @@
-package cell;
+package grid;
 
 public enum BorderType {
 	FINITE,
