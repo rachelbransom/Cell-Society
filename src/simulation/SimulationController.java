@@ -16,9 +16,10 @@ public class SimulationController {
 	private String myShape;
 	
 	public void initializeSimulation(String filename, String shape){		  
-		SimulationFactory factory = new SimulationFactory(filename);
-		mySimulation = factory.makeSimulation();
 		myShape = shape;
+		SimulationFactory factory = new SimulationFactory(filename, myShape);
+		mySimulation = factory.makeSimulation();
+		
 	}
 	
 	

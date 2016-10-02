@@ -21,7 +21,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	private Random myRandom;
 
 	public SpreadingFireSimulation( Grid inputGrid , double probCatch){
-		super( inputGrid );
+		super( inputGrid);
 		getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 		myProbCatch = probCatch;
 		myRandom = new Random();
