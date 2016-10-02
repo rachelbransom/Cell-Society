@@ -37,7 +37,9 @@ public class UX {
 			CONTROLS_START_X = 10, CONTROLS_START_Y = 150, CONTROLS_SPACING = 45,
 			INSTRUCTIONSX = 275, INSTRUCTIONSY = 350,
 			SLIDER_TEXT_X = CONTROLS_START_X + 50, 
-			SLIDER_MIN = 1, SLIDER_MAX = 10, SLIDER_DEFAULT = 3;
+			SPEED_SLIDER_MIN = 1, SPEED_SLIDER_MAX = 10, SPEED_SLIDER_DEFAULT = 3;
+			
+	private final double PROBABILITY_SLIDER_MIN = 0.0, PROBAILITY_SLIDER_MAX = 1.0 , PROBABILITY_SLIDER_DEFAULT = 0.3;
 
 	private Scene scene;
 	private Group root = new Group();
@@ -45,11 +47,11 @@ public class UX {
 	private Group graphRoot = new Group();
 	private Timeline animation;
 	private Button play, stop, step, reset;
-	private Slider slider;
+	private Slider speedSlider, probabilitySlider;
 	private ComboBox<String> xmlComboBox;
 	private ComboBox<String> shapeComboBox;
 	private ComboBox<String> cellStateComboBox;
-	private Text cellSocietyText, instructionsText, sliderText;
+	private Text cellSocietyText, instructionsText, speedSliderText, probabilitySliderText;
 	private SimulationController simulationControl;	
 	private ResourceBundle myResources;
 	private LineChart<Number, Number> myChart;
@@ -87,14 +89,16 @@ public class UX {
 		
 		buttonInit();
 		buttonActionInit();
-		sliderInit();
+		speedSliderInit();
 		xmlComboBoxInit();
 		shapeComboBoxInit();
 		displayInstructions();
 		displayTitle();
-		displaySliderText();
+		displaySpeedSliderText();
 		displayGridLineCheckBox();
 		cellStateComboBoxInit();
+		probabilitySliderInit();
+		displayProbabilitySliderText();
 		root.getChildren().add(gridRoot);
 		
 		return scene;
@@ -124,9 +128,11 @@ public class UX {
 		root.getChildren().addAll(setControlLayout(play, 0), setControlLayout(stop, CONTROLS_SPACING),
 				setControlLayout(step, CONTROLS_SPACING * 2), setControlLayout(reset, CONTROLS_SPACING * 3));
 	}
+	
+	
 
 	private void playSimulation() {
-		double speedMultiplier = slider.getValue();
+		double speedMultiplier = speedSlider.getValue();
 		KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY / speedMultiplier), e -> step());
 		animation = new Timeline();
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -179,7 +185,7 @@ public class UX {
 	}
 	
 	private void checkSpeed() {
-		if (slider.isValueChanging() == true) {
+		if (speedSlider.isValueChanging() == true) {
 			stopSimulation();
 			playSimulation();
 		}
@@ -251,13 +257,18 @@ public class UX {
 		root.getChildren().add(setControlLayout(cellStateComboBox, CONTROLS_SPACING*8));
 	}
 	
-	private void sliderInit() {
-		slider = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_DEFAULT);
-		slider.setMajorTickUnit(1f);
-		root.getChildren().add(setControlLayout(slider, CONTROLS_SPACING * 4));
+	private void speedSliderInit() {
+		speedSlider = new Slider(SPEED_SLIDER_MIN, SPEED_SLIDER_MAX, SPEED_SLIDER_DEFAULT);
+		speedSlider.setMajorTickUnit(1f);
+		root.getChildren().add(setControlLayout(speedSlider, CONTROLS_SPACING * 4));
+	}
+	
+	private void probabilitySliderInit(){
+		probabilitySlider = new Slider(PROBABILITY_SLIDER_MIN, PROBAILITY_SLIDER_MAX, PROBABILITY_SLIDER_DEFAULT);
+		probabilitySlider.setMajorTickUnit(1f);
+		root.getChildren().add(setControlLayout(probabilitySlider, CONTROLS_SPACING * 9));
 	}
 
-	
 	private void displayInstructions() {
 		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
 		instructionsText.getStyleClass().add("instructions");
@@ -273,10 +284,16 @@ public class UX {
 	}
 	
 
-	private void displaySliderText() {
-		sliderText = new Text(SLIDER_TEXT_X, CONTROLS_START_Y + CONTROLS_SPACING*4, myResources.getString("SliderText"));
-		sliderText.getStyleClass().add("slider");
-		root.getChildren().add(sliderText);
+	private void displaySpeedSliderText() {
+		speedSliderText = new Text(SLIDER_TEXT_X, CONTROLS_START_Y + CONTROLS_SPACING*4, myResources.getString("SliderText"));
+		speedSliderText.getStyleClass().add("slider");
+		root.getChildren().add(speedSliderText);
+	}
+	
+	private void displayProbabilitySliderText(){
+		probabilitySliderText = new Text(SLIDER_TEXT_X-30, CONTROLS_START_Y + CONTROLS_SPACING*9, myResources.getString("ProbabilitySliderText"));
+		probabilitySliderText.getStyleClass().add("slider");
+		root.getChildren().add(probabilitySliderText);
 	}
 	
 	private void displayGridLineCheckBox(){
