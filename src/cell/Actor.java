@@ -1,7 +1,5 @@
 package cell;
 
-import javafx.scene.paint.Color;
-
 public class Actor{
 	
 	private Enum myState;
@@ -42,6 +40,10 @@ public class Actor{
 	
 	public void incrementEnergy(){
 		myEnergy++;
+	}
+	
+	public void setEnergy(int in){
+		myEnergy = in;
 	}
 	
 	public void decrementEnergy(){

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cell.CellState.*;
+
 import grid.Grid;
 import javafx.scene.paint.Color;
 import simulation.types.basic.*;

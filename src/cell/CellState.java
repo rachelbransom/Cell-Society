@@ -26,7 +26,13 @@ public final class CellState {
 		EMPTY;
 	}
 	
-	public enum LangtonInstruction{
-		
+	public enum SlimeMold{
+		MOLD,
+		EMPTY;
+	}
+	
+	public enum SugarScape{
+		AGENT,
+		EMPTY;
 	}
 }

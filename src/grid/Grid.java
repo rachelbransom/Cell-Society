@@ -1,6 +1,6 @@
 package grid;
 
-import cell.BorderType;
+import grid.BorderType;
 import cell.Cell;
 import simulation.types.SimulationType;
 

@@ -1,17 +1,14 @@
 package simulation.types.basic;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Random;
 
 
 import cell.Actor;
-import cell.BorderType;
+import grid.BorderType;
 import cell.Cell;
 import cell.CellState.WaTorWorld;
 import grid.Grid;
-
-import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractSimulation;
 
@@ -103,7 +100,26 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 		
 		
 	}
+
+	@Override
+	protected void initColorMap() {
+		this.myColorMap = new HashMap<Enum, Color>();
+		
+		myColorMap.put(OCEAN, Color.BLUE);
+		myColorMap.put(SHARK, Color.GRAY);
+		myColorMap.put(FISH, Color.GOLD);
 	
+	}
+	
+	protected void initPopulationMap(){
+		myPopulationMap = new HashMap<Color, Integer>();
+		
+		myPopulationMap.put(Color.BLUE, 0);
+		myPopulationMap.put(Color.GRAY, 0);
+		myPopulationMap.put(Color.GOLD, 0);
+	}
+
+
 	/*----------------- Private / Helper Methods -----------------------------*/
 	
 	private void moveActorToRandomNeighborWithState(Cell inputCell, Enum state){

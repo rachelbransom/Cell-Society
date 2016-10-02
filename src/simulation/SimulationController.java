@@ -1,6 +1,11 @@
 package simulation;
 
+import java.util.HashMap;
+
+import graph.PopulationGraph;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
 import javafx.scene.paint.Color;
 import simulation.types.hierarchy.AbstractSimulation;
 import simulation.visuals.SimulationVisualizer;
@@ -14,6 +19,8 @@ public class SimulationController {
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
 	private String myShape;
+	private HashMap<Color, Integer> populationMap;
+	private PopulationGraph myPopulationGraph;
 	
 	public void initializeSimulation(String filename, String shape){		  
 		myShape = shape;
@@ -21,22 +28,46 @@ public class SimulationController {
 		mySimulation = factory.makeSimulation();
 		
 	}
+
 	
+//	public LineChart<Number,Number> getSimulationChart(){
+//		return mySimulation.getMyChart();
+//	}
 	
+//	public void setSimulationChartLayout(int x, int y){
+//		mySimulation.setMyChartLayout(x, y);
+//	}
 	
-	public Group returnCurrVisualGrid(){
+	public Group returnCurrVisualGrid(Boolean withGridOutlines){
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
-		return makeGridRoot(colorGrid);
+		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape, withGridOutlines);
+		Group gridRoot = makeGridRoot(colorGrid);
+		myPopulationGraph = new PopulationGraph(myVisualizer.getPopulationMap());
+		return gridRoot;
 	}
 	
 	public Group returnNextVisualGrid(){
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid();
-		return makeGridRoot(colorGrid);
+		Group gridRoot = makeGridRoot(colorGrid);
+		myPopulationGraph.update(myVisualizer.getPopulationMap());
+		return gridRoot;
 	}	
 	
 	private Group makeGridRoot( Color[][] colorGrid ){
-		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
+		
 		return gridRoot;
 	}
+	
+	public Group getPopulationChart(){
+		Group graphRoot = new Group();
+		graphRoot.getChildren().add(myPopulationGraph.getMyLineChart());
+		return graphRoot;
+	}
+	
+	public void setMyLineChartLayout(int x, int y){
+		myPopulationGraph.setMyLineChartLayout(x, y);
+	}
+	
+
 }
