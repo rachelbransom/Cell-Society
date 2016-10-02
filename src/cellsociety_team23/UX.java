@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import com.sun.javafx.geom.Rectangle;
 import com.sun.javafx.geom.Shape;
 
+import exceptions.NoShapeChosen;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
@@ -224,8 +225,11 @@ public class UX {
 			return "Triangle";
 		case("HEXAGON"):
 			return "Hexagon";
+		default:
+			NoShapeChosen noShapeException = new NoShapeChosen();
+			noShapeException.CallDialogBox();
+			return null;
 		}
-		return null;
 	}
 	
 	
