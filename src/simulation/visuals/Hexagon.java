@@ -11,28 +11,34 @@ public class Hexagon extends CellShape{
 	
 	public Hexagon(int size) {
 		super(size);
-		width = UX.GRID_SIZE/(1.5*(size-1) + 2) ;
-		height = UX.GRID_SIZE/(size + 0.5);		
+		width = (double)UX.GRID_SIZE/(1.5*((double)size-1) + 2) ;
+		height = (double)UX.GRID_SIZE/((double)size + 0.5);		
 	}
 	
 	@Override
 	public Shape formatShape(int i, int j, Shape[][] shapeGrid) {
-
 		hexagon = new Polygon();
-		double addHeight = 0;
+		double addHeight = 0.0;
+		double dI = (double) i;
+		double dJ = (double) j;
 		
 		if (j % 2 == 1){
 			addHeight = 0.5;
 		}
-		
+		System.out.println(dI);
+		System.out.println(dJ);
+		System.out.println(height);
+		System.out.println(width);
+		System.out.println(addHeight);
 		hexagon.getPoints().addAll(new Double[]{
-				UX.GRID_START_X + 3/2*j*width, UX.GRID_START_Y + (i+0.5 + addHeight)*height,
-				UX.GRID_START_X + (3/2*j + 0.5)*width, UX.GRID_START_Y + (i + addHeight)*height,
-				UX.GRID_START_X + (3/2*j + 1.5)*width, UX.GRID_START_Y + (i + addHeight)*height,
-				UX.GRID_START_X + (3/2*j + 2)*width, UX.GRID_START_Y + (i+0.5 + addHeight)*height,
-				UX.GRID_START_X + (3/2*j + 0.5)*width, UX.GRID_START_Y + (i+1 + addHeight)*height,
-				UX.GRID_START_X + (3/2*j + 1.5)*width, UX.GRID_START_Y + (i+1 + addHeight)*height
+				UX.GRID_START_X + 1.5*dJ*width, UX.GRID_START_Y + (dI + 0.5 + addHeight)*height,
+				UX.GRID_START_X + (1.5*dJ + 0.5)*width, UX.GRID_START_Y + (dI + addHeight)*height,
+				UX.GRID_START_X + (1.5*dJ + 1.5)*width, UX.GRID_START_Y + (dI + addHeight)*height,
+				UX.GRID_START_X + (1.5*dJ + 2)*width, UX.GRID_START_Y + (dI+0.5 + addHeight)*height,				
+				UX.GRID_START_X + (1.5*dJ + 1.5)*width, UX.GRID_START_Y + (dI+1 + addHeight)*height,
+				UX.GRID_START_X + (1.5*dJ + 0.5)*width, UX.GRID_START_Y + (dI+1 + addHeight)*height
 		});
+		System.out.println(hexagon.getPoints());
 		
 		return hexagon;
 		

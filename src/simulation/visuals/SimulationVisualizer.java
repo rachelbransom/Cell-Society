@@ -20,9 +20,10 @@ public class SimulationVisualizer {
 	private CellShape myCellShape;
 	
 	public SimulationVisualizer(int size, String shape){
-		initShapeGrid(size);	
 		myShape = shape;
-		getShape(size);
+		myCellShape = getShape(size);
+		initShapeGrid(size);			
+		
 	}
 
 	public Group returnVisualGrid(Color[][] colorGrid){
@@ -40,31 +41,27 @@ public class SimulationVisualizer {
 		}
 	}
 
-	private void getShape(int size){
-		switch(myShape) {
+	private CellShape getShape(int size){
+		switch(myShape) {		
 		case("Square"):
-			myCellShape = new Square(size);
+			return new Square(size);
 		case("Triangle"):
-			myCellShape = new Triangle(size);
+			return new Triangle(size);
 		case("Hexagon"):
-			myCellShape = new Hexagon(size); 
+			return new Hexagon(size); 	    
 		}
+		return null;
 	}
 	
 	private void initShapeGrid(int size){
 		myShapeGrid = new Shape[size][size]; 	
 		for (int i = 0; i < size; i++) {
-			for (int j = 0; j < size; j++) {				
-				Shape shapeInGrid;			
-				shapeInGrid = myCellShape.formatShape(i, j, myShapeGrid);				
+			
+			for (int j = 0; j < size; j++) {						
+				Shape shapeInGrid = myCellShape.formatShape(i, j, myShapeGrid);				
 				myShapeGrid[i][j] = shapeInGrid;				
 			}
 		}		
 	}
-
-	
-	
-	
-	
 	
 }
