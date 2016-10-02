@@ -2,6 +2,8 @@ package cellsociety_team23;
 
 import java.util.ResourceBundle;
 
+import com.sun.javafx.geom.Rectangle;
+import com.sun.javafx.geom.Shape;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Slider;
@@ -51,6 +54,8 @@ public class UX {
 	private LineChart<Number, Number> myChart;
 	private NumberAxis xAxis;
 	private NumberAxis yAxis;
+	private Boolean withGridOutlines;
+	private CheckBox gridLineCheckBox;
 	
 	private int XSIZE;
 	private int YSIZE;
@@ -87,6 +92,7 @@ public class UX {
 		displayInstructions();
 		displayTitle();
 		displaySliderText();
+		displayGridLineCheckBox();
 		root.getChildren().add(gridRoot);
 		
 		return scene;
@@ -153,12 +159,11 @@ public class UX {
 			resetGridRoot();
 		}
 	}
-	
-	
 
 	private void resetGridRoot() {
 		root.getChildren().remove(gridRoot);
-		gridRoot = simulationControl.returnCurrVisualGrid();
+		Boolean withGridOutlines = gridLineCheckBox.isSelected();
+		gridRoot = simulationControl.returnCurrVisualGrid(withGridOutlines);
 		root.getChildren().add(gridRoot);
 		
 		simulationControl.setMyLineChartLayout(GRID_START_X-40, GRID_START_Y-185);
@@ -264,6 +269,14 @@ public class UX {
 		sliderText = new Text(SLIDER_TEXT_X, CONTROLS_START_Y + CONTROLS_SPACING*4, myResources.getString("SliderText"));
 		sliderText.getStyleClass().add("slider");
 		root.getChildren().add(sliderText);
+	}
+	
+	private void displayGridLineCheckBox(){
+		gridLineCheckBox = new CheckBox();
+		gridLineCheckBox.setText("GRID LINES");
+		root.getChildren().add(setControlLayout(gridLineCheckBox,315));
+		gridLineCheckBox.setLayoutX(50);
+
 	}
 
 	private void displayTitle() {

@@ -35,9 +35,9 @@ public class SimulationController {
 //		mySimulation.setMyChartLayout(x, y);
 //	}
 	
-	public Group returnCurrVisualGrid(){
+	public Group returnCurrVisualGrid(Boolean withGridOutlines){
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
-		myVisualizer = new SimulationVisualizer(colorGrid.length);
+		myVisualizer = new SimulationVisualizer(colorGrid.length, withGridOutlines);
 		Group gridRoot = makeGridRoot(colorGrid);
 		myPopulationGraph = new PopulationGraph(myVisualizer.getPopulationMap());
 		return gridRoot;

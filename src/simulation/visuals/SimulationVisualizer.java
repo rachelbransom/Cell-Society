@@ -21,8 +21,12 @@ public class SimulationVisualizer {
 	private Shape[][] myShapeGrid;
 	private Group myGridRoot;
 	private HashMap<Color, Integer> populationMap;// = new HashMap<Color, Integer>();
+	private Boolean gridLinesVisible = false;
 	
-	public SimulationVisualizer(int size) {
+	public SimulationVisualizer(int size, Boolean userWantsGridLines) {
+		if (userWantsGridLines){
+			this.gridLinesVisible = true;
+		}
 		initShapeGrid(size);
 	}
 
@@ -69,6 +73,10 @@ public class SimulationVisualizer {
 		shapeInGrid.setHeight(UX.GRID_SIZE / myShapeGrid.length);
 		shapeInGrid.setX(UX.GRID_START_X + UX.GRID_SIZE / myShapeGrid[0].length * j);
 		shapeInGrid.setY(UX.GRID_START_Y + UX.GRID_SIZE / myShapeGrid.length * i);
+		if (gridLinesVisible){
+			shapeInGrid.setStroke(Color.BLACK);
+		}
+		
 	}
 
 }
