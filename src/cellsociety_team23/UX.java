@@ -48,6 +48,7 @@ public class UX {
 	private Slider slider;
 	private ComboBox<String> xmlComboBox;
 	private ComboBox<String> shapeComboBox;
+	private ComboBox<String> cellStateComboBox;
 	private Text cellSocietyText, instructionsText, sliderText;
 	private SimulationController simulationControl;	
 	private ResourceBundle myResources;
@@ -93,6 +94,7 @@ public class UX {
 		displayTitle();
 		displaySliderText();
 		displayGridLineCheckBox();
+		cellStateComboBoxInit();
 		root.getChildren().add(gridRoot);
 		
 		return scene;
@@ -124,8 +126,6 @@ public class UX {
 	}
 
 	private void playSimulation() {
-		//this.simulationControl.setSimulationChartLayout(GRID_START_X-65, GRID_START_Y-175);
-		//root.getChildren().add(this.simulationControl.getSimulationChart());
 		double speedMultiplier = slider.getValue();
 		KeyFrame frame = new KeyFrame(Duration.seconds(SECOND_DELAY / speedMultiplier), e -> step());
 		animation = new Timeline();
@@ -243,6 +243,14 @@ public class UX {
 		root.getChildren().add(setControlLayout(shapeComboBox, CONTROLS_SPACING * 6));
 	}
 	
+	private void cellStateComboBoxInit(){
+		ObservableList<String> stateOptions = FXCollections.observableArrayList(myResources.getString("Random"), 
+				myResources.getString("XMLVals"), myResources.getString("Probability"));
+		cellStateComboBox = new ComboBox<String>(stateOptions);
+		cellStateComboBox.setValue(myResources.getString("StateComboBoxText"));
+		root.getChildren().add(setControlLayout(cellStateComboBox, CONTROLS_SPACING*8));
+	}
+	
 	private void sliderInit() {
 		slider = new Slider(SLIDER_MIN, SLIDER_MAX, SLIDER_DEFAULT);
 		slider.setMajorTickUnit(1f);
@@ -292,4 +300,5 @@ public class UX {
 		control.getStyleClass().add("control");
 		return control;
 	}
+	
 }
