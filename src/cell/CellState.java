@@ -30,4 +30,9 @@ public final class CellState {
 		MOLD,
 		EMPTY;
 	}
+	
+	public enum SugarScape{
+		AGENT,
+		EMPTY;
+	}
 }

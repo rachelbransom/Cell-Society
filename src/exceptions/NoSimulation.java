@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class NoSimulation extends ExceptionConfirguration {
+public class NoSimulation extends ExceptionConfiguration {
 	private ResourceBundle myResources = ResourceBundle.getBundle("resources/DisplayedText");
 
 	public NoSimulation(){

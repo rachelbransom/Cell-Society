@@ -5,7 +5,6 @@ import cell.Cell;
 import cell.CellState.SlimeMold;
 import grid.Grid;
 import simulation.types.hierarchy.AbstractSequentialSimulation;
-import simulation.types.hierarchy.AbstractSimulation;
 
 public class SlimeSimulation extends AbstractSequentialSimulation {
 
@@ -31,7 +30,7 @@ public class SlimeSimulation extends AbstractSequentialSimulation {
 		
 		evaporatePhero(curr);
 	}
-
+	
 	private void goToSiteWithMostPhero(Cell curr){
 		
 		Cell maxCampCell = new Cell();
@@ -54,26 +53,26 @@ public class SlimeSimulation extends AbstractSequentialSimulation {
 	}
 	
 	private void depositPhero( Cell curr ){
-		curr.getFloor().contents().set(0, curr.getFloor().contents().get(0) + myPheroDepositRate);
+		curr.getFloor().setContent( curr.getFloor().getContent() + myPheroDepositRate);
 		
 		for(Cell neighbor: curr.getNeighbors()){
-			neighbor.getFloor().contents().set(0, neighbor.getFloor().contents().get(0) + myPheroDepositRate );
+			neighbor.getFloor().setContent( neighbor.getFloor().contents().get(0) + myPheroDepositRate );
 		}
 	}
 	
 	private void diffusePhero( Cell curr ){
-		double currConct = curr.getFloor().contents().get(0);
+		double currConct = curr.getFloor().getContent();
 		double splitConct = currConct / curr.getNeighbors().size();
 		
-		curr.getFloor().contents().set(0, splitConct);
+		curr.getFloor().setContent(splitConct);
 		
 		for (Cell neighbor : curr.getNeighbors()) {	
-			neighbor.getFloor().contents().set(0, neighbor.getFloor().contents().get(0) + splitConct);
+			neighbor.getFloor().setContent( neighbor.getFloor().getContent() + splitConct);
 		}
 	}
 	
 	private void evaporatePhero( Cell curr ){
-		if(curr.getFloor().contents().get(0) > 0)
-		curr.getFloor().contents().set(0, curr.getFloor().contents().get(0) - myEvaporationRate);
+		if(curr.getFloor().getContent() > 0)
+		curr.getFloor().contents().set(0, curr.getFloor().getContent() - myEvaporationRate);
 	}
 }
