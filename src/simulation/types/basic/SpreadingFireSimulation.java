@@ -4,10 +4,9 @@ import java.awt.Point;
 import java.util.Random;
 
 import cell.Actor;
-import cell.BorderType;
+import grid.BorderType;
 import cell.Cell;
 import cell.CellState.SpreadingFire;
-import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
 
 

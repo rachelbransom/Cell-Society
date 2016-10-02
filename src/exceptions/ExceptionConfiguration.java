@@ -3,9 +3,9 @@ package exceptions;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class ExceptionConfirguration extends Exception{
+public class ExceptionConfiguration extends Exception{
 
-	public ExceptionConfirguration(String string){
+	public ExceptionConfiguration(String string){
 		super(string);
 	}
 	
