@@ -44,16 +44,8 @@ public class Grid {
 		myCellGrid[x][y] = new Cell(input);
 	}
 	
-	public boolean inBounds(int x, int y){
-		boolean inX = 0 <= x && x < mySize;
-		boolean inY = 0 <= y && y < mySize;
-				
-		return inX && inY;
-	}
-
-	/**
-	 * Sets edge neighbors as connecting, thus forming a toroid
-	 */
+	
+	
 	private void setToroid(){
 		
 		// Connect Top and Bottom rows
@@ -66,35 +58,8 @@ public class Grid {
 			getCell(0, y).connectTo(getCell(mySize - 1, y));
 		}
 	}
-	
-	public void setFullSquareNeighbors(int i, int j, Cell currCell){
-		
-		setSideNeighbors(i, j, currCell);
-		
-		// Top Left
-		if(inBounds(i - 1 , j - 1)) currCell.connectTo(getCell(i - 1, j - 1));
-		// Top Right
-		if(inBounds(i + 1 , j - 1)) currCell.connectTo(getCell(i + 1, j - 1));
-		// Bottom Right
-		if(inBounds(i + 1 , j + 1)) currCell.connectTo(getCell(i + 1, j + 1));
-		// Bottom Left
-		if(inBounds(i - 1 , j + 1)) currCell.connectTo(getCell(i - 1, j + 1));
-		
-	}
-	
-	public void setSideNeighbors(int i, int j, Cell currCell){
-		currCell.getNeighbors().clear();
 
-		// Top Middle
-		if(inBounds(i     , j - 1)) currCell.connectTo(getCell(i    , j - 1 ));
-		// Right Side
-		if(inBounds(i + 1 , j    )) currCell.connectTo(getCell(i + 1, j     ));
-		// Bottom Middle
-		if(inBounds(i     , j + 1)) currCell.connectTo(getCell(i    , j + 1 ));
-		// Left Side
-		if(inBounds(i - 1 , j    )) currCell.connectTo(getCell(i - 1, j     ));
-		
-	}
+	
 	
 	
 	public void setNeighbors(SimulationType simType){
@@ -103,15 +68,14 @@ public class Grid {
 			for (int j = 0; j < mySize; j++) {
 				
 				if( simType.equals(SimulationType.GAME_OF_LIFE) ||
-						simType.equals(SimulationType.SEGREGATION)) setFullSquareNeighbors(i, j, getCell(i, j));
+						simType.equals(SimulationType.SEGREGATION)) setFullNeighbors(i, j, getCell(i, j));
 				
 				if( simType.equals(SimulationType.WA_TOR_WORLD) ||
 						simType.equals(SimulationType.SPREADING_FIRE)) 
-						setSideNeighbors(i, j, getCell(i, j));
+						setCardinalNeighbors(i, j, getCell(i, j));
 				
 			}
 		}
-		
 	}
 	
 	public void setNeighbors(SimulationType simType, BorderType bordType){
@@ -121,4 +85,5 @@ public class Grid {
 		if(bordType.equals(BorderType.TOROID)) setToroid();
 		
 	}
+
 }

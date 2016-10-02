@@ -15,11 +15,14 @@ import javafx.scene.shape.Shape;
 public class SimulationVisualizer {
 	
 	
-	private Shape[][] myShapeGrid;
+	private Shape[][] myShapeGrid; //CellShape[][] Polygon extends shape
 	private Group myGridRoot;
+	private String myShape;
+	private CellShape myCellShape;
 	
-	public SimulationVisualizer(int size){
-		initShapeGrid(size);		
+	public SimulationVisualizer(int size, String shape){
+		initShapeGrid(size);	
+		myShape = shape;
 	}
 
 	public Group returnVisualGrid(Color[][] colorGrid){
@@ -37,8 +40,19 @@ public class SimulationVisualizer {
 		}
 	}
 
+	private void getShape(){
+		switch(myShape) {
+		case("Square"):
+			myCellShape = new Square();
+		case("Triangle"):
+			myCellShape = new Triangle();
+		case("Hexagon"):
+			myCellShape = new Hexagon(); 
+		}
+	}
+	
 	private void initShapeGrid(int size){
-		myShapeGrid = new Shape[size][size];		
+		myShapeGrid = new Shape[size][size]; //CellShape		
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {				
 				Rectangle shapeInGrid = new Rectangle();			
@@ -53,7 +67,7 @@ public class SimulationVisualizer {
 	private void formatRectangle(int i, int j, Rectangle shapeInGrid) {
 		shapeInGrid.setWidth(UX.GRID_SIZE/myShapeGrid[0].length);
 		shapeInGrid.setHeight(UX.GRID_SIZE/myShapeGrid.length);
-		shapeInGrid.setX(UX.GRID_START_X+ UX.GRID_SIZE/myShapeGrid[0].length*j);
+		shapeInGrid.setX(UX.GRID_START_X + UX.GRID_SIZE/myShapeGrid[0].length*j);
 		shapeInGrid.setY(UX.GRID_START_Y + UX.GRID_SIZE/myShapeGrid.length*i);
 		
 		

@@ -29,6 +29,7 @@ public class XMLParser {
 	private int gridDimensions;
 	private int states;
 	private Grid grid;
+	private UX ux;
 
 	public XMLParser(String chosenFileName) {
 		file = chosenFileName;

@@ -13,10 +13,12 @@ public class SimulationController {
 
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
+	private String myShape;
 	
 	public void initializeSimulation(String filename, String shape){		  
 		SimulationFactory factory = new SimulationFactory(filename);
 		mySimulation = factory.makeSimulation();
+		myShape = shape;
 	}
 	
 	
@@ -32,7 +34,7 @@ public class SimulationController {
 	}	
 	
 	private Group makeGridRoot( Color[][] colorGrid ){
-		myVisualizer = new SimulationVisualizer(colorGrid.length);
+		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape);
 		Group gridRoot = myVisualizer.returnVisualGrid(colorGrid);
 		return gridRoot;
 	}

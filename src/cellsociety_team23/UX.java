@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -47,9 +45,6 @@ public class UX {
 	private Text cellSocietyText, instructionsText, sliderText;
 	private SimulationController simulationControl;	
 	private ResourceBundle myResources;
-	private LineChart<Number, Number> myChart;
-	private NumberAxis xAxis;
-	private NumberAxis yAxis;
 	
 	private int XSIZE;
 	private int YSIZE;
@@ -83,7 +78,6 @@ public class UX {
 		displayInstructions();
 		displayTitle();
 		displaySliderText();
-		lineChartInit();
 		root.getChildren().add(gridRoot);
 		return scene;
 	}
@@ -185,7 +179,7 @@ public class UX {
 	private String getShape(String chosenShape){
 		switch(chosenShape) {
 		case("SQUARE"):
-			return "Rectangle";
+			return "Square";
 		case("TRIANGLE"):
 			return "Triangle";
 		case("HEXAGON"):
@@ -221,16 +215,6 @@ public class UX {
 		root.getChildren().add(setControlLayout(slider, CONTROLS_SPACING * 4));
 	}
 
-	private void lineChartInit(){
-		xAxis = new NumberAxis();
-		xAxis.setLabel(myResources.getString("ChartXAxis"));
-		yAxis = new NumberAxis();
-		yAxis.setLabel(myResources.getString("ChartYAxis"));
-		myChart = new LineChart<Number, Number>(xAxis, yAxis);
-		root.getChildren().add(myChart);
-		
-	}
-	
 	private void displayInstructions() {
 		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
 		instructionsText.getStyleClass().add("instructions");
