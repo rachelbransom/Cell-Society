@@ -1,12 +1,8 @@
 package simulation;
 
-import java.util.HashMap;
-
 import cellStateConfigurationType.ConfigurationType;
 import graph.PopulationGraph;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.chart.LineChart;
 import javafx.scene.paint.Color;
 import simulation.types.hierarchy.AbstractSimulation;
 import simulation.visuals.SimulationVisualizer;
@@ -21,7 +17,6 @@ public class SimulationController {
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
 	private String myShape;
-	private HashMap<Color, Integer> populationMap;
 	private PopulationGraph myPopulationGraph;
 	private ColorScheme userColorChoice;
 	

@@ -1,5 +1,7 @@
 package cellsociety_team23;
 
+//@author Rachel Bransom
+
 import java.io.File;
 import java.util.Random;
 

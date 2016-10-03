@@ -39,9 +39,7 @@ public class UX {
 	private final int TITLE_X = 10, TITLE_Y = 100, CONTROLS_START_X = 10, CONTROLS_START_Y = 150, CONTROLS_SPACING = 45,
 			INSTRUCTIONSX = 275, INSTRUCTIONSY = 350, SLIDER_TEXT_X = CONTROLS_START_X + 50, SPEED_SLIDER_MIN = 1,
 			SPEED_SLIDER_MAX = 10, SPEED_SLIDER_DEFAULT = 3;
-
-	private final double PROBABILITY_SLIDER_MIN = 0.0, PROBAILITY_SLIDER_MAX = 1.0, PROBABILITY_SLIDER_DEFAULT = 0.3;
-
+	
 	private Scene scene;
 	private Group root = new Group();
 	private Group gridRoot = new Group();
@@ -49,25 +47,28 @@ public class UX {
 	private ToggleGroup colorToggleGroup = new ToggleGroup();
 	private Timeline animation;
 	private Button play, stop, step, reset;
-	private Slider speedSlider, probabilitySlider;
+	private Slider speedSlider;
 	private ComboBox<String> xmlComboBox, shapeComboBox, cellStateComboBox;
-	private Text cellSocietyText, instructionsText, speedSliderText, probabilitySliderText;
+	private Text cellSocietyText, instructionsText, speedSliderText;
 	private SimulationController simulationControl;
 	private ResourceBundle myResources;
 	private CheckBox gridLineCheckBox;
 	private RadioButton normal, brighten, darken, saturate, grayscale, invert;
 
-	private int XSIZE;
-	private int YSIZE;
+	private int XSIZE, YSIZE;
+
+	public static int GRID_START_X = 250;
+	public static int GRID_START_Y = 300;
+	public static int GRID_SIZE = 430;
 
 	public static final int FRAMES_PER_SECOND = 1;
 	private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private static final String RESOURCE_FILE_NAME = "resources/DisplayedText";
 	private static final String CSS_FILE_NAME = "resources/UXStyling.css";
-
-	public static int GRID_START_X = 250;
-	public static int GRID_START_Y = 300;
-	public static int GRID_SIZE = 430;
+	private static final int GRAPH_START_X = GRID_START_X - 40;
+	private static final int GRAPH_START_Y = GRID_START_Y - 185;
+	private static final int RADIO_BUTTON_START_Y = 400;
+	private static final int RADIO_BUTTON_SPACING = 25;
 
 	public String getTitle() {
 		return myResources.getString("Title");
@@ -168,7 +169,7 @@ public class UX {
 				getColorChoice(colorToggleGroup.getSelectedToggle()));
 		root.getChildren().add(gridRoot);
 
-		simulationControl.setMyLineChartLayout(GRID_START_X - 40, GRID_START_Y - 185);
+		simulationControl.setMyLineChartLayout(GRAPH_START_X, GRAPH_START_Y);
 		root.getChildren().remove(graphRoot);
 		graphRoot = simulationControl.getPopulationChart();
 		root.getChildren().add(graphRoot);
@@ -186,9 +187,9 @@ public class UX {
 			playSimulation();
 		}
 	}
-	
-	private ConfigurationType getConfigurationType(){
-		switch (cellStateComboBox.getSelectionModel().getSelectedItem()){
+
+	private ConfigurationType getConfigurationType() {
+		switch (cellStateComboBox.getSelectionModel().getSelectedItem()) {
 		case ("USE XML VALUES"):
 			return ConfigurationType.XML_FILE;
 		case ("SET RANDOMLY"):
@@ -287,12 +288,6 @@ public class UX {
 		root.getChildren().add(setControlLayout(speedSlider, CONTROLS_SPACING * 4));
 	}
 
-//	private void probabilitySliderInit() {
-//		probabilitySlider = new Slider(PROBABILITY_SLIDER_MIN, PROBAILITY_SLIDER_MAX, PROBABILITY_SLIDER_DEFAULT);
-//		probabilitySlider.setMajorTickUnit(1f);
-//		root.getChildren().add(setControlLayout(probabilitySlider, CONTROLS_SPACING * 9));
-//	}
-
 	private void displayInstructions() {
 		instructionsText = new Text(INSTRUCTIONSX, INSTRUCTIONSY, myResources.getString("Instructions"));
 		instructionsText.getStyleClass().add("instructions");
@@ -314,17 +309,11 @@ public class UX {
 		root.getChildren().add(speedSliderText);
 	}
 
-//	private void displayProbabilitySliderText() {
-//		probabilitySliderText = new Text(SLIDER_TEXT_X - 30, CONTROLS_START_Y + CONTROLS_SPACING * 9,
-//				myResources.getString("ProbabilitySliderText"));
-//		probabilitySliderText.getStyleClass().add("slider");
-//		root.getChildren().add(probabilitySliderText);
-//	}
-
 	private void displayGridLineCheckBox() {
 		gridLineCheckBox = new CheckBox();
 		gridLineCheckBox.setText("GRID LINES");
-		root.getChildren().add(setControlLayout(gridLineCheckBox, CONTROLS_SPACING *8));
+		gridLineCheckBox.setSelected(true);
+		root.getChildren().add(setControlLayout(gridLineCheckBox, CONTROLS_SPACING * 8));
 		gridLineCheckBox.setLayoutX(50);
 	}
 
@@ -356,12 +345,12 @@ public class UX {
 		addToToggleGroup(grayscale);
 		addToToggleGroup(invert);
 
-		setControlLayout(normal, 400);
-		setControlLayout(brighten, 425);
-		setControlLayout(darken, 450);
-		setControlLayout(saturate, 475);
-		setControlLayout(grayscale, 500);
-		setControlLayout(invert, 525);
+		setControlLayout(normal, RADIO_BUTTON_START_Y);
+		setControlLayout(brighten, RADIO_BUTTON_START_Y + RADIO_BUTTON_SPACING);
+		setControlLayout(darken, RADIO_BUTTON_START_Y + RADIO_BUTTON_SPACING * 2);
+		setControlLayout(saturate, RADIO_BUTTON_START_Y + RADIO_BUTTON_SPACING * 3);
+		setControlLayout(grayscale, RADIO_BUTTON_START_Y + RADIO_BUTTON_SPACING * 4);
+		setControlLayout(invert, RADIO_BUTTON_START_Y + RADIO_BUTTON_SPACING * 5);
 
 		normal.setSelected(true);
 
