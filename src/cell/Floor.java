@@ -8,7 +8,7 @@ public class Floor<Type> {
 	private List<Type> contents;
 	
 	Floor(){
-		contents = new ArrayList<Type>(1);
+		contents = new ArrayList<Type>();
 	}
 	
 	public List<Type> contents(){
@@ -16,6 +16,10 @@ public class Floor<Type> {
 	}
 	
 	public void setContent(Type obj){
+		if(contents.size() == 0){
+			contents.add(obj);
+			return;
+		}
 		contents.set(0, obj);
 	}
 	

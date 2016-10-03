@@ -6,10 +6,8 @@ import cellStateConfigurationType.ConfigurationType;
 
 import cellsociety_team23.XMLParser;
 import simulation.types.*;
-import simulation.types.basic.GameOfLifeSimulation;
-import simulation.types.basic.SegregationSimulation;
-import simulation.types.basic.SpreadingFireSimulation;
-import simulation.types.basic.WaTorWorldSimulation;
+import simulation.types.advanced.*;
+import simulation.types.basic.*;
 import simulation.types.hierarchy.AbstractSimulation;
 
 class SimulationFactory {
@@ -36,6 +34,13 @@ class SimulationFactory {
 			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 		case WA_TOR_WORLD:
 			return out = new WaTorWorldSimulation(parser.getGrid());		
+		case SLIME_MOLD:
+			return out = new SlimeSimulation(parser.getGrid(), parser.getGlobalConfiguration());
+		case SUGARSCAPE:
+			return out = new SugarAndSpiceSimulation(parser.getGrid(), new int[]{4, 4}, 
+																	new int[]{4, 4}, 
+																	new int[]{1, 1}, 
+																	2);
 		default:
 			return out;
 		}

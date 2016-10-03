@@ -200,6 +200,22 @@ public class XMLParser {
 				return CellState.WaTorWorld.PREY;
 			}
 			break;
+		case SLIME_MOLD:
+			switch (state) {
+			case 0:
+				return CellState.SlimeMold.EMPTY;
+			case 1:
+				return CellState.SlimeMold.MOLD;
+			}
+			break;
+		case SUGARSCAPE:
+			switch (state) {
+			case 0:
+				return CellState.SugarScape.EMPTY;
+			case 1:
+				return CellState.SugarScape.AGENT;
+			}
+			break;
 		}
 		return null;
 	}
