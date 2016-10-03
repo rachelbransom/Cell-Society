@@ -1,7 +1,9 @@
 package simulation.types.hierarchy;
 
+import cell.CellState.SugarScape;
 import cell.Floor;
 import grid.Grid;
+import simulation.types.SimulationType;
 
 public abstract class AbstractPowdersSimulation extends AbstractSequentialSimulation {
 
@@ -17,9 +19,11 @@ public abstract class AbstractPowdersSimulation extends AbstractSequentialSimula
 		myPowdersGrowBackRate = growBacks;
 		myMaximumPowdersCapacity = powdercaps;
 		myAgentPowderMetabolism = metabs;
-		myPowderGrowBackInterval = interval;
-		
+		myPowderGrowBackInterval = interval;		
 		myStepCounter = 0;
+		
+		showCurrGrid().setNeighbors(SimulationType.SUGARSCAPE);
+		initAgents();
 	}
 	
 	@Override
@@ -27,6 +31,20 @@ public abstract class AbstractPowdersSimulation extends AbstractSequentialSimula
 		super.updateGrid();
 		myStepCounter++;
 		growBackPowders();
+		showCurrGrid().setNeighbors(SimulationType.SUGARSCAPE);
+
+	}
+	
+	protected void initAgents(){
+		for (int x = 0; x < getSize(); x++) {
+			for (int y = 0; y < getSize(); y++) {
+				if(getCurrGrid().getCell(x, y).getActor().isState(SugarScape.AGENT)){
+					for (int p = 0; p < myAgentPowderMetabolism.length; p++) {
+						getCurrGrid().getCell(x, y).getActor().energies().add(p, 5);
+					}
+				}
+			}
+		}
 	}
 	
 	protected void growBackPowders(){
@@ -47,7 +65,12 @@ public abstract class AbstractPowdersSimulation extends AbstractSequentialSimula
 	}
 	
 	protected void setPowder(int x, int y, int powdType, Double inp){
-		getFloorAt(x,y).contents().set(powdType,inp);
+		try {
+			getFloorAt(x,y).contents().set(powdType,inp);
+		} catch (Exception e) {
+			getFloorAt(x,y).contents().add(powdType,inp);
+		}
+		
 	}
 	
 	protected Double getPowder(int x, int y, int powdType){
@@ -56,7 +79,7 @@ public abstract class AbstractPowdersSimulation extends AbstractSequentialSimula
 	
 	protected Double takePowder(int x, int y, int p){
 		Double powder = getPowder(x, y, p);
-		setPowder(x, y, p, 0.0);
+		setPowder(x, y, p, new Double(0.0));
 		return powder;
 	}
 	

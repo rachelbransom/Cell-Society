@@ -12,7 +12,9 @@ public class Actor{
 	public Actor(){
 		myState = null;
 		myEnergies = new ArrayList<>();
-		myEnergies.add(0);
+		for(int i = 0; i < 10; i++){
+			myEnergies.add(0);
+		}
 		myAge = 0;
 	}
 	

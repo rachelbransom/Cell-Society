@@ -6,13 +6,14 @@ import cell.Actor;
 import cell.Cell;
 import cell.CellState.SugarScape;
 import grid.Grid;
+import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractPowdersSimulation;
 
 public class SugarAndSpiceSimulation extends AbstractPowdersSimulation {
 
 	public SugarAndSpiceSimulation(Grid inputGrid, int[] growBacks, int[] powdercaps, int[] metabs, int interval) {
 		super(inputGrid, growBacks, powdercaps, metabs, interval);
-		// TODO Auto-generated constructor stub
+		getCurrGrid().setNeighbors(SimulationType.SUGARSCAPE);
 	}
 
 	@Override
@@ -23,8 +24,9 @@ public class SugarAndSpiceSimulation extends AbstractPowdersSimulation {
 			
 			List<Integer> actorEnergies = curr.getActor().energies();
 			
-			for (int p = 0; p < actorEnergies.size(); p++) {
+			for (int p = 0; p < 2; p++) {
 				actorEnergies.set(p, actorEnergies.get(p) - getAgentMetabOf(p));
+				actorEnergies.set(p, actorEnergies.get(p) + takePowder(curr.getLocation().x, curr.getLocation().y, p).intValue());
 			}
 			
 			goToSiteWithMostWelfare(curr);
@@ -35,7 +37,7 @@ public class SugarAndSpiceSimulation extends AbstractPowdersSimulation {
 		List<Integer> energyList = curr.getActor().energies();
 		boolean agentDies = false;
 		
-		for (int i = 0; i < energyList.size(); i++) {
+		for (int i = 0; i < 2; i++) {
 			agentDies = agentDies || (energyList.get(i) <= 0);
 		}
 		
@@ -52,7 +54,7 @@ public class SugarAndSpiceSimulation extends AbstractPowdersSimulation {
 											eN.getFloor().contents().get(1),
 											c.getActor().energies().get(0),
 											c.getActor().energies().get(1));
-			if( maxWelfare < currWelfare ){
+			if( maxWelfare <= currWelfare ){
 				foundMax = true;
 				maxWelfare = currWelfare;
 				maxCampCell = eN;
@@ -66,7 +68,7 @@ public class SugarAndSpiceSimulation extends AbstractPowdersSimulation {
 	}
 	
 	private double getWelfare(double seenSugar, double seenSpice, double mySugar, double mySpice){
-		int welfareCoeff = 3;
+		int welfareCoeff = 1;
 		double sugarNeed = seenSugar / (Math.pow(mySugar, welfareCoeff));
 		double spiceNeed = seenSpice / (Math.pow(mySpice, welfareCoeff));
 		return sugarNeed + spiceNeed;

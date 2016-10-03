@@ -213,7 +213,7 @@ public class UX {
 			return ("NoSimulationType.xml");
 		case ("SLIME MOLD"):
 			return ("Slime.xml");
-		case ("SUGAR AND SPICE"):
+		case ("SUGARSCAPE"):
 			return ("SugarAndSpice.xml");
 		case ("LANGTON"):
 			return("Langton.xml");

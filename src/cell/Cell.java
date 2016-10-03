@@ -39,6 +39,8 @@ public class Cell {
 		
 		myNeighbors = new ArrayList<Cell>();
 		myNeighbors.addAll(that.myNeighbors);
+		
+		myFloor = new Floor<Double>( that.myFloor );
 	}
 	
 	public Actor getActor(){
