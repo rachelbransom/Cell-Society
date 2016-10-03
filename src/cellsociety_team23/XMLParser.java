@@ -24,6 +24,7 @@ import simulation.visuals.Hexagon;
 import simulation.visuals.Triangle;
 
 public class XMLParser {
+	private static final int LANGTONS_LOOPS = 0;
 	Document document;
 	String file;
 	private SimulationType situation;
@@ -73,15 +74,15 @@ public class XMLParser {
 			for (int i = 0; i < gridDimensions; i++) {
 				for (int j = 0; j < gridDimensions; j++) {
 					Cell currCell = new Cell(i, j);
-					
+
 					if (this.configurationType.equals(ConfigurationType.RANDOM)){
 						currCellState = setCellStateByRandom(states);
 					}
 					else{
 						currCellState = setCellStateByXML(i, j, situation);
 					}
-					
-					
+
+
 					if (situation == SimulationType.SUGARSCAPE) {
 						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
 						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
@@ -99,7 +100,7 @@ public class XMLParser {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int setCellStateByXML(int i, int j, SimulationType situation){
 		int currCellState = Integer.parseInt(getTextByTag("cell" + i + "." + j));
 
@@ -109,10 +110,10 @@ public class XMLParser {
 			e.callDialogBox();
 			e.printStackTrace();
 		}
-		
+
 		return currCellState;
 	}
-	
+
 	private int setCellStateByRandom(int states){
 		return rand.nextInt(states);
 	}
@@ -202,7 +203,6 @@ public class XMLParser {
 				return CellState.WaTorWorld.PREY;
 			}
 			break;
-<<<<<<< HEAD
 		case SLIME_MOLD:
 			switch (state) {
 			case 0:
@@ -217,7 +217,8 @@ public class XMLParser {
 				return CellState.SugarScape.EMPTY;
 			case 1:
 				return CellState.SugarScape.AGENT;
-=======
+			}
+			break;
 		case LANGTONS_LOOPS:
 			switch (state) {
 			case 0:
@@ -236,7 +237,6 @@ public class XMLParser {
 				return CellState.Langton.MAKETURN;
 			case 7:
 				return CellState.Langton.ENDLOOP;
->>>>>>> 49469512f4ad1e26545070787761bf7d71d00996
 			}
 			break;
 		}
@@ -256,7 +256,7 @@ public class XMLParser {
 			if (simulationType.equals(SimulationType.LANGTONS_LOOPS) && state < 0 || state > 7){
 				throw new InvalidCellState();
 			}
-				
+
 		}
 	}
 }
