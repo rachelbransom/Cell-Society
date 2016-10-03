@@ -550,13 +550,13 @@
 	<cell18.2>5</cell18.2>
 	<cell18.3>0</cell18.3>
 	<cell18.4>4</cell18.4>
-	<cell18.5>4</cell18.5>
-	<cell18.6>4</cell18.6>
-	<cell18.7>1</cell18.7>
-	<cell18.8>5</cell18.8>
-	<cell18.9>4</cell18.9>
+	<cell18.5>2</cell18.5>
+	<cell18.6>5</cell18.6>
+	<cell18.7>4</cell18.7>
+	<cell18.8>1</cell18.8>
+	<cell18.9>5</cell18.9>
 	<cell18.10>4</cell18.10>
-	<cell18.11>4</cell18.11>
+	<cell18.11>1</cell18.11>
 	<cell18.12>0</cell18.12>
 	<cell18.13>5</cell18.13>
 	<cell18.14>5</cell18.14>
@@ -586,7 +586,7 @@
 	<cell19.8>0</cell19.8>
 	<cell19.9>0</cell19.9>
 	<cell19.10>0</cell19.10>
-	<cell19.11>4</cell19.11>
+	<cell19.11>5</cell19.11>
 	<cell19.12>0</cell19.12>
 	<cell19.13>5</cell19.13>
 	<cell19.14>5</cell19.14>
@@ -609,7 +609,7 @@
 	<cell20.1>5</cell20.1>
 	<cell20.2>5</cell20.2>
 	<cell20.3>0</cell20.3>
-	<cell20.4>1</cell20.4>
+	<cell20.4>2</cell20.4>
 	<cell20.5>0</cell20.5>
 	<cell20.6>5</cell20.6>
 	<cell20.7>5</cell20.7>
@@ -669,7 +669,7 @@
 	<cell22.1>5</cell22.1>
 	<cell22.2>5</cell22.2>
 	<cell22.3>0</cell22.3>
-	<cell22.4>4</cell22.4>
+	<cell22.4>5</cell22.4>
 	<cell22.5>0</cell22.5>
 	<cell22.6>5</cell22.6>
 	<cell22.7>5</cell22.7>
@@ -699,7 +699,7 @@
 	<cell23.1>5</cell23.1>
 	<cell23.2>5</cell23.2>
 	<cell23.3>0</cell23.3>
-	<cell23.4>4</cell23.4>
+	<cell23.4>2</cell23.4>
 	<cell23.5>0</cell23.5>
 	<cell23.6>5</cell23.6>
 	<cell23.7>5</cell23.7>
@@ -729,7 +729,7 @@
 	<cell24.1>5</cell24.1>
 	<cell24.2>5</cell24.2>
 	<cell24.3>0</cell24.3>
-	<cell24.4>5</cell24.4>
+	<cell24.4>4</cell24.4>
 	<cell24.5>0</cell24.5>
 	<cell24.6>0</cell24.6>
 	<cell24.7>0</cell24.7>
@@ -741,7 +741,7 @@
 	<cell24.13>0</cell24.13>
 	<cell24.14>0</cell24.14>
 	<cell24.15>0</cell24.15>
-	<cell24.16>5</cell24.16>
+	<cell24.16>0</cell24.16>
 	<cell24.17>5</cell24.17>
 	<cell24.18>5</cell24.18>
 	<cell24.19>5</cell24.19>
@@ -759,20 +759,20 @@
 	<cell25.1>5</cell25.1>
 	<cell25.2>5</cell25.2>
 	<cell25.3>0</cell25.3>
-	<cell25.4>2</cell25.4>
-	<cell25.5>4</cell25.5>
+	<cell25.4>5</cell25.4>
+	<cell25.5>2</cell25.5>
 	<cell25.6>4</cell25.6>
 	<cell25.7>5</cell25.7>
 	<cell25.8>2</cell25.8>
 	<cell25.9>4</cell25.9>
-	<cell25.10>4</cell25.10>
-	<cell25.11>4</cell25.11>
+	<cell25.10>5</cell25.10>
+	<cell25.11>2</cell25.11>
 	<cell25.12>4</cell25.12>
 	<cell25.13>4</cell25.13>
 	<cell25.14>4</cell25.14>
 	<cell25.15>4</cell25.15>
-	<cell25.16>0</cell25.16>
-	<cell25.17>5</cell25.17>
+	<cell25.16>4</cell25.16>
+	<cell25.17>0</cell25.17>
 	<cell25.18>5</cell25.18>
 	<cell25.19>5</cell25.19>
 	<cell25.20>5</cell25.20>
@@ -801,7 +801,7 @@
 	<cell26.13>0</cell26.13>
 	<cell26.14>0</cell26.14>
 	<cell26.15>0</cell26.15>
-	<cell26.16>5</cell26.16>
+	<cell26.16>0</cell26.16>
 	<cell26.17>5</cell26.17>
 	<cell26.18>5</cell26.18>
 	<cell26.19>5</cell26.19>

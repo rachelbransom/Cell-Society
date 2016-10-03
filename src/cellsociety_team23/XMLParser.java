@@ -197,7 +197,11 @@ public class XMLParser {
 			case 4:
 				return CellState.Langton.NOCOMMAND;
 			case 5:
-				return CellState.Langton.EMPTY;				
+				return CellState.Langton.EMPTY;		
+			case 6: 
+				return CellState.Langton.MAKETURN;
+			case 7:
+				return CellState.Langton.ENDLOOP;
 			}
 			break;
 		}
@@ -216,7 +220,7 @@ public class XMLParser {
 	private static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
 		if (((0 > state || 1 < state) && (simulationType.equals(SimulationType.GAME_OF_LIFE)))
 				|| (0 > state || 2 < state)) {
-			if (simulationType.equals(SimulationType.LANGTONS_LOOPS) && state < 0 || state > 5){
+			if (simulationType.equals(SimulationType.LANGTONS_LOOPS) && state < 0 || state > 7){
 				throw new InvalidCellState();
 			}
 				

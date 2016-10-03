@@ -2,6 +2,13 @@ package grid;
 
 import cell.Cell;
 
+/**
+ * 
+ * @author Diane Hadley
+ *
+ */
+
+
 public abstract class Neighbors{
 	
 	protected Grid myGrid;

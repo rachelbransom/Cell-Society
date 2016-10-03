@@ -42,7 +42,9 @@ public final class CellState {
 		ADVANCE,
 		MESSENGER,
 		NOCOMMAND,
-		EMPTY;
+		EMPTY,
+		MAKETURN,
+		ENDLOOP;
 		
 	}
 }

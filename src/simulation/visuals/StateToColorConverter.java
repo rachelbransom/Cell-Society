@@ -98,6 +98,8 @@ public class StateToColorConverter {
 		myStateToColorMap.put(Langton.MESSENGER, Color.DEEPPINK);
 		myStateToColorMap.put(Langton.EMPTY, Color.BLACK);
 		myStateToColorMap.put(Langton.NOCOMMAND, Color.WHITE);
+		myStateToColorMap.put(Langton.MAKETURN, Color.AQUAMARINE);
+		myStateToColorMap.put(Langton.ENDLOOP, Color.BLUE);
 	}
 	
 	private void initSlimeMoldColorScheme(){}
