@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import simulation.types.hierarchy.AbstractSimulation;
 import simulation.visuals.SimulationVisualizer;
 import simulation.visuals.StateToColorConverter;
+import simulationColorChoices.ColorChoice;
 
 //@authour: Rachel Bransom
 //@author: Diane Hadley
@@ -21,6 +22,7 @@ public class SimulationController {
 	private String myShape;
 	private HashMap<Color, Integer> populationMap;
 	private PopulationGraph myPopulationGraph;
+	private ColorChoice userColorChoice;
 	
 	public void initializeSimulation(String filename, String shape){		  
 		myShape = shape;
@@ -28,18 +30,10 @@ public class SimulationController {
 		mySimulation = factory.makeSimulation();
 		
 	}
-
 	
-//	public LineChart<Number,Number> getSimulationChart(){
-//		return mySimulation.getMyChart();
-//	}
-	
-//	public void setSimulationChartLayout(int x, int y){
-//		mySimulation.setMyChartLayout(x, y);
-//	}
-	
-	public Group returnCurrVisualGrid(Boolean withGridOutlines){
-		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
+	public Group returnCurrVisualGrid(Boolean withGridOutlines, ColorChoice colorChoice){
+		this.userColorChoice = colorChoice;
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid(colorChoice);
 		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape, withGridOutlines);
 		Group gridRoot = makeGridRoot(colorGrid);
 		myPopulationGraph = new PopulationGraph(myVisualizer.getPopulationMap());
@@ -47,7 +41,7 @@ public class SimulationController {
 	}
 	
 	public Group returnNextVisualGrid(){
-		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid();
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid(userColorChoice);
 		Group gridRoot = makeGridRoot(colorGrid);
 		myPopulationGraph.update(myVisualizer.getPopulationMap());
 		return gridRoot;

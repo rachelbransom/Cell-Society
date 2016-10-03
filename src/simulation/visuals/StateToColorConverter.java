@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import simulation.types.basic.*;
 import simulation.types.advanced.*;
 import simulation.types.hierarchy.AbstractSimulation;
+import simulationColorChoices.ColorChoice;
 
 public class StateToColorConverter {
 
@@ -22,11 +23,13 @@ public class StateToColorConverter {
 		chooseColorScheme(mySimulation);
 	}
 	
-	public Color[][] showCurrColorGrid(){
+	public Color[][] showCurrColorGrid(ColorChoice color){
+		applyColorChoice(color);
 		return convertStateGridToColorGrid(mySimulation.showCurrGrid());
 	}
 	
-	public Color[][] showNextColorGrid(){
+	public Color[][] showNextColorGrid(ColorChoice color){
+		applyColorChoice(color);
 		return convertStateGridToColorGrid(mySimulation.showNextGrid());
 	}
 	
@@ -41,6 +44,7 @@ public class StateToColorConverter {
 				colorGrid[x][y] = myStateToColorMap.get(currState);
 			}
 		}
+		
 
 		return colorGrid;
 	}
@@ -98,4 +102,33 @@ public class StateToColorConverter {
 	private void initSugarScapeColorScheme(){}
 	
 	private void initForagingAntsColorScheme(){}
+	
+	
+	private void applyColorChoice(ColorChoice color){
+		for (Enum state : myStateToColorMap.keySet()){
+			switch (color) {
+			case NORMAL:
+				// nothing
+				break;
+			case BRIGHTEN:
+				myStateToColorMap.put(state, myStateToColorMap.get(state).brighter());
+				break;
+			case DARKEN:
+				myStateToColorMap.put(state, myStateToColorMap.get(state).darker());
+				break;
+			case SATURATE:
+				myStateToColorMap.put(state, myStateToColorMap.get(state).saturate());
+				break;
+			case GRAYSCALE:
+				myStateToColorMap.put(state, myStateToColorMap.get(state).grayscale());
+				break;
+			case INVERT:
+				myStateToColorMap.put(state, myStateToColorMap.get(state).invert());
+				break;
+			}
+			
+		}
+	}
+	
+	
 }

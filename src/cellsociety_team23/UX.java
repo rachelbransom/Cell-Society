@@ -18,11 +18,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import simulation.SimulationController;
+import simulationColorChoices.ColorChoice;
 
 /**
  * This class manages the visualization window
@@ -60,6 +64,8 @@ public class UX {
 	private NumberAxis yAxis;
 	private Boolean withGridOutlines;
 	private CheckBox gridLineCheckBox;
+	private ToggleGroup colorToggleGroup = new ToggleGroup();
+	private RadioButton normal, brighten, darken, saturate, desaturate, grayscale, invert;
 
 	
 	private int XSIZE;
@@ -101,6 +107,7 @@ public class UX {
 		cellStateComboBoxInit();
 		probabilitySliderInit();
 		displayProbabilitySliderText();
+		displayRadioButtons();
 		root.getChildren().add(gridRoot);
 		
 		return scene;
@@ -151,7 +158,6 @@ public class UX {
 	private void step() {
 		if (simulationControl != null) {
 			advanceGridRoot();
-			
 		}
 		checkSpeed();
 	}
@@ -161,17 +167,22 @@ public class UX {
 		String shape = getShape(getShapeComboBoxValue());
 		stopSimulation();
 		if (!file.equals("NONE CHOSEN")) {
+			try{
 			simulationControl = new SimulationController();
 			simulationControl.initializeSimulation(file, shape);
-			//root.getChildren().add(simulationControl.getPopulationChart());
 			resetGridRoot();
+			}
+			catch (Exception e){
+				NoShapeChosen noShapeException = new NoShapeChosen();
+				noShapeException.CallDialogBox();
+			}
 		}
 	}
 
 	private void resetGridRoot() {
 		root.getChildren().remove(gridRoot);
 		Boolean withGridOutlines = gridLineCheckBox.isSelected();
-		gridRoot = simulationControl.returnCurrVisualGrid(withGridOutlines);
+		gridRoot = simulationControl.returnCurrVisualGrid(withGridOutlines, getColorChoice(colorToggleGroup.getSelectedToggle()));
 		root.getChildren().add(gridRoot);
 		
 		simulationControl.setMyLineChartLayout(GRID_START_X-40, GRID_START_Y-185);
@@ -226,13 +237,26 @@ public class UX {
 		case("HEXAGON"):
 			return "Hexagon";
 		default:
-			NoShapeChosen noShapeException = new NoShapeChosen();
-			noShapeException.CallDialogBox();
 			return null;
 		}
 	}
 	
-	
+	private ColorChoice getColorChoice(Toggle radioButton){
+		switch (radioButton.getUserData().toString()) {
+		case ("brighten"):
+			return ColorChoice.BRIGHTEN;
+		case ("darken"):
+			return ColorChoice.DARKEN;
+		case ("saturate"):
+			return ColorChoice.SATURATE;
+		case ("grayscale"):
+			return ColorChoice.GRAYSCALE;
+		case ("invert"):
+			return ColorChoice.INVERT;
+		default:
+			return ColorChoice.NORMAL;
+		}
+	}
 
 	/*----------------- Private / Helper Methods -----------------------------*/
 
@@ -306,13 +330,50 @@ public class UX {
 		gridLineCheckBox.setText("GRID LINES");
 		root.getChildren().add(setControlLayout(gridLineCheckBox,315));
 		gridLineCheckBox.setLayoutX(50);
-
 	}
 
 	private void displayTitle() {
 		cellSocietyText = new Text(TITLE_X, TITLE_Y, myResources.getString("DisplayTitle"));
 		cellSocietyText.getStyleClass().add("title");
 		root.getChildren().add(cellSocietyText);
+	}
+	
+	private void displayRadioButtons(){
+		normal = new RadioButton(myResources.getString("normal"));
+		brighten = new RadioButton(myResources.getString("brighten"));
+		darken = new RadioButton(myResources.getString("darken"));
+		saturate = new RadioButton(myResources.getString("saturate"));
+		grayscale = new RadioButton(myResources.getString("grayscale"));
+		invert = new RadioButton(myResources.getString("invert"));
+		
+		normal.setUserData("normal");
+		brighten.setUserData("brighten");
+		darken.setUserData("darken");
+		saturate.setUserData("saturate");
+		grayscale.setUserData("grayscale");
+		invert.setUserData("invert");
+		
+		addToToggleGroup(normal);
+		addToToggleGroup(brighten);
+		addToToggleGroup(darken);
+		addToToggleGroup(saturate);
+		addToToggleGroup(grayscale);
+		addToToggleGroup(invert);
+		
+		setControlLayout(normal, 425);
+		setControlLayout(brighten, 450);
+		setControlLayout(darken, 475);
+		setControlLayout(saturate, 500);
+		setControlLayout(grayscale,525);
+		setControlLayout(invert, 550);
+		
+		normal.setSelected(true);
+		
+		root.getChildren().addAll(normal, brighten, darken, saturate, grayscale, invert);
+	}
+	
+	private void addToToggleGroup(RadioButton button){
+		button.setToggleGroup(colorToggleGroup);
 	}
 
 	private Control setControlLayout(Control control, int layoutY) {

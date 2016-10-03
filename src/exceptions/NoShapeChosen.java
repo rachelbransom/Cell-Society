@@ -9,8 +9,8 @@ public class NoShapeChosen extends ExceptionConfiguration{
 	}
 	
 	public void CallDialogBox() {
-		showDialogBox("Error with starting the simulation!", "No shape chosen", 
-				"Please choose a cell shape before resting the simulation.");
+		showDialogBox("Error with starting the simulation!", "No shape or no file chosen", 
+				"Please choose a cell shape AND a file before resting the simulation.");
 	}
 	
 }
