@@ -1,32 +1,35 @@
 package cell;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Actor{
 	
 	private Enum myState;
-	private int myEnergy;
+	private List<Integer> myEnergies;
 	private int myAge;
 	
 	public Actor(){
 		myState = null;
-		myEnergy = 0;
+		myEnergies = new ArrayList<>();
+		myEnergies.add(0);
 		myAge = 0;
 	}
 	
 	public Actor(Enum state){
+		this();
 		myState = state;
-		myEnergy = 0;
-		myAge = 0;
 	}
 	
 	public Actor(Enum state, int energy, int age){
-		myState = state;
-		myEnergy = energy;
+		this(state);
+		myEnergies.set(0, energy);
 		myAge = 0;
 	}
 
 	public Actor(Actor that){
 		this.myState  = that.myState ;
-		myEnergy = that.myEnergy;
+		myEnergies = new ArrayList<>(that.myEnergies);
 		myAge = that.myAge;
 	}
 	
@@ -39,15 +42,19 @@ public class Actor{
 	}
 	
 	public void incrementEnergy(){
-		myEnergy++;
+		myEnergies.set(0, myEnergies.get(0) + 1);
 	}
 	
 	public void setEnergy(int in){
-		myEnergy = in;
+		myEnergies.set(0, in);
 	}
 	
 	public void decrementEnergy(){
-		myEnergy--;
+		myEnergies.set(0, myEnergies.get(0) - 1);
+	}
+	
+	public List<Integer> energies(){
+		return myEnergies;
 	}
 	
 	public void incrementAge(){
@@ -63,7 +70,7 @@ public class Actor{
 	}
 	
 	public int getEnergy(){
-		return myEnergy;
+		return myEnergies.get(0);
 	}
 	
 	public Enum getState(){

@@ -3,44 +3,23 @@ package simulation.types.advanced;
 import cell.Actor;
 import cell.Cell;
 import cell.CellState.SugarScape;
-import cell.Floor;
 import grid.Grid;
-import simulation.types.hierarchy.AbstractSimulation;
+import simulation.types.hierarchy.AbstractPowdersSimulation;
 
+public class SugarSimulation extends AbstractPowdersSimulation {
 
-public class SugarSimulation extends AbstractSimulation {
 	
 	// Agent Related Instance Variables
 	private int myAgentSugarMetabolism;
 	
-	// Sugar related Instance Variables
-	private int mySugarGrowBackRate;
-	private int myMaximumSugarContent;
-	private int mySugarGrowBackInterval;
-	private int myStepCounter;
-	
-	public SugarSimulation(Grid inputGrid) {
-		super(inputGrid);
-		
-		myAgentSugarMetabolism = 1;
-		
-		mySugarGrowBackRate = 2;
-		myMaximumSugarContent = 10;
-		mySugarGrowBackInterval = 2;
-		myStepCounter = 0;
-		
+	public SugarSimulation(Grid inputGrid, int growBack, int sugarCap, int metab, int interval) {
+		super(inputGrid, new int[]{growBack}, new int[]{sugarCap}, new int[]{metab}, interval);
+		myAgentSugarMetabolism = getAgentMetabOf(0);
 	}
 
 	@Override
-	protected void updateGrid(){
-		super.updateGrid();
-		myStepCounter++;
-		growBackSugar();
-	}
-	
-	@Override
 	protected void updateCell(Cell curr) {
-		if(curr.getActor().equals(SugarScape.AGENT)){
+		if(curr.getActor().isState(SugarScape.AGENT)){
 			
 			// If Agent runs out of energy, kill it
 			if(curr.getActor().getEnergy() < 0){
@@ -48,9 +27,7 @@ public class SugarSimulation extends AbstractSimulation {
 				return;
 			}
 			
-			int x = curr.getLocation().x;
-			int y = curr.getLocation().y;
-			setSugar(x, y, getSugar(x, y) - myAgentSugarMetabolism);
+			curr.getActor().setEnergy( curr.getActor().getEnergy() - myAgentSugarMetabolism);
 			
 			goToSiteWithMostSugar(curr);
 		}
@@ -78,35 +55,7 @@ public class SugarSimulation extends AbstractSimulation {
 		}
 	}
 	
-	private Floor<Double> getFloorAt(int x, int y){
-		return getCurrGrid().getCell(x, y).getFloor();
-	}
-	
-	private Double getSugar(int x, int y){
-		return getFloorAt(x, y).getContent();
-	}
-	
-	private void setSugar(int x, int y, Double input){
-		getFloorAt(x, y).setContent(input);
-	}
-	
 	private Double takeSugar(int x, int y){
-		Double sugar = getSugar(x, y);
-		setSugar(x, y, 0.0);
-		return sugar;
+		return takePowder(x, y, 0);
 	}
-	
-	private void growBackSugar(){
-		if((myStepCounter % mySugarGrowBackInterval) == 0){
-			for (int x = 0; x < getSize(); x++) {
-				for (int y = 0; y < getSize(); y++) {
-					setSugar(x, y,  getSugar(x, y) + mySugarGrowBackRate );
-					if(getSugar(x,y) > myMaximumSugarContent){
-						setSugar(x, y, (double) myMaximumSugarContent);
-					}
-				}
-			}
-		}
-	}
-
 }

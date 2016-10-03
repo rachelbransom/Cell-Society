@@ -26,6 +26,7 @@ public class SimulationController {
 		mySimulation = factory.makeSimulation();
 		
 	}
+
 	
 	public Group returnCurrVisualGrid(Boolean withGridOutlines, ColorScheme colorChoice){
 		this.userColorChoice = colorChoice;

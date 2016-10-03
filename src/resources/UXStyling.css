@@ -1,3 +1,6 @@
+.root{
+  -fx-background: #E9967A;
+}
 
 .title{ 
   -fx-font-size: 100;
