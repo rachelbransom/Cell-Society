@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import simulation.types.basic.*;
 import simulation.types.advanced.*;
 import simulation.types.hierarchy.AbstractSimulation;
-import simulationColorChoices.ColorChoice;
+import simulationColorScheme.ColorScheme;
 
 public class StateToColorConverter {
 
@@ -23,12 +23,12 @@ public class StateToColorConverter {
 		chooseColorScheme(mySimulation);
 	}
 	
-	public Color[][] showCurrColorGrid(ColorChoice color){
+	public Color[][] showCurrColorGrid(ColorScheme color){
 		applyColorChoice(color);
 		return convertStateGridToColorGrid(mySimulation.showCurrGrid());
 	}
 	
-	public Color[][] showNextColorGrid(ColorChoice color){
+	public Color[][] showNextColorGrid(ColorScheme color){
 		applyColorChoice(color);
 		return convertStateGridToColorGrid(mySimulation.showNextGrid());
 	}
@@ -104,7 +104,7 @@ public class StateToColorConverter {
 	private void initForagingAntsColorScheme(){}
 	
 	
-	private void applyColorChoice(ColorChoice color){
+	private void applyColorChoice(ColorScheme color){
 		for (Enum state : myStateToColorMap.keySet()){
 			switch (color) {
 			case NORMAL:
@@ -129,6 +129,5 @@ public class StateToColorConverter {
 			
 		}
 	}
-	
 	
 }

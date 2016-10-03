@@ -1,6 +1,6 @@
-package simulationColorChoices;
+package simulationColorScheme;
 
-public enum ColorChoice {
+public enum ColorScheme {
 	NORMAL,
 	BRIGHTEN,
 	DARKEN,

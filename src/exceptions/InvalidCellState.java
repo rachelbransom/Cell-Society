@@ -1,5 +1,7 @@
 package exceptions;
 
+//@author Rachel Bransom
+
 public class InvalidCellState extends ExceptionConfiguration {
 	public InvalidCellState(){
 		super("Chosen file contains an invalid cell state");

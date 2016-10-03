@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 
 
 import javafx.scene.shape.Shape;
-import simulationColorChoices.ColorChoice;
+import simulationColorScheme.ColorScheme;
 
 public class SimulationVisualizer {
 

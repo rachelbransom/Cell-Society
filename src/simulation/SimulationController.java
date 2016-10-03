@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import simulation.types.hierarchy.AbstractSimulation;
 import simulation.visuals.SimulationVisualizer;
 import simulation.visuals.StateToColorConverter;
-import simulationColorChoices.ColorChoice;
+import simulationColorScheme.ColorScheme;
 
 //@authour: Rachel Bransom
 //@author: Diane Hadley
@@ -22,7 +22,7 @@ public class SimulationController {
 	private String myShape;
 	private HashMap<Color, Integer> populationMap;
 	private PopulationGraph myPopulationGraph;
-	private ColorChoice userColorChoice;
+	private ColorScheme userColorChoice;
 	
 	public void initializeSimulation(String filename, String shape){		  
 		myShape = shape;
@@ -31,7 +31,7 @@ public class SimulationController {
 		
 	}
 	
-	public Group returnCurrVisualGrid(Boolean withGridOutlines, ColorChoice colorChoice){
+	public Group returnCurrVisualGrid(Boolean withGridOutlines, ColorScheme colorChoice){
 		this.userColorChoice = colorChoice;
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid(colorChoice);
 		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape, withGridOutlines);

@@ -1,10 +1,6 @@
 package cellsociety_team23;
 
 import java.util.ResourceBundle;
-
-import com.sun.javafx.geom.Rectangle;
-import com.sun.javafx.geom.Shape;
-
 import exceptions.NoShapeChosen;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -26,7 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import simulation.SimulationController;
-import simulationColorChoices.ColorChoice;
+import simulationColorScheme.ColorScheme;
 
 /**
  * This class manages the visualization window
@@ -59,10 +55,6 @@ public class UX {
 	private Text cellSocietyText, instructionsText, speedSliderText, probabilitySliderText;
 	private SimulationController simulationControl;	
 	private ResourceBundle myResources;
-	private LineChart<Number, Number> myChart;
-	private NumberAxis xAxis;
-	private NumberAxis yAxis;
-	private Boolean withGridOutlines;
 	private CheckBox gridLineCheckBox;
 	private ToggleGroup colorToggleGroup = new ToggleGroup();
 	private RadioButton normal, brighten, darken, saturate, desaturate, grayscale, invert;
@@ -241,20 +233,20 @@ public class UX {
 		}
 	}
 	
-	private ColorChoice getColorChoice(Toggle radioButton){
+	private ColorScheme getColorChoice(Toggle radioButton){
 		switch (radioButton.getUserData().toString()) {
 		case ("brighten"):
-			return ColorChoice.BRIGHTEN;
+			return ColorScheme.BRIGHTEN;
 		case ("darken"):
-			return ColorChoice.DARKEN;
+			return ColorScheme.DARKEN;
 		case ("saturate"):
-			return ColorChoice.SATURATE;
+			return ColorScheme.SATURATE;
 		case ("grayscale"):
-			return ColorChoice.GRAYSCALE;
+			return ColorScheme.GRAYSCALE;
 		case ("invert"):
-			return ColorChoice.INVERT;
+			return ColorScheme.INVERT;
 		default:
-			return ColorChoice.NORMAL;
+			return ColorScheme.NORMAL;
 		}
 	}
 

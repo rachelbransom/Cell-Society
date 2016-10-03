@@ -100,24 +100,11 @@ public class SegregationSimulation extends AbstractSimulation {
 		}
 	}
 
-	
 
 	protected void initPopulationGraph() {
 		populationOne = 0;
 		populationTwo = 0;
 		super.initPopulationGraphSuper();
-
-		//XYChart.Series series1 = new XYChart.Series<>();
-		//XYChart.Series series2 = new XYChart.Series<>();
-		//lineChart.getData().addAll(series1, series2);
-	}
-
-	protected void updateChart() {
-		//XYChart.Series series1 = new XYChart.Series<>();
-		//XYChart.Series series2 = new XYChart.Series<>();
-		//lineChart.getData().get(0).getData().addAll(new XYChart.Data(counter, populationOne),
-				//new XYChart.Data(counter, populationTwo));
-
 	}
 
 }

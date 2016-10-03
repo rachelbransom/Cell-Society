@@ -84,23 +84,4 @@ public class GameOfLifeSimulation extends AbstractSimulation {
 	private void stayAlive(Cell newCell) {
 		newCell.setActor(new Actor(GameOfLife.ALIVE));
 	}
-
-//	@Override
-//	protected void initColorMap() {
-//		myColorMap = new HashMap<Enum, Color>();
-//
-//		myColorMap.put(GameOfLife.DEAD, Color.WHITE);
-//		myColorMap.put(GameOfLife.ALIVE, Color.BLACK);
-//
-//	}
-
-	
-
-	/*----------------- Helper / Private Methods -----------------------------*/
-
-//	private void updateChart() {
-//		XYChart.Series series = new XYChart.Series<>();
-//		lineChart.getData().get(0).getData().add(new XYChart.Data(counter, myAliveCells));
-//
-//	}
 }
