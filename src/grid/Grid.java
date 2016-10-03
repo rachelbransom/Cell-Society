@@ -92,7 +92,8 @@ public class Grid {
 					myNeighbors.setFullNeighbors(i, j, getCell(i, j));
 				
 				if( simType.equals(SimulationType.WA_TOR_WORLD) ||
-						simType.equals(SimulationType.SPREADING_FIRE)) 
+						simType.equals(SimulationType.SPREADING_FIRE) ||
+						simType.equals(SimulationType.LANGTONS_LOOPS)) 
 					myNeighbors.setCardinalNeighbors(i, j, getCell(i, j));
 				
 			}

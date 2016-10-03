@@ -98,7 +98,16 @@ public class StateToColorConverter {
 		myStateToColorMap.put(WaTorWorld.PREY, Color.GOLDENROD);
 	}
 
-	private void initLangtonColorScheme(){}
+	private void initLangtonColorScheme(){
+		myStateToColorMap.put(Langton.SHEATH, Color.RED);
+		myStateToColorMap.put(Langton.TURN, Color.FORESTGREEN);
+		myStateToColorMap.put(Langton.ADVANCE, Color.YELLOW);
+		myStateToColorMap.put(Langton.MESSENGER, Color.DEEPPINK);
+		myStateToColorMap.put(Langton.EMPTY, Color.BLACK);
+		myStateToColorMap.put(Langton.NOCOMMAND, Color.WHITE);
+		myStateToColorMap.put(Langton.MAKETURN, Color.AQUAMARINE);
+		myStateToColorMap.put(Langton.ENDLOOP, Color.BLUE);
+	}
 	
 	private void initSlimeMoldColorScheme(){
 		myStateToColorMap.put(SlimeMold.MOLD, Color.GREENYELLOW);

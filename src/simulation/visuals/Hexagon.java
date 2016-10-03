@@ -25,11 +25,6 @@ public class Hexagon extends CellShape{
 		if (j % 2 == 1){
 			addHeight = 0.5;
 		}
-		System.out.println(dI);
-		System.out.println(dJ);
-		System.out.println(height);
-		System.out.println(width);
-		System.out.println(addHeight);
 		hexagon.getPoints().addAll(new Double[]{
 				UX.GRID_START_X + 1.5*dJ*width, UX.GRID_START_Y + (dI + 0.5 + addHeight)*height,
 				UX.GRID_START_X + (1.5*dJ + 0.5)*width, UX.GRID_START_Y + (dI + addHeight)*height,
@@ -38,7 +33,7 @@ public class Hexagon extends CellShape{
 				UX.GRID_START_X + (1.5*dJ + 1.5)*width, UX.GRID_START_Y + (dI+1 + addHeight)*height,
 				UX.GRID_START_X + (1.5*dJ + 0.5)*width, UX.GRID_START_Y + (dI+1 + addHeight)*height
 		});
-		System.out.println(hexagon.getPoints());
+	
 		
 		return hexagon;
 		
