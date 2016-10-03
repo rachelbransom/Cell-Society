@@ -96,12 +96,9 @@ public class WaTorWorldSimulation extends AbstractSimulation {
 			if(actorReference.getAge() % mySharkReproductiveAge == 0){
 				curr.setActor( new Actor(SHARK, this.EnergyThreshold, 0));
 			}
-		}
-		
-		
-	}
 
-	
+		}	
+	}
 
 
 	/*----------------- Private / Helper Methods -----------------------------*/

@@ -1,15 +1,13 @@
 package simulation;
 
-import java.util.HashMap;
-
+import cellStateConfigurationType.ConfigurationType;
 import graph.PopulationGraph;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.chart.LineChart;
 import javafx.scene.paint.Color;
 import simulation.types.hierarchy.AbstractSimulation;
 import simulation.visuals.SimulationVisualizer;
 import simulation.visuals.StateToColorConverter;
+import simulationColorScheme.ColorScheme;
 
 //@authour: Rachel Bransom
 //@author: Diane Hadley
@@ -19,19 +17,20 @@ public class SimulationController {
 	private AbstractSimulation mySimulation;
 	private SimulationVisualizer myVisualizer;
 	private String myShape;
-	private HashMap<Color, Integer> populationMap;
 	private PopulationGraph myPopulationGraph;
+	private ColorScheme userColorChoice;
 	
-	public void initializeSimulation(String filename, String shape){		  
+	public void initializeSimulation(String filename, String shape, ConfigurationType configType){		  
 		myShape = shape;
-		SimulationFactory factory = new SimulationFactory(filename, myShape);
+		SimulationFactory factory = new SimulationFactory(filename, myShape, configType);
 		mySimulation = factory.makeSimulation();
 		
 	}
 
 	
-	public Group returnCurrVisualGrid(Boolean withGridOutlines){
-		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
+	public Group returnCurrVisualGrid(Boolean withGridOutlines, ColorScheme colorChoice){
+		this.userColorChoice = colorChoice;
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid(colorChoice);
 		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape, withGridOutlines);
 		Group gridRoot = makeGridRoot(colorGrid);
 		myPopulationGraph = new PopulationGraph(myVisualizer.getPopulationMap());
@@ -39,7 +38,7 @@ public class SimulationController {
 	}
 	
 	public Group returnNextVisualGrid(){
-		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid();
+		Color[][] colorGrid = new StateToColorConverter(mySimulation).showNextColorGrid(userColorChoice);
 		Group gridRoot = makeGridRoot(colorGrid);
 		myPopulationGraph.update(myVisualizer.getPopulationMap());
 		return gridRoot;

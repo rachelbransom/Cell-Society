@@ -1,6 +1,9 @@
 package cellsociety_team23;
 
+//@author Rachel Bransom
+
 import java.io.File;
+import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -8,10 +11,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-
 import cell.Actor;
 import cell.Cell;
 import cell.CellState;
+import cellStateConfigurationType.ConfigurationType;
 import grid.Grid;
 import exceptions.InvalidCellState;
 import exceptions.NoSimulation;
@@ -29,14 +32,18 @@ public class XMLParser {
 	private double globalConfig;
 	private int gridDimensions;
 	private int states;
+	private int currCellState = 0;
 	private Grid grid;
 	private String shape;
+	private ConfigurationType configurationType;
+	private Random rand = new Random();
 
-	public XMLParser(String chosenFileName, String shape) {
+	public XMLParser(String chosenFileName, String shape, ConfigurationType configType) {
 		file = chosenFileName;
 		this.shape = shape;
+		this.configurationType = configType;
 		parseFile();
-		
+
 	}
 
 	private void parseFile() {
@@ -66,37 +73,48 @@ public class XMLParser {
 			for (int i = 0; i < gridDimensions; i++) {
 				for (int j = 0; j < gridDimensions; j++) {
 					Cell currCell = new Cell(i, j);
-					int currCellState = Integer.parseInt(getTextByTag("cell" + i + "." + j));
-
-					try {
-						testIfValidCellState(currCellState, situation);
-					} catch (InvalidCellState e) {
-						e.callDialogBox();
-						e.printStackTrace();
+					
+					if (this.configurationType.equals(ConfigurationType.RANDOM)){
+						currCellState = setCellStateByRandom(states);
+					}
+					else{
+						currCellState = setCellStateByXML(i, j, situation);
 					}
 					
-					if (situation == SimulationType.SUGARSCAPE){
-						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "."+ j));
-						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "."+ j));
-						
+					
+					if (situation == SimulationType.SUGARSCAPE) {
+						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
+						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
+
 						currCell.getFloor().contents().set(0, (double) sugarFloor);
 						currCell.getFloor().contents().add(1, (double) spiceFloor);
 					}
-					
 
-			Actor currAct = new Actor(returnCellState(situation, currCellState));
-			currCell.setActor(currAct);
-			grid.setCell(i, j, currCell);
+					Actor currAct = new Actor(returnCellState(situation, currCellState));
+					currCell.setActor(currAct);
+					grid.setCell(i, j, currCell);
 				}
 			}
-			
-			
-			
-			
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int setCellStateByXML(int i, int j, SimulationType situation){
+		int currCellState = Integer.parseInt(getTextByTag("cell" + i + "." + j));
+
+		try {
+			testIfValidCellState(currCellState, situation);
+		} catch (InvalidCellState e) {
+			e.callDialogBox();
+			e.printStackTrace();
+		}
+		
+		return currCellState;
+	}
+	
+	private int setCellStateByRandom(int states){
+		return rand.nextInt(states);
 	}
 
 	public SimulationType getSimulationType() {
@@ -106,8 +124,8 @@ public class XMLParser {
 	public double getGlobalConfiguration() {
 		return globalConfig;
 	}
-	
-	public int getNumberOfStates(){
+
+	public int getNumberOfStates() {
 		return states;
 	}
 
@@ -208,8 +226,6 @@ public class XMLParser {
 		return null;
 	}
 
-
-	
 	/*----------------- Exceptions -----------------------------*/
 
 	private static void testIfSimulation(SimulationType simulationType) throws NoSimulation {

@@ -1,8 +1,9 @@
 package simulation.types.hierarchy;
 
 
+
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
+
 import cell.Cell;
 import grid.Grid;
 
@@ -19,7 +20,7 @@ public abstract class AbstractSimulation {
 	private Grid myCurrGrid;
 	protected Grid myNextGrid;
 	private int mySize;
-	
+
 	public AbstractSimulation( Grid inputGrid ){		
 		mySize = inputGrid.getSize();
 		myCurrGrid = inputGrid;		
@@ -77,21 +78,6 @@ public abstract class AbstractSimulation {
 	protected int getSize(){
 		return mySize;
 	}
-	
-
-	protected void initPopulationGraphSuper(){
-		NumberAxis xAxis = new NumberAxis();
-		NumberAxis yAxis = new NumberAxis();
-		
-		xAxis.setLabel("Time");
-		yAxis.setLabel("Alive");
-		xAxis.setForceZeroInRange(false);
-		xAxis.setAutoRanging(false);
-		lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-		lineChart.setMaxHeight(250);
-		lineChart.setPrefWidth(505);
-	}
-
 
 	/*----------------- Overriden Methods -----------------------------*/
 	

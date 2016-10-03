@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 
 
 import javafx.scene.shape.Shape;
+import simulationColorScheme.ColorScheme;
 
 public class SimulationVisualizer {
 
@@ -32,10 +33,8 @@ public class SimulationVisualizer {
 		}
 		myShape = shape;
 		myCellShape = getShape(size);
-		initShapeGrid(size);			
-		
+		initShapeGrid(size);	
 	}
-	
 
 	public Group returnVisualGrid(Color[][] colorGrid) {
 		updateGridColor(colorGrid);

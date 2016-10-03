@@ -2,10 +2,12 @@ package simulation.types.advanced;
 
 
 
+
 import java.awt.Point;
 import java.util.Collection;
 
 import cell.Actor;
+
 import cell.Cell;
 import cell.CellState.Langton;
 import grid.Grid;

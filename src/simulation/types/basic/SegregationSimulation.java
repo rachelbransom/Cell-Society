@@ -1,16 +1,14 @@
 package simulation.types.basic;
 
+//@author Rachel Bransom
+
 import java.awt.Point;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Stack;
-
 import cell.Actor;
 import cell.Cell;
 import cell.CellState.Segregation;
-
 import grid.Grid;
-import javafx.scene.paint.Color;
 import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractSimulation;
 
@@ -21,7 +19,6 @@ public class SegregationSimulation extends AbstractSimulation {
 	private Stack<Point> myEmptyCellPoints; // Holds empty cells
 	private Stack<Actor> myUnsatisfiedCitizens; // Holds the unsatisfied Actors
 												// from one pass of the grid
-	private int populationOne, populationTwo, counter;
 	boolean initialCallToUpdateGrid = true;
 
 	private static final Enum AMP = Segregation.POP_ONE; // Short Nickname for
@@ -37,7 +34,6 @@ public class SegregationSimulation extends AbstractSimulation {
 		mySatisfactionThreshold = 0.5;
 		myEmptyCellPoints = new Stack<Point>();
 		myUnsatisfiedCitizens = new Stack<Actor>();
-		initPopulationGraph();
 	}
 
 	/*----------------- Overriden Methods -----------------------------*/
@@ -98,26 +94,6 @@ public class SegregationSimulation extends AbstractSimulation {
 			Point emptyPoint = myEmptyCellPoints.pop();
 			getCurrGrid().getCell(emptyPoint.x, emptyPoint.y).setActor(new Actor(EMPTY));;
 		}
-	}
-
-	
-
-	protected void initPopulationGraph() {
-		populationOne = 0;
-		populationTwo = 0;
-		super.initPopulationGraphSuper();
-
-		//XYChart.Series series1 = new XYChart.Series<>();
-		//XYChart.Series series2 = new XYChart.Series<>();
-		//lineChart.getData().addAll(series1, series2);
-	}
-
-	protected void updateChart() {
-		//XYChart.Series series1 = new XYChart.Series<>();
-		//XYChart.Series series2 = new XYChart.Series<>();
-		//lineChart.getData().get(0).getData().addAll(new XYChart.Data(counter, populationOne),
-				//new XYChart.Data(counter, populationTwo));
-
 	}
 
 }
