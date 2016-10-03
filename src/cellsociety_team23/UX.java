@@ -213,7 +213,7 @@ public class UX {
 			return ("NoSimulationType.xml");
 		case ("SLIME MOLD"):
 			return ("Slime.xml");
-		case ("SUGAR AND SPICE"):
+		case ("SUGARSCAPE"):
 			return ("SugarAndSpice.xml");
 		case ("LANGTON"):
 			return("Langton.xml");
@@ -259,7 +259,7 @@ public class UX {
 
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
 				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"),
-				myResources.getString("SlimeMold"), myResources.getString("SugarScape"),myResources.getString("SlimeMold"), 
+				myResources.getString("SlimeMold"), myResources.getString("SugarScape"), 
 				myResources.getString("Langton"),
 				myResources.getString("NoSimulationType"), myResources.getString("InvalidCellState"));
 
