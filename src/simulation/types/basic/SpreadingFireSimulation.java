@@ -70,45 +70,5 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		getNextGrid().setCell(location.x, location.y, newCell);
 	}
 
-
-//	@Override
-//	protected void initColorMap() {
-//		myColorMap = new HashMap<Enum, Color>();		
-//
-//		myColorMap.put(SpreadingFire.EMPTY, Color.YELLOW);
-//		myColorMap.put(SpreadingFire.TREE, Color.GREEN);
-//		myColorMap.put(SpreadingFire.BURNING, Color.RED);
-//
-//	}
-	
-//	private void initPopulationCounts(Grid grid){
-//		for (int i=0; i<grid.getSize(); i++){
-//			for (int j=0; j<grid.getSize(); j++){
-//				switch ( (SpreadingFire) grid.getCell(i, j).getActor().getState() ){
-//					
-//				}
-//			}
-//		}
-//	}
-	
-//	private void initPopulationGraph(){
-//		tree = 0;
-//		burning = 0;
-//		super.initPopulationGraphSuper();
-//		
-//		XYChart.Series series1 = new XYChart.Series<>();
-//		XYChart.Series series2 = new XYChart.Series<>();
-//		series1.getData().add(new XYChart.Data<Number, Number>(0, 0));
-//		series2.getData().add(new XYChart.Data<Number, Number>(0, 0));
-//		lineChart.getData().addAll(series1, series2);
-//	}
-//	
-//	private void updateChart() {
-//		XYChart.Series series1 = new XYChart.Series<>();
-//		XYChart.Series series2 = new XYChart.Series<>();
-//		lineChart.getData().get(0).getData().addAll(new XYChart.Data(counter, tree),
-//				new XYChart.Data(counter, burning));
-//	}
-
 }
 

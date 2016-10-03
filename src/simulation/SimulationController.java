@@ -30,14 +30,6 @@ public class SimulationController {
 	}
 
 	
-//	public LineChart<Number,Number> getSimulationChart(){
-//		return mySimulation.getMyChart();
-//	}
-	
-//	public void setSimulationChartLayout(int x, int y){
-//		mySimulation.setMyChartLayout(x, y);
-//	}
-	
 	public Group returnCurrVisualGrid(Boolean withGridOutlines){
 		Color[][] colorGrid = new StateToColorConverter(mySimulation).showCurrColorGrid();
 		myVisualizer = new SimulationVisualizer(colorGrid.length, myShape, withGridOutlines);

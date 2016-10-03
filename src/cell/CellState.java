@@ -35,4 +35,14 @@ public final class CellState {
 		AGENT,
 		EMPTY;
 	}
+	
+	public enum Langton{
+		SHEATH,
+		TURN,
+		ADVANCE,
+		MESSENGER,
+		NOCOMMAND,
+		EMPTY;
+		
+	}
 }

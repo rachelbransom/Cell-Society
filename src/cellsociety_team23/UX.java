@@ -83,7 +83,7 @@ public class UX {
 	}
 
 	public Scene init() {
-		scene = new Scene(root, XSIZE, YSIZE, Color.BLACK);
+		scene = new Scene(root, XSIZE, YSIZE, Color.INDIANRED);
 		scene.getStylesheets().add(CSS_FILE_NAME);
 		
 		buttonInit();
@@ -204,6 +204,8 @@ public class UX {
 			return ("Slime.xml");
 		case ("SUGAR AND SPICE"):
 			return ("SugarAndSpice.xml");
+		case ("LANGTON"):
+			return("Langton.xml");
 		case ("INVALID CELL STATE"):
 			return ("InvalidCellState.xml");
 		}
@@ -229,7 +231,8 @@ public class UX {
 	private void xmlComboBoxInit() {
 		ObservableList<String> xmlOptions = FXCollections.observableArrayList(myResources.getString("Segregation"), 
 				myResources.getString("PredatorPrey"),myResources.getString("Fire"),myResources.getString("GameOfLife"),
-				myResources.getString("SlimeMold"), myResources.getString("SugarScape"),
+				myResources.getString("SlimeMold"), myResources.getString("SugarScape"),myResources.getString("SlimeMold"), 
+				myResources.getString("Langton"),
 				myResources.getString("NoSimulationType"), myResources.getString("InvalidCellState"));
 		xmlComboBox = new ComboBox<String>(xmlOptions);
 		xmlComboBox.setValue(myResources.getString("XMLComboBoxText"));

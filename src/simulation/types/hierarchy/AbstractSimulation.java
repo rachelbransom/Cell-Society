@@ -1,16 +1,11 @@
 package simulation.types.hierarchy;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import cell.Cell;
-
 import grid.Grid;
 
-import javafx.scene.paint.Color;
 
 /**
  *	This class manages the current state of the grid. 
@@ -97,14 +92,7 @@ public abstract class AbstractSimulation {
 		lineChart.setPrefWidth(505);
 	}
 
-//	public LineChart<Number, Number> getMyChart() {
-//		return lineChart;
-//	}
-	
-//	public void setMyChartLayout(int x, int y){
-//		lineChart.setLayoutX(x);
-//		lineChart.setLayoutY(y);
-//	}
+
 	/*----------------- Overriden Methods -----------------------------*/
 	
 	

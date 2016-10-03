@@ -81,7 +81,9 @@ public class Cell {
 		int count = 0;
 		
 		for(Cell c: myNeighbors){
-			if(c.getActor().isState(state)) count++;
+			if(c.getActor().isState(state)) {
+				count++;
+			}
 		}
 		
 		return count;
