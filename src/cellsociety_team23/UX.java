@@ -1,6 +1,8 @@
 package cellsociety_team23;
 
 import java.util.ResourceBundle;
+
+import cellStateConfigurationType.ConfigurationType;
 import exceptions.NoShapeChosen;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -150,7 +152,7 @@ public class UX {
 		if (!file.equals("NONE CHOSEN")) {
 			try {
 				simulationControl = new SimulationController();
-				simulationControl.initializeSimulation(file, shape);
+				simulationControl.initializeSimulation(file, shape, getConfigurationType());
 				resetGridRoot();
 			} catch (Exception e) {
 				NoShapeChosen noShapeException = new NoShapeChosen();
@@ -182,6 +184,17 @@ public class UX {
 		if (speedSlider.isValueChanging() == true) {
 			stopSimulation();
 			playSimulation();
+		}
+	}
+	
+	private ConfigurationType getConfigurationType(){
+		switch (cellStateComboBox.getSelectionModel().getSelectedItem()){
+		case ("USE XML VALUES"):
+			return ConfigurationType.XML_FILE;
+		case ("SET RANDOMLY"):
+			return ConfigurationType.RANDOM;
+		default:
+			return ConfigurationType.XML_FILE;
 		}
 	}
 
@@ -262,7 +275,7 @@ public class UX {
 
 	private void cellStateComboBoxInit() {
 		ObservableList<String> stateOptions = FXCollections.observableArrayList(myResources.getString("Random"),
-				myResources.getString("XMLVals"), myResources.getString("Probability"));
+				myResources.getString("XMLVals"));
 		cellStateComboBox = new ComboBox<String>(stateOptions);
 		cellStateComboBox.setValue(myResources.getString("StateComboBoxText"));
 		root.getChildren().add(setControlLayout(cellStateComboBox, CONTROLS_SPACING * 7));

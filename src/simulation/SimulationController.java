@@ -2,6 +2,7 @@ package simulation;
 
 import java.util.HashMap;
 
+import cellStateConfigurationType.ConfigurationType;
 import graph.PopulationGraph;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -24,9 +25,9 @@ public class SimulationController {
 	private PopulationGraph myPopulationGraph;
 	private ColorScheme userColorChoice;
 	
-	public void initializeSimulation(String filename, String shape){		  
+	public void initializeSimulation(String filename, String shape, ConfigurationType configType){		  
 		myShape = shape;
-		SimulationFactory factory = new SimulationFactory(filename, myShape);
+		SimulationFactory factory = new SimulationFactory(filename, myShape, configType);
 		mySimulation = factory.makeSimulation();
 		
 	}
