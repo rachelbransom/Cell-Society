@@ -1,5 +1,3 @@
-
-
 import cellsociety_team23.UX;
 import javafx.application.Application;
 import javafx.stage.Stage;

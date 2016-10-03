@@ -42,8 +42,8 @@ public abstract class AbstractPowdersSimulation extends AbstractSequentialSimula
 
 	}
 
-	protected Double getAgentMetabOf(int p){
-		return (double) myAgentPowderMetabolism[p];
+	protected int getAgentMetabOf(int p){
+		return myAgentPowderMetabolism[p];
 	}
 	
 	protected void setPowder(int x, int y, int powdType, Double inp){

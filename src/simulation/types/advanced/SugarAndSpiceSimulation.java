@@ -1,5 +1,7 @@
 package simulation.types.advanced;
 
+import java.util.List;
+
 import cell.Actor;
 import cell.Cell;
 import cell.CellState.SugarScape;
@@ -15,12 +17,31 @@ public class SugarAndSpiceSimulation extends AbstractPowdersSimulation {
 
 	@Override
 	protected void updateCell(Cell curr) {
-		// TODO Auto-generated method stub
-		
-		// if Agent runs out of everything, it dies.
-		
+		if(curr.getActor().isState(SugarScape.AGENT)){			
+			
+			if(doesAgentDie(curr)) curr.setActor( new Actor(SugarScape.EMPTY) );
+			
+			List<Integer> actorEnergies = curr.getActor().energies();
+			
+			for (int p = 0; p < actorEnergies.size(); p++) {
+				actorEnergies.set(p, actorEnergies.get(p) - getAgentMetabOf(p));
+			}
+			
+			goToSiteWithMostWelfare(curr);
+		}
 	}
 
+	private boolean doesAgentDie(Cell curr){
+		List<Integer> energyList = curr.getActor().energies();
+		boolean agentDies = false;
+		
+		for (int i = 0; i < energyList.size(); i++) {
+			agentDies = agentDies || (energyList.get(i) <= 0);
+		}
+		
+		return agentDies;
+	}
+	
 	private void goToSiteWithMostWelfare(Cell c){
 		Cell maxCampCell = new Cell();
 		Double maxWelfare = 0.0;

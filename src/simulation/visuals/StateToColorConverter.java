@@ -16,6 +16,7 @@ public class StateToColorConverter {
 
 	private	Map<Enum, Color> myStateToColorMap;
 	private AbstractSimulation mySimulation;
+	private Color[] myFloorColors;
 	
 	public StateToColorConverter(AbstractSimulation sim) {
 		myStateToColorMap = new HashMap<Enum, Color>();
@@ -67,9 +68,11 @@ public class StateToColorConverter {
 		
 		if( simClass.equals(SlimeSimulation.class) ) initSlimeMoldColorScheme();
 		
-		if( simClass.equals(WaTorWorldSimulation.class) ) initSugarScapeColorScheme();
+		if( simClass.equals(SugarSimulation.class) ) initSugarScapeColorScheme();
+		
+		if( simClass.equals(SugarAndSpiceSimulation.class)) initSugarSpiceColorScheme();
 	}
-	
+
 	/****************** Initialize Maps *************************/
 
 	private void initGameOfLifeColorScheme(){
@@ -97,9 +100,22 @@ public class StateToColorConverter {
 
 	private void initLangtonColorScheme(){}
 	
-	private void initSlimeMoldColorScheme(){}
+	private void initSlimeMoldColorScheme(){
+		myStateToColorMap.put(SlimeMold.MOLD, Color.GREENYELLOW);
+		myStateToColorMap.put(SlimeMold.EMPTY, Color.GHOSTWHITE);
+		myFloorColors = new Color[]{Color.DARKSEAGREEN};
+	}
 
-	private void initSugarScapeColorScheme(){}
+	private void initSugarScapeColorScheme(){
+		myStateToColorMap.put(SugarScape.AGENT, Color.MAROON);
+		myStateToColorMap.put(SugarScape.EMPTY, Color.WHITE);
+		myFloorColors = new Color[]{Color.BISQUE};
+	}
+	
+	private void initSugarSpiceColorScheme() {
+		initSugarScapeColorScheme();
+		myFloorColors = new Color[]{myFloorColors[0], Color.CORNFLOWERBLUE};
+	}
 	
 	private void initForagingAntsColorScheme(){}
 	

@@ -14,12 +14,12 @@ public class SugarSimulation extends AbstractPowdersSimulation {
 	
 	public SugarSimulation(Grid inputGrid, int growBack, int sugarCap, int metab, int interval) {
 		super(inputGrid, new int[]{growBack}, new int[]{sugarCap}, new int[]{metab}, interval);
-		myAgentSugarMetabolism = getAgentMetabOf(0).intValue();
+		myAgentSugarMetabolism = getAgentMetabOf(0);
 	}
 
 	@Override
 	protected void updateCell(Cell curr) {
-		if(curr.getActor().equals(SugarScape.AGENT)){
+		if(curr.getActor().isState(SugarScape.AGENT)){
 			
 			// If Agent runs out of energy, kill it
 			if(curr.getActor().getEnergy() < 0){
@@ -27,8 +27,6 @@ public class SugarSimulation extends AbstractPowdersSimulation {
 				return;
 			}
 			
-			int x = curr.getLocation().x;
-			int y = curr.getLocation().y;
 			curr.getActor().setEnergy( curr.getActor().getEnergy() - myAgentSugarMetabolism);
 			
 			goToSiteWithMostSugar(curr);
@@ -60,9 +58,4 @@ public class SugarSimulation extends AbstractPowdersSimulation {
 	private Double takeSugar(int x, int y){
 		return takePowder(x, y, 0);
 	}
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> origin
