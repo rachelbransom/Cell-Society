@@ -1,10 +1,10 @@
 package simulation;
 
+import cellStateConfigurationType.ConfigurationType;
+
 //@author Rachel Bransom
 
 import cellsociety_team23.XMLParser;
-import graph.PopulationGraph;
-import javafx.scene.Node;
 import simulation.types.*;
 import simulation.types.basic.GameOfLifeSimulation;
 import simulation.types.basic.SegregationSimulation;
@@ -19,9 +19,9 @@ class SimulationFactory {
 	private XMLParser parser;
 	private AbstractSimulation out;
 	
-	public SimulationFactory(String chosenFile, String shape){
+	public SimulationFactory(String chosenFile, String shape, ConfigurationType configType){
 		file = chosenFile;
-		parser = new XMLParser(file, shape);
+		parser = new XMLParser(file, shape, configType);
 		simulation = parser.getSimulationType();
 	}
 	

@@ -1,16 +1,10 @@
 package simulation.types.hierarchy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import cell.Cell;
 
 import grid.Grid;
 
-import javafx.scene.paint.Color;
 
 /**
  *	This class manages the current state of the grid. 
@@ -24,7 +18,7 @@ public abstract class AbstractSimulation {
 	private Grid myCurrGrid;
 	protected Grid myNextGrid;
 	private int mySize;
-	
+
 	public AbstractSimulation( Grid inputGrid ){		
 		mySize = inputGrid.getSize();
 		myCurrGrid = inputGrid;		
@@ -81,20 +75,6 @@ public abstract class AbstractSimulation {
 	
 	protected int getSize(){
 		return mySize;
-	}
-	
-
-	protected void initPopulationGraphSuper(){
-		NumberAxis xAxis = new NumberAxis();
-		NumberAxis yAxis = new NumberAxis();
-		
-		xAxis.setLabel("Time");
-		yAxis.setLabel("Alive");
-		xAxis.setForceZeroInRange(false);
-		xAxis.setAutoRanging(false);
-		lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-		lineChart.setMaxHeight(250);
-		lineChart.setPrefWidth(505);
 	}
 
 	/*----------------- Overriden Methods -----------------------------*/

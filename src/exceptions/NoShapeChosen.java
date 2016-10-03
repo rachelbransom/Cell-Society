@@ -1,7 +1,6 @@
 package exceptions;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+//@author Rachel Bransom
 
 public class NoShapeChosen extends ExceptionConfiguration{
 	public NoShapeChosen(){
