@@ -51,8 +51,6 @@ public class Grid {
 		myCellGrid[x][y] = new Cell(input);
 	}
 	
-	
-	
 	private void setToroid(){
 		
 		// Connect Top and Bottom rows

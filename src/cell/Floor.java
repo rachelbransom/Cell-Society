@@ -11,6 +11,10 @@ public class Floor<Type> {
 		contents = new ArrayList<Type>();
 	}
 	
+	Floor(Floor<Type> f){
+		contents = new ArrayList<Type>(f.contents);
+	}
+	
 	public List<Type> contents(){
 		return contents;
 	}

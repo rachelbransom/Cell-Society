@@ -37,10 +37,7 @@ class SimulationFactory {
 		case SLIME_MOLD:
 			return out = new SlimeSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 		case SUGARSCAPE:
-			return out = new SugarAndSpiceSimulation(parser.getGrid(), new int[]{4, 4}, 
-																	new int[]{4, 4}, 
-																	new int[]{1, 1}, 
-																	2);
+			return out = new SugarAndSpiceSimulation(parser.getGrid(), new int[]{1, 1}, new int[]{10, 10}, new int[]{2, 2}, 2);
 		default:
 			return out;
 		}

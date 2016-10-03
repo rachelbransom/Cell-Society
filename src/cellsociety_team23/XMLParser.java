@@ -86,7 +86,7 @@ public class XMLParser {
 						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
 						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
 
-						currCell.getFloor().contents().set(0, (double) sugarFloor);
+						currCell.getFloor().contents().add(0, (double) sugarFloor);
 						currCell.getFloor().contents().add(1, (double) spiceFloor);
 					}
 
