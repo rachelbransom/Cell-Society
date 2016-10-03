@@ -5,6 +5,7 @@ import cell.Actor;
 import cell.Cell;
 import cell.CellState.SlimeMold;
 import grid.Grid;
+import simulation.types.SimulationType;
 import simulation.types.hierarchy.AbstractSequentialSimulation;
 
 public class SlimeSimulation extends AbstractSequentialSimulation {
@@ -13,16 +14,20 @@ public class SlimeSimulation extends AbstractSequentialSimulation {
 	private double myPheroDepositRate;
 	private double myEvaporationRate;
 	
-	public SlimeSimulation(Grid inputGrid) {
+	public SlimeSimulation(Grid inputGrid, Double sniffThresh) {
 		super(inputGrid);
-		mySniffThreshold = 0;
-		myPheroDepositRate = 1;
-		myEvaporationRate = 0.1;
+		initBlankSlatePhero();
+		getCurrGrid().setNeighbors(SimulationType.SLIME_MOLD);
+		mySniffThreshold = sniffThresh;
+		myPheroDepositRate = 0.1;
+		myEvaporationRate = 0.6;
 	}
 
 	@Override
 	protected void updateCell(Cell curr) {
 		diffusePhero(curr);
+		
+		
 		
 		if(curr.getActor().isState(SlimeMold.MOLD)){
 			depositPhero(curr);
@@ -53,6 +58,22 @@ public class SlimeSimulation extends AbstractSequentialSimulation {
 		}
 	}
 	
+	private void initBlankSlatePhero(){
+		for (int x = 0; x < getSize(); x++) {
+			for (int y = 0; y < getSize(); y++) {
+				getCurrGrid().getCell(x, y).getFloor().setContent( 0.0 );
+			}
+		}
+	}
+	
+	private void setPhero( int x, int y, double phero ){
+		showCurrGrid().getCell(x, y).getFloor().setContent( (Double) phero);
+	}
+	
+	private double getPhero(int x, int y){
+		return showCurrGrid().getCell(x, y).getFloor().getContent();
+	}
+	
 	private void depositPhero( Cell curr ){
 		curr.getFloor().setContent( curr.getFloor().getContent() + myPheroDepositRate);
 		
@@ -61,7 +82,7 @@ public class SlimeSimulation extends AbstractSequentialSimulation {
 		}
 	}
 	
-	private void diffusePhero( Cell curr ){
+	private void diffusePhero( Cell curr ){		
 		double currConct = curr.getFloor().getContent();
 		double splitConct = currConct / curr.getNeighbors().size();
 		

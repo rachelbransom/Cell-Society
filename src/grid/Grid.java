@@ -51,8 +51,6 @@ public class Grid {
 		myCellGrid[x][y] = new Cell(input);
 	}
 	
-	
-	
 	private void setToroid(){
 		
 		// Connect Top and Bottom rows
@@ -88,7 +86,9 @@ public class Grid {
 			for (int j = 0; j < mySize; j++) {
 				
 				if( simType.equals(SimulationType.GAME_OF_LIFE) ||
-						simType.equals(SimulationType.SEGREGATION)) 
+					simType.equals(SimulationType.SEGREGATION)  ||
+					simType.equals(SimulationType.SLIME_MOLD)   ||
+					simType.equals(SimulationType.SUGARSCAPE) ) 
 					myNeighbors.setFullNeighbors(i, j, getCell(i, j));
 				
 				if( simType.equals(SimulationType.WA_TOR_WORLD) ||

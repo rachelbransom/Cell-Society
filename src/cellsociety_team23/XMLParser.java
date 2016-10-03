@@ -86,7 +86,7 @@ public class XMLParser {
 						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
 						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
 
-						currCell.getFloor().contents().set(0, (double) sugarFloor);
+						currCell.getFloor().contents().add(0, (double) sugarFloor);
 						currCell.getFloor().contents().add(1, (double) spiceFloor);
 					}
 
@@ -202,6 +202,22 @@ public class XMLParser {
 				return CellState.WaTorWorld.PREY;
 			}
 			break;
+<<<<<<< HEAD
+		case SLIME_MOLD:
+			switch (state) {
+			case 0:
+				return CellState.SlimeMold.EMPTY;
+			case 1:
+				return CellState.SlimeMold.MOLD;
+			}
+			break;
+		case SUGARSCAPE:
+			switch (state) {
+			case 0:
+				return CellState.SugarScape.EMPTY;
+			case 1:
+				return CellState.SugarScape.AGENT;
+=======
 		case LANGTONS_LOOPS:
 			switch (state) {
 			case 0:
@@ -220,6 +236,7 @@ public class XMLParser {
 				return CellState.Langton.MAKETURN;
 			case 7:
 				return CellState.Langton.ENDLOOP;
+>>>>>>> 49469512f4ad1e26545070787761bf7d71d00996
 			}
 			break;
 		}
