@@ -97,14 +97,6 @@ public abstract class AbstractSimulation {
 		lineChart.setPrefWidth(505);
 	}
 
-//	public LineChart<Number, Number> getMyChart() {
-//		return lineChart;
-//	}
-	
-//	public void setMyChartLayout(int x, int y){
-//		lineChart.setLayoutX(x);
-//		lineChart.setLayoutY(y);
-//	}
 	/*----------------- Overriden Methods -----------------------------*/
 	
 	

@@ -8,7 +8,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-
 import cell.Actor;
 import cell.Cell;
 import cell.CellState;
@@ -36,7 +35,7 @@ public class XMLParser {
 		file = chosenFileName;
 		this.shape = shape;
 		parseFile();
-		
+
 	}
 
 	private void parseFile() {
@@ -74,26 +73,20 @@ public class XMLParser {
 						e.callDialogBox();
 						e.printStackTrace();
 					}
-					
-					if (situation == SimulationType.SUGARSCAPE){
-						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "."+ j));
-						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "."+ j));
-						
+
+					if (situation == SimulationType.SUGARSCAPE) {
+						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
+						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
+
 						currCell.getFloor().contents().set(0, (double) sugarFloor);
 						currCell.getFloor().contents().add(1, (double) spiceFloor);
 					}
-					
 
-			Actor currAct = new Actor(returnCellState(situation, currCellState));
-			currCell.setActor(currAct);
-			grid.setCell(i, j, currCell);
+					Actor currAct = new Actor(returnCellState(situation, currCellState));
+					currCell.setActor(currAct);
+					grid.setCell(i, j, currCell);
 				}
 			}
-			
-			
-			
-			
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,8 +99,8 @@ public class XMLParser {
 	public double getGlobalConfiguration() {
 		return globalConfig;
 	}
-	
-	public int getNumberOfStates(){
+
+	public int getNumberOfStates() {
 		return states;
 	}
 
@@ -186,8 +179,6 @@ public class XMLParser {
 		return null;
 	}
 
-
-	
 	/*----------------- Exceptions -----------------------------*/
 
 	private static void testIfSimulation(SimulationType simulationType) throws NoSimulation {

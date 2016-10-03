@@ -1,5 +1,7 @@
 package simulation;
 
+//@author Rachel Bransom
+
 import cellsociety_team23.XMLParser;
 import graph.PopulationGraph;
 import javafx.scene.Node;

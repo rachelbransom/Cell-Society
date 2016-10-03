@@ -3,6 +3,8 @@ package exceptions;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+//@author Rachel Bransom
+
 public class ExceptionConfiguration extends Exception{
 
 	public ExceptionConfiguration(String string){
