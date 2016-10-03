@@ -1,5 +1,6 @@
 package simulation.types.advanced;
 
+
 import cell.Actor;
 import cell.Cell;
 import cell.CellState.SlimeMold;
@@ -75,4 +76,5 @@ public class SlimeSimulation extends AbstractSequentialSimulation {
 		if(curr.getFloor().getContent() > 0)
 		curr.getFloor().contents().set(0, curr.getFloor().getContent() - myEvaporationRate);
 	}
+
 }

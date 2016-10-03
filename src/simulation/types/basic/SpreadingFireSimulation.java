@@ -3,6 +3,7 @@ package simulation.types.basic;
 import java.awt.Point;
 import java.util.Random;
 
+import javafx.scene.chart.XYChart;
 import cell.Actor;
 import grid.BorderType;
 import cell.Cell;
@@ -15,15 +16,20 @@ import grid.Grid;
 
 
 public class SpreadingFireSimulation extends AbstractSimulation {
-
+	private int tree, burning, counter;
 	private double myProbCatch;
 	private Random myRandom;
 
 	public SpreadingFireSimulation( Grid inputGrid , double probCatch){
+
 		super( inputGrid );
+
+		//initPopulationCounts(inputGrid);
+
 		getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 		myProbCatch = probCatch;
 		myRandom = new Random();
+		//initPopulationGraph();
 	}
 
 	/*----------------- Overridden Methods -----------------------------*/
@@ -31,7 +37,9 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 	@Override
 	public void updateGrid(){
 		super.updateGrid();
-		//getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
+		counter++;
+		//this.updateChart();
+		getCurrGrid().setNeighbors(SimulationType.SPREADING_FIRE, BorderType.TOROID);
 	}
 
 	@Override
@@ -45,6 +53,9 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 
 		// If cell is empty or on fire, next turn it's 
 		if( currState == SpreadingFire.EMPTY || currState == SpreadingFire.BURNING ){
+			if (currState.equals(SpreadingFire.BURNING)){
+				burning--;
+			}
 			newCell.setActor( new Actor(SpreadingFire.EMPTY) );
 		}
 
@@ -52,7 +63,7 @@ public class SpreadingFireSimulation extends AbstractSimulation {
 		if( currState == SpreadingFire.TREE )
 			for (Cell neighbor : currCell.getNeighbors())
 				if ( neighbor.getActor().getState().equals(SpreadingFire.BURNING) && myRandom.nextDouble() < myProbCatch ) {
-					// System.out.println(newCell.getLocation().toString() + "has burned");
+					burning++;
 					newCell.setActor( new Actor(SpreadingFire.BURNING) );
 				}
 

@@ -1,6 +1,10 @@
 package simulation;
 
+//@author Rachel Bransom
+
 import cellsociety_team23.XMLParser;
+import graph.PopulationGraph;
+import javafx.scene.Node;
 import simulation.types.*;
 import simulation.types.basic.GameOfLifeSimulation;
 import simulation.types.basic.SegregationSimulation;
@@ -9,14 +13,15 @@ import simulation.types.basic.WaTorWorldSimulation;
 import simulation.types.hierarchy.AbstractSimulation;
 
 class SimulationFactory {
+	
 	String file;
 	private SimulationType simulation;
 	private XMLParser parser;
 	private AbstractSimulation out;
 	
-	public SimulationFactory(String chosenFile){
+	public SimulationFactory(String chosenFile, String shape){
 		file = chosenFile;
-		parser = new XMLParser(file);
+		parser = new XMLParser(file, shape);
 		simulation = parser.getSimulationType();
 	}
 	
@@ -35,4 +40,7 @@ class SimulationFactory {
 			return out;
 		}
 	}
+	
+	
+	
 }

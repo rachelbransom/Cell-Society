@@ -2,7 +2,7 @@
 	<situation>life</situation>
 	<title>Game of Life</title>
 	<author>John Conway</author>
-	<global_config>0</global_config>
+	<global_config>0.95</global_config>
 	<grid_dimensions>10</grid_dimensions>
 	<states>2</states>
 	<cell0.0>1</cell0.0>

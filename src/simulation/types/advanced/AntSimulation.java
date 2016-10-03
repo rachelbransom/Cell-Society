@@ -1,8 +1,8 @@
 package simulation.types.advanced;
-
 import cell.Cell;
 import grid.Grid;
 import simulation.types.hierarchy.AbstractSimulation;
+
 
 public class AntSimulation extends AbstractSimulation {
 

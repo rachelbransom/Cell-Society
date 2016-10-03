@@ -8,16 +8,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-
 import cell.Actor;
 import cell.Cell;
 import cell.CellState;
 import grid.Grid;
-
 import exceptions.InvalidCellState;
 import exceptions.NoSimulation;
 
 import simulation.types.SimulationType;
+import simulation.visuals.Hexagon;
+import simulation.visuals.Triangle;
 
 public class XMLParser {
 	Document document;
@@ -29,13 +29,16 @@ public class XMLParser {
 	private int gridDimensions;
 	private int states;
 	private Grid grid;
+	private String shape;
 
-	public XMLParser(String chosenFileName) {
+	public XMLParser(String chosenFileName, String shape) {
 		file = chosenFileName;
+		this.shape = shape;
 		parseFile();
+
 	}
 
-	public void parseFile() {
+	private void parseFile() {
 
 		try {
 			File XMLFile = new File("data/" + file + "/");
@@ -58,8 +61,7 @@ public class XMLParser {
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
-			grid = new Grid(gridDimensions);
-
+			grid = new Grid(gridDimensions, shape);
 			for (int i = 0; i < gridDimensions; i++) {
 				for (int j = 0; j < gridDimensions; j++) {
 					Cell currCell = new Cell(i, j);
@@ -72,12 +74,19 @@ public class XMLParser {
 						e.printStackTrace();
 					}
 
+					if (situation == SimulationType.SUGARSCAPE) {
+						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
+						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
+
+						currCell.getFloor().contents().set(0, (double) sugarFloor);
+						currCell.getFloor().contents().add(1, (double) spiceFloor);
+					}
+
 					Actor currAct = new Actor(returnCellState(situation, currCellState));
 					currCell.setActor(currAct);
 					grid.setCell(i, j, currCell);
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,6 +100,10 @@ public class XMLParser {
 		return globalConfig;
 	}
 
+	public int getNumberOfStates() {
+		return states;
+	}
+
 	public int getGridDimensions() {
 		return gridDimensions;
 	}
@@ -99,11 +112,11 @@ public class XMLParser {
 		return grid;
 	}
 
-	public String getTextByTag(String tag) {
+	private String getTextByTag(String tag) {
 		return document.getElementsByTagName(tag).item(0).getTextContent();
 	}
 
-	public Enum<SimulationType> returnSimulationType(String situation) {
+	private Enum<SimulationType> returnSimulationType(String situation) {
 		switch (situation) {
 		case "life":
 			return SimulationType.GAME_OF_LIFE;
@@ -113,12 +126,16 @@ public class XMLParser {
 			return SimulationType.SEGREGATION;
 		case "wator":
 			return SimulationType.WA_TOR_WORLD;
+		case "slime":
+			return SimulationType.SLIME_MOLD;
+		case "sugar":
+			return SimulationType.SUGARSCAPE;
 		default:
 			return null;
 		}
 	}
 
-	public Enum returnCellState(SimulationType simType, int state) {
+	private Enum returnCellState(SimulationType simType, int state) {
 		switch (simType) {
 		case GAME_OF_LIFE:
 			switch (state) {
@@ -164,12 +181,12 @@ public class XMLParser {
 
 	/*----------------- Exceptions -----------------------------*/
 
-	public static void testIfSimulation(SimulationType simulationType) throws NoSimulation {
+	private static void testIfSimulation(SimulationType simulationType) throws NoSimulation {
 		if (simulationType == null)
 			throw new NoSimulation();
 	}
 
-	public static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
+	private static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
 		if (((0 > state || 1 < state) && (simulationType.equals(SimulationType.GAME_OF_LIFE)))
 				|| (0 > state || 2 < state)) {
 			throw new InvalidCellState();

@@ -7,6 +7,7 @@ import grid.Grid;
 import simulation.types.hierarchy.AbstractPowdersSimulation;
 
 public class SugarSimulation extends AbstractPowdersSimulation {
+
 	
 	// Agent Related Instance Variables
 	private int myAgentSugarMetabolism;
@@ -59,4 +60,9 @@ public class SugarSimulation extends AbstractPowdersSimulation {
 	private Double takeSugar(int x, int y){
 		return takePowder(x, y, 0);
 	}
+<<<<<<< HEAD
 }
+=======
+
+}
+>>>>>>> origin
