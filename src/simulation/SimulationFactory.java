@@ -6,6 +6,7 @@ import cellStateConfigurationType.ConfigurationType;
 
 import cellsociety_team23.XMLParser;
 import simulation.types.*;
+import simulation.types.advanced.LangtonSimulation;
 import simulation.types.basic.GameOfLifeSimulation;
 import simulation.types.basic.SegregationSimulation;
 import simulation.types.basic.SpreadingFireSimulation;
@@ -36,6 +37,8 @@ class SimulationFactory {
 			return out = new SegregationSimulation(parser.getGrid(), parser.getGlobalConfiguration());
 		case WA_TOR_WORLD:
 			return out = new WaTorWorldSimulation(parser.getGrid());		
+		case LANGTONS_LOOPS:
+			return out = new LangtonSimulation(parser.getGrid());
 		default:
 			return out;
 		}

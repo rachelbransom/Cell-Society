@@ -1,8 +1,10 @@
 package simulation.types.hierarchy;
 
-import javafx.scene.chart.LineChart;
-import cell.Cell;
 
+
+import javafx.scene.chart.LineChart;
+
+import cell.Cell;
 import grid.Grid;
 
 

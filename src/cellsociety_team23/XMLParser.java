@@ -155,6 +155,8 @@ public class XMLParser {
 			return SimulationType.SLIME_MOLD;
 		case "sugar":
 			return SimulationType.SUGARSCAPE;
+		case "langton":
+			return SimulationType.LANGTONS_LOOPS;
 		default:
 			return null;
 		}
@@ -200,6 +202,26 @@ public class XMLParser {
 				return CellState.WaTorWorld.PREY;
 			}
 			break;
+		case LANGTONS_LOOPS:
+			switch (state) {
+			case 0:
+				return CellState.Langton.SHEATH;
+			case 1:
+				return CellState.Langton.TURN;
+			case 2:
+				return CellState.Langton.ADVANCE;
+			case 3: 
+				return CellState.Langton.MESSENGER;
+			case 4:
+				return CellState.Langton.NOCOMMAND;
+			case 5:
+				return CellState.Langton.EMPTY;		
+			case 6: 
+				return CellState.Langton.MAKETURN;
+			case 7:
+				return CellState.Langton.ENDLOOP;
+			}
+			break;
 		}
 		return null;
 	}
@@ -214,7 +236,10 @@ public class XMLParser {
 	private static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
 		if (((0 > state || 1 < state) && (simulationType.equals(SimulationType.GAME_OF_LIFE)))
 				|| (0 > state || 2 < state)) {
-			throw new InvalidCellState();
+			if (simulationType.equals(SimulationType.LANGTONS_LOOPS) && state < 0 || state > 7){
+				throw new InvalidCellState();
+			}
+				
 		}
 	}
 }
