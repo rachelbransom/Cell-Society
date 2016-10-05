@@ -69,19 +69,18 @@ public class XMLParser {
 			globalConfig = Double.parseDouble(getTextByTag("global_config"));
 			gridDimensions = Integer.parseInt(getTextByTag("grid_dimensions"));
 			states = Integer.parseInt(getTextByTag("states"));
+
 			grid = new Grid(gridDimensions, shape);
 			for (int i = 0; i < gridDimensions; i++) {
 				for (int j = 0; j < gridDimensions; j++) {
 					Cell currCell = new Cell(i, j);
-					
-					if (this.configurationType.equals(ConfigurationType.RANDOM)){
+
+					if (this.configurationType.equals(ConfigurationType.RANDOM)) {
 						currCellState = setCellStateByRandom(states);
-					}
-					else{
+					} else {
 						currCellState = setCellStateByXML(i, j, situation);
 					}
-					
-					
+
 					if (situation == SimulationType.SUGARSCAPE) {
 						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
 						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
@@ -99,8 +98,9 @@ public class XMLParser {
 			e.printStackTrace();
 		}
 	}
-	
-	public int setCellStateByXML(int i, int j, SimulationType situation){
+
+	/*------------------  CELL STATE BY USER PREFERENCE   ---------------------*/
+	public int setCellStateByXML(int i, int j, SimulationType situation) {
 		int currCellState = Integer.parseInt(getTextByTag("cell" + i + "." + j));
 
 		try {
@@ -109,14 +109,14 @@ public class XMLParser {
 			e.callDialogBox();
 			e.printStackTrace();
 		}
-		
 		return currCellState;
 	}
-	
-	private int setCellStateByRandom(int states){
+
+	private int setCellStateByRandom(int states) {
 		return rand.nextInt(states);
 	}
 
+	/*--------------------- GETTERS AND SETTERS --------------------------*/
 	public SimulationType getSimulationType() {
 		return situation;
 	}
@@ -202,7 +202,7 @@ public class XMLParser {
 				return CellState.WaTorWorld.PREY;
 			}
 			break;
-<<<<<<< HEAD
+		//
 		case SLIME_MOLD:
 			switch (state) {
 			case 0:
@@ -217,26 +217,26 @@ public class XMLParser {
 				return CellState.SugarScape.EMPTY;
 			case 1:
 				return CellState.SugarScape.AGENT;
-=======
-		case LANGTONS_LOOPS:
-			switch (state) {
-			case 0:
-				return CellState.Langton.SHEATH;
-			case 1:
-				return CellState.Langton.TURN;
-			case 2:
-				return CellState.Langton.ADVANCE;
-			case 3: 
-				return CellState.Langton.MESSENGER;
-			case 4:
-				return CellState.Langton.NOCOMMAND;
-			case 5:
-				return CellState.Langton.EMPTY;		
-			case 6: 
-				return CellState.Langton.MAKETURN;
-			case 7:
-				return CellState.Langton.ENDLOOP;
->>>>>>> 49469512f4ad1e26545070787761bf7d71d00996
+			//
+			// case LANGTONS_LOOPS:
+			// switch (state) {
+			// case 0:
+			// return CellState.Langton.SHEATH;
+			// case 1:
+			// return CellState.Langton.TURN;
+			// case 2:
+			// return CellState.Langton.ADVANCE;
+			// case 3:
+			// return CellState.Langton.MESSENGER;
+			// case 4:
+			// return CellState.Langton.NOCOMMAND;
+			// case 5:
+			// return CellState.Langton.EMPTY;
+			// case 6:
+			// return CellState.Langton.MAKETURN;
+			// case 7:
+			// return CellState.Langton.ENDLOOP;
+
 			}
 			break;
 		}
@@ -253,10 +253,10 @@ public class XMLParser {
 	private static void testIfValidCellState(int state, SimulationType simulationType) throws InvalidCellState {
 		if (((0 > state || 1 < state) && (simulationType.equals(SimulationType.GAME_OF_LIFE)))
 				|| (0 > state || 2 < state)) {
-			if (simulationType.equals(SimulationType.LANGTONS_LOOPS) && state < 0 || state > 7){
+			if (simulationType.equals(SimulationType.LANGTONS_LOOPS) && state < 0 || state > 7) {
 				throw new InvalidCellState();
 			}
-				
+
 		}
 	}
 }
