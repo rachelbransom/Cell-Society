@@ -1,7 +1,5 @@
 package simulation.types.hierarchy;
 
-
-
 import javafx.scene.chart.LineChart;
 
 import cell.Cell;

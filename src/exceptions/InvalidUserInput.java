@@ -2,8 +2,8 @@ package exceptions;
 
 //@author Rachel Bransom
 
-public class NoShapeChosen extends ExceptionConfiguration{
-	public NoShapeChosen(){
+public class InvalidUserInput extends ExceptionConfiguration{
+	public InvalidUserInput(){
 		super("No shape selected");
 	}
 	

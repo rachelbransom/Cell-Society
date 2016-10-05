@@ -6,6 +6,8 @@ import cellStateConfigurationType.ConfigurationType;
 
 import cellsociety_team23.XMLParser;
 import simulation.types.*;
+import simulation.types.advanced.*;
+import simulation.types.basic.*;
 import simulation.types.advanced.LangtonSimulation;
 import simulation.types.advanced.SlimeSimulation;
 import simulation.types.advanced.SugarAndSpiceSimulation;

@@ -24,6 +24,7 @@ import simulation.visuals.Hexagon;
 import simulation.visuals.Triangle;
 
 public class XMLParser {
+	private static final int LANGTONS_LOOPS = 0;
 	Document document;
 	String file;
 	private SimulationType situation;
@@ -81,6 +82,7 @@ public class XMLParser {
 						currCellState = setCellStateByXML(i, j, situation);
 					}
 
+
 					if (situation == SimulationType.SUGARSCAPE) {
 						int sugarFloor = Integer.parseInt(getTextByTag("cellFloorSugar" + i + "." + j));
 						int spiceFloor = Integer.parseInt(getTextByTag("cellFloorSpice" + i + "." + j));
@@ -99,6 +101,7 @@ public class XMLParser {
 		}
 	}
 
+
 	/*------------------  CELL STATE BY USER PREFERENCE   ---------------------*/
 	public int setCellStateByXML(int i, int j, SimulationType situation) {
 		int currCellState = Integer.parseInt(getTextByTag("cell" + i + "." + j));
@@ -112,7 +115,7 @@ public class XMLParser {
 		return currCellState;
 	}
 
-	private int setCellStateByRandom(int states) {
+	private int setCellStateByRandom(int states){
 		return rand.nextInt(states);
 	}
 
@@ -202,7 +205,6 @@ public class XMLParser {
 				return CellState.WaTorWorld.PREY;
 			}
 			break;
-		//
 		case SLIME_MOLD:
 			switch (state) {
 			case 0:
@@ -217,26 +219,26 @@ public class XMLParser {
 				return CellState.SugarScape.EMPTY;
 			case 1:
 				return CellState.SugarScape.AGENT;
-			//
-			// case LANGTONS_LOOPS:
-			// switch (state) {
-			// case 0:
-			// return CellState.Langton.SHEATH;
-			// case 1:
-			// return CellState.Langton.TURN;
-			// case 2:
-			// return CellState.Langton.ADVANCE;
-			// case 3:
-			// return CellState.Langton.MESSENGER;
-			// case 4:
-			// return CellState.Langton.NOCOMMAND;
-			// case 5:
-			// return CellState.Langton.EMPTY;
-			// case 6:
-			// return CellState.Langton.MAKETURN;
-			// case 7:
-			// return CellState.Langton.ENDLOOP;
-
+	}
+			break;
+		case LANGTONS_LOOPS:
+			switch (state) {
+			case 0:
+				return CellState.Langton.SHEATH;
+			case 1:
+				return CellState.Langton.TURN;
+			case 2:
+				return CellState.Langton.ADVANCE;
+			case 3: 
+				return CellState.Langton.MESSENGER;
+			case 4:
+				return CellState.Langton.NOCOMMAND;
+			case 5:
+				return CellState.Langton.EMPTY;		
+			case 6: 
+				return CellState.Langton.MAKETURN;
+			case 7:
+				return CellState.Langton.ENDLOOP;
 			}
 			break;
 		}

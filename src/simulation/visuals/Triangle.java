@@ -1,6 +1,6 @@
 package simulation.visuals;
 
-import cellsociety_team23.UX;
+import cellsociety_team23.ApplicationController;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
@@ -10,7 +10,7 @@ public class Triangle extends CellShape{
 	
 	public Triangle(int size) {
 		super(size);
-		width = (double)UX.GRID_SIZE/(double)size * 2 ;
+		width = (double)ApplicationController.GRID_SIZE/(double)size * 2 ;
 	}
 	
 	
@@ -31,17 +31,17 @@ public class Triangle extends CellShape{
 	
 	private void setPointUpCoordinates(double i, double j){
 		triangle.getPoints().addAll(new Double[]{
-				UX.GRID_START_X + j/2.0*width, UX.GRID_START_Y + (1+i)*height,
-				UX.GRID_START_X + (j/2.0+1)*width, UX.GRID_START_Y + (1+i)*height,
-				UX.GRID_START_X + (j+1)*width/2, UX.GRID_START_Y + i*height,
+				ApplicationController.GRID_START_X + j/2.0*width, ApplicationController.GRID_START_Y + (1+i)*height,
+				ApplicationController.GRID_START_X + (j/2.0+1)*width, ApplicationController.GRID_START_Y + (1+i)*height,
+				ApplicationController.GRID_START_X + (j+1)*width/2, ApplicationController.GRID_START_Y + i*height,
 		});
 	}
 	
 	private void setPointDownCoordinates(double i, double j){
 		triangle.getPoints().addAll(new Double[]{
-				UX.GRID_START_X + j/2*width, UX.GRID_START_Y + i*height,
-				UX.GRID_START_X + (j/2+1)*width, UX.GRID_START_Y + i*height,
-				UX.GRID_START_X + (j+1)*width/2, UX.GRID_START_Y + (i+1)*height,
+				ApplicationController.GRID_START_X + j/2*width, ApplicationController.GRID_START_Y + i*height,
+				ApplicationController.GRID_START_X + (j/2+1)*width, ApplicationController.GRID_START_Y + i*height,
+				ApplicationController.GRID_START_X + (j+1)*width/2, ApplicationController.GRID_START_Y + (i+1)*height,
 		});
 	}
 	
