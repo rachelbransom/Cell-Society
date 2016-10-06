@@ -1,3 +1,6 @@
+//This entire file is part of my masterpiece 
+//RACHEL BRANSOM
+
 package cellsociety_team23;
 
 import cellStateConfigurationType.ConfigurationType;
@@ -8,11 +11,6 @@ import javafx.scene.Group;
 import javafx.util.Duration;
 import simulation.SimulationController;
 import simulationColorScheme.ColorScheme;
-
-/**
- * This entire file is part of my masterpiece 
- * RACHEL BRANSOM
- */
 
 public class ApplicationController {
 

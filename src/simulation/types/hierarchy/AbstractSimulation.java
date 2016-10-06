@@ -5,7 +5,6 @@ import javafx.scene.chart.LineChart;
 import cell.Cell;
 import grid.Grid;
 
-
 /**
  *	This class manages the current state of the grid. 
  *	
